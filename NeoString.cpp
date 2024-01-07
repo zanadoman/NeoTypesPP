@@ -21,7 +21,7 @@ namespace NeoTypes
 
     string::string()
     {
-        this->Literal = (char*)malloc(sizeof(char*));
+        this->Literal = (char*)malloc(sizeof(char));
         if (this->Literal == NULL)
         {
             printf("string(): Memory allocation failed\n");
