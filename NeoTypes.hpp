@@ -27,10 +27,19 @@ namespace NeoTypes
             uint64 Length;
 
             string();
+            string(char* Literal);
+            ~string();
+            char* Get();
 
         private:
             char* Literal;
     };
+
+    void* memCopy(void* Source, uint64 Size);
+    uint8 memCopyTo(void* Source, void* Destination, uint64 Size);
+    void* memLoad(char* FilePath, uint64 Size);
+    uint8 memLoadTo(char* FilePath, void* Destination, uint64 Size);
+    uint8 memSave(void* Source, uint64 Size, char* FilePath);
 }
 
 #endif

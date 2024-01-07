@@ -4,17 +4,9 @@ using namespace NeoTypes;
 
 sint32 main(sint32 argc, char* *argv)
 {
-    array<uint8> arr(0);
+    string str((char*)"Hello World");
 
-    for (uint8 i = 0; i < 9; i++)
-    {
-        arr.Insert(i, i);
-    }
-
-    for (uint8 i = 0; i < arr.Length; i++)
-    {
-        printf("%d ", arr[i]);
-    }
+    printf("%s\n", str.Get());
 
     return 0;
 }

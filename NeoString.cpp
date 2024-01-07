@@ -1,3 +1,4 @@
+#include "NeoMemory.hpp"
 #include "NeoTypes.hpp"
 
 namespace NeoTypes
@@ -29,5 +30,28 @@ namespace NeoTypes
 
         this->Literal[0] = '\0';
         this->Length = 1;
+    }
+
+    string::string(char* Literal)
+    {
+        this->Length = strLength(Literal);
+        this->Literal = (char*)malloc(sizeof(char*) * this->Length);
+        if (this->Literal == NULL)
+        {
+            printf("string(): Memory allocation failed\nParams: Literal: %p\n", Literal);
+            exit(1);
+        }
+
+        memCopyTo<char>(Literal, this->Literal);
+    }
+
+    string::~string()
+    {
+        free(this->Literal);
+    }
+
+    char* string::Get()
+    {
+        return this->Literal;
     }
 }
