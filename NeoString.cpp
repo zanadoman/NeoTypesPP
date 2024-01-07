@@ -142,7 +142,7 @@ namespace NeoTypes
         this->Literal = (char*)realloc(this->Literal, sizeof(char*) * ++this->Length);
         if (this->Literal == NULL)
         {
-            printf("string+=(): Memory allocation failed\nParams: Character: %c\n", Character);
+            printf("string+(): Memory allocation failed\nParams: Character: %c\n", Character);
             exit(1);
         }
 
