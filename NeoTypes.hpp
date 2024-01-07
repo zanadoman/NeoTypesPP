@@ -17,6 +17,48 @@ typedef signed long long sint64;
 
 namespace NeoTypes
 {
+    //____________________________________________NeoString.c____________________________________________//
+
+    uint64 strLength(const char* Literal);
+    class string
+    {
+        public:
+            uint64 Length;
+
+            string();
+            string(const char* Literal);
+            string(const string* String);
+            ~string();
+
+            uint8 operator=(const char* Literal);
+            uint8 operator=(const string* String);
+
+            uint8 operator+=(char Character);
+            uint8 operator+=(const char* Literal);
+            string* operator+=(const string* String);
+
+            bool operator==(const string* String);
+            bool operator==(const char* Literal);
+            bool operator!=(const string* String);
+            bool operator!=(const char* Literal);
+
+            char* Get();
+
+        private:
+            char* Literal;
+    };
+
+    //____________________________________________NeoMemory.c___________________________________________
+
+    bool memCompare(const void* Source1, const void* Source2, uint64 Size);
+    void* memCopy(const void* Source, uint64 Size);
+    uint8 memCopyTo(const void* Source, void* Destination, uint64 Size);
+    void* memLoad(const char* FilePath, uint64 Size);
+    uint8 memLoadTo(const char* FilePath, void* Destination, uint64 Size);
+    uint8 memSave(const void* Source, uint64 Size, const char* FilePath);
+
+    //____________________________________________NeoArray.c_____________________________________________//
+
     template <typename type> class array
     {
         public:
@@ -124,7 +166,7 @@ namespace NeoTypes
             exit(1);
         }
 
-        memCopyTo(Array->Elements, this->Elements + this->Length - Array->Length, sizeof(type) * Array->Elements);
+        memCopyTo(Array->Elements, this->Elements + this->Length - Array->Length, sizeof(type) * Array->Length);
 
         return 0;
     }
@@ -246,46 +288,6 @@ namespace NeoTypes
 
         return 0;
     }
-
-    //____________________________________________NeoString.c____________________________________________//
-
-    uint64 strLength(const char* Literal);
-    class string
-    {
-        public:
-            uint64 Length;
-
-            string();
-            string(const char* Literal);
-            string(const string* String);
-            ~string();
-
-            uint8 operator=(const char* Literal);
-            uint8 operator=(const string* String);
-
-            uint8 operator+=(char Character);
-            uint8 operator+=(const char* Literal);
-            string* operator+=(const string* String);
-
-            bool operator==(const string* String);
-            bool operator==(const char* Literal);
-            bool operator!=(const string* String);
-            bool operator!=(const char* Literal);
-
-            char* Get();
-
-        private:
-            char* Literal;
-    };
-
-    //____________________________________________NeoMemory.c___________________________________________
-
-    bool memCompare(const void* Source1, const void* Source2, uint64 Size);
-    void* memCopy(const void* Source, uint64 Size);
-    uint8 memCopyTo(const void* Source, void* Destination, uint64 Size);
-    void* memLoad(const char* FilePath, uint64 Size);
-    uint8 memLoadTo(const char* FilePath, void* Destination, uint64 Size);
-    uint8 memSave(const void* Source, uint64 Size, const char* FilePath);
 }
 
 #endif
