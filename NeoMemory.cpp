@@ -2,6 +2,19 @@
 
 namespace NeoTypes
 {
+    bool memCompare(void* Source1, void* Source2, uint64 Size)
+    {
+        for (uint64 i = 0; i < Size; i++)
+        {
+            if (((uint8*)Source1)[i] != ((uint8*)Source2)[i])
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     void* memCopy(void* Source, uint64 Size)
     {
         void* result;

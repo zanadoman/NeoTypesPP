@@ -6,6 +6,8 @@ sint32 main(sint32 argc, char* *argv)
 {
     string str((char*)"Hello World");
 
+    str = (char*)"szarom";
+
     printf("%s\n", str.Get());
 
     return 0;

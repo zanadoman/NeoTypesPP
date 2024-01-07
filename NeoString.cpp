@@ -60,7 +60,7 @@ namespace NeoTypes
         return this->Literal;
     }
 
-    void string::operator()(char* Literal)
+    void string::operator=(char* Literal)
     {
         if (Literal == NULL)
         {
@@ -77,5 +77,15 @@ namespace NeoTypes
         }
 
         memCopyTo(Literal, this->Literal, this->Length);
+    }
+
+    bool string::operator==(string String)
+    {
+        if (this->Length != String.Length)
+        {
+            return false;
+        }
+
+        
     }
 }

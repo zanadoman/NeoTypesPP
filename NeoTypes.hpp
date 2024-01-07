@@ -31,8 +31,10 @@ namespace NeoTypes
             string(char* Literal);
             ~string();
 
+            void operator=(char* Literal);
+            bool operator==(string String);
+
             char* Get();
-            void operator()(char* Literal);
 
         private:
             char* Literal;
@@ -40,6 +42,7 @@ namespace NeoTypes
 
     //____________________________________________NeoMemory.c___________________________________________
 
+    bool memCompare(void* Source1, void* Source2, uint64 Size);
     void* memCopy(void* Source, uint64 Size);
     uint8 memCopyTo(void* Source, void* Destination, uint64 Size);
     void* memLoad(char* FilePath, uint64 Size);
