@@ -99,12 +99,7 @@ namespace NeoTypes
 
     bool string::operator==(string* String)
     {
-        if (String == NULL)
-        {
-            return false;
-        }
-
-        if (this->Length != String->Length)
+        if (String == NULL || this->Length != String->Length)
         {
             return false;
         }
@@ -114,12 +109,7 @@ namespace NeoTypes
 
     bool string::operator==(char* Literal)
     {
-        if (Literal == NULL)
-        {
-            return false;
-        }
-
-        if (this->Length != strLength(Literal))
+        if (Literal == NULL || this->Length != strLength(Literal))
         {
             return false;
         }
@@ -129,12 +119,7 @@ namespace NeoTypes
 
     bool string::operator!=(char* Literal)
     {
-        if (Literal == NULL)
-        {
-            return true;
-        }
-
-        if (this->Length != strLength(Literal))
+        if (Literal == NULL || this->Length != strLength(Literal))
         {
             return true;
         }
@@ -144,12 +129,7 @@ namespace NeoTypes
 
     bool string::operator!=(string* String)
     {
-        if (String == NULL)
-        {
-            return true;
-        }
-
-        if (this->Length != String->Length)
+        if (String == NULL || this->Length != String->Length)
         {
             return true;
         }
