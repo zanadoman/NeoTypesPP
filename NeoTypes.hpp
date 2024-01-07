@@ -201,7 +201,7 @@ namespace NeoTypes
         return 0;
     }
 
-    template <typename type> uint8 array<type>::operator+=(array<type>* Array)
+    template <typename type> uint8 array<type>::operator+=(const array<type>* Array)
     {
         this->Length += Array->Length;
         this->Elements = (type*)realloc(this->Elements, sizeof(type) * this->Length);
