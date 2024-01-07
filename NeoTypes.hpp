@@ -11,6 +11,8 @@ namespace NeoTypes
         public:
             uint64 Length;
 
+            string();
+
         private:
             char* Literal;
     };
