@@ -58,23 +58,15 @@ namespace NeoTypes
             exit(1);
         }
 
-        if (String->Length <= 1)
+        this->Length = String->Length;
+        this->Literal = (char*)malloc(sizeof(char) * this->Length);
+        if (this->Literal == NULL)
         {
-            printf("string(): Invalid String\nParams: String: %p\n", String);
+            printf("string(): Memory allocation failed\nParams: String: %s\n", String->Literal);
             exit(1);
         }
-        else
-        {
-            this->Length = String->Length;
-            this->Literal = (char*)malloc(sizeof(char) * this->Length);
-            if (this->Literal == NULL)
-            {
-                printf("string(): Memory allocation failed\nParams: String: %s\n", String->Literal);
-                exit(1);
-            }
 
-            memCopyTo(String->Literal, this->Literal, sizeof(char) * this->Length);
-        }
+        memCopyTo(String->Literal, this->Literal, sizeof(char) * this->Length);
     }
 
     string::~string()
@@ -98,7 +90,7 @@ namespace NeoTypes
         return this->Literal[Index];
     }
 
-    uint8 string::operator=(const char* Literal)
+    char* string::operator=(const char* Literal)
     {
         if (Literal == NULL)
         {
@@ -116,10 +108,10 @@ namespace NeoTypes
 
         memCopyTo(Literal, this->Literal, sizeof(char) * this->Length);
 
-        return 0;
+        return (char*)Literal;
     }
 
-    uint8 string::operator=(const string* String)
+    string* string::operator=(const string* String)
     {
         if (String == NULL)
         {
@@ -137,10 +129,10 @@ namespace NeoTypes
 
         memCopyTo(String->Literal, this->Literal, sizeof(char) * this->Length);
 
-        return 0;
+        return (string*)String;
     }
 
-    uint8 string::operator+=(char Character)
+    char string::operator+=(char Character)
     {
         this->Literal = (char*)realloc(this->Literal, sizeof(char) * ++this->Length);
         if (this->Literal == NULL)
@@ -152,12 +144,18 @@ namespace NeoTypes
         this->Literal[this->Length - 2] = Character;
         this->Literal[this->Length - 1] = '\0';
 
-        return 0;
+        return Character;
     }
 
-    uint8 string::operator+=(const char* Literal)
+    char* string::operator+=(const char* Literal)
     {
         uint64 cache;
+
+        if (Literal == NULL)
+        {
+            printf("string+=: Literal must not be NULL\nParams: Literal: %p\n", Literal);
+            exit(1);
+        }
 
         cache = strLength(Literal);
 
@@ -171,7 +169,7 @@ namespace NeoTypes
 
         memCopyTo(Literal, this->Literal + this->Length - cache, cache);
 
-        return 0;
+        return (char*)Literal;
     }
     
     uint8 string::Read()

@@ -63,10 +63,10 @@ namespace NeoTypes
 
             const char* operator()();
             char& operator[](uint64 Index);
-            uint8 operator=(const char* Literal);
-            uint8 operator=(const string* String);
-            uint8 operator+=(char Character);
-            uint8 operator+=(const char* Literal);
+            char* operator=(const char* Literal);
+            string* operator=(const string* String);
+            char operator+=(char Character);
+            char* operator+=(const char* Literal);
             string* operator+=(const string* String);
             bool operator==(const string* String);
             bool operator==(const char* Literal);
