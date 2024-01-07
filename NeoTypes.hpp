@@ -189,7 +189,7 @@ namespace NeoTypes
         this->Elements = (type*)realloc(this->Elements, sizeof(type) * ++this->Length);
         if (this->Elements == NULL)
         {
-            printf("array-=: Memory allocation failed\nParams: Value: %lld\n", Value);
+            printf("array-=: Memory allocation failed\nParams: Value(sizeof): %d\n", sizeof(Value));
             exit(1);
         }
 
@@ -202,12 +202,12 @@ namespace NeoTypes
         return 0;
     }
 
-    template <typename type> uint8 array<type>::operator+=(type Value)
+    template <typename type> uint8 array<type>::operator+=(const type Value)
     {
         this->Elements = (type*)realloc(this->Elements, sizeof(type) * ++this->Length);
         if (this->Elements == NULL)
         {
-            printf("array+=: Memory allocation failed\nParams: Value: %lld\n", Value);
+            printf("array+=: Memory allocation failed\nParams: Value(sizeof): %d\n", sizeof(Value));
             exit(1);
         }
         this->Elements[this->Length - 1] = Value;
@@ -228,6 +228,26 @@ namespace NeoTypes
         memCopyTo(Array->Elements, this->Elements + this->Length - Array->Length, sizeof(type) * Array->Length);
 
         return 0;
+    }
+
+    template <typename type> bool array<type>::operator==(const array<type>* Array)
+    {
+        if (Array == NULL || this->Length != Array->Length)
+        {
+            return false;
+        }
+
+        return memCompare(this->Elements, Array->Elements, sizeof(type) * this->Length);
+    }
+
+    template <typename type> bool array<type>::operator!=(const array<type>* Array)
+    {
+        if (Array == NULL || this->Length != Array->Length)
+        {
+            return true;
+        }
+
+        return !memCompare(this->Elements, Array->Elements, sizeof(type) * this->Length);
     }
 
     template <typename type> uint8 array<type>::Resize(uint64 Length)
