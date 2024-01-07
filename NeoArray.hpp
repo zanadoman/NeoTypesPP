@@ -26,12 +26,12 @@ namespace NeoTypes
             ~array();
 
             type& operator[](uint64 Index);
-            uint8 Resize(uint64 Length);
-            uint8 Insert(uint64 Index, type Value);
-            uint8 Remove(uint64 Index);
+            void Resize(uint64 Length);
+            void Insert(uint64 Index, type Value);
+            void Remove(uint64 Index);
             bool Contains(type Value);
-            uint8 Reverse();
-            uint8 Clear();
+            void Reverse();
+            void Clear();
 
         private:
             type* Elements;
@@ -72,7 +72,7 @@ namespace NeoTypes
         return this->Elements[Index];
     }
 
-    template <typename type> uint8 array<type>::Resize(uint64 Length)
+    template <typename type> void array<type>::Resize(uint64 Length)
     {
         if (Length == 0)
         {
@@ -90,11 +90,9 @@ namespace NeoTypes
             }
             this->Length = Length;
         }
-
-        return 0;
     }
 
-    template <typename type> uint8 array<type>::Insert(uint64 Index, type Value)
+    template <typename type> void array<type>::Insert(uint64 Index, type Value)
     {
         if (this->Length < Index)
         {
@@ -114,11 +112,9 @@ namespace NeoTypes
             this->Elements[i] = this->Elements[i - 1];
         }
         this->Elements[Index] = Value;
-
-        return 0;
     }
 
-    template <typename type> uint8 array<type>::Remove(uint64 Index)
+    template <typename type> void array<type>::Remove(uint64 Index)
     {
         if (this->Length <= Index)
         {
@@ -150,8 +146,6 @@ namespace NeoTypes
                 exit(1);
             }
         }
-
-        return 0;
     }
 
     template <typename type> bool array<type>::Contains(type Value)
@@ -167,7 +161,7 @@ namespace NeoTypes
         return false;
     }
 
-    template <typename type> uint8 array<type>::Reverse()
+    template <typename type> void array<type>::Reverse()
     {
         type tmp;
 
@@ -177,17 +171,13 @@ namespace NeoTypes
             this->Elements[i] = this->Elements[this->Length - 1 - i];
             this->Elements[this->Length - 1 - i] = tmp;
         }
-
-        return 0;
     }
 
-    template <typename type> uint8 array<type>::Clear()
+    template <typename type> void array<type>::Clear()
     {
         free(this->Elements);
         this->Elements = NULL;
         this->Length = 0;
-
-        return 0;
     }
 }
 
