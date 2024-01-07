@@ -164,15 +164,24 @@ namespace NeoTypes
             exit(1);
         }
 
-        this->Length = Array->Length;
-        this->Elements = (type*)realloc(this->Elements, sizeof(type) * this->Length);
-        if (this->Elements == NULL)
+        if (Array->Length == 0)
         {
-            printf("array=(): Memory allocation failed\nParams: Array: %p\n", Array);
-            exit(1);
+            free(this->Elements);
+            this->Elements = NULL;
+            this->Length = 0;
         }
+        else
+        {
+            this->Length = Array->Length;
+            this->Elements = (type*)realloc(this->Elements, sizeof(type) * this->Length);
+            if (this->Elements == NULL)
+            {
+                printf("array=(): Memory allocation failed\nParams: Array: %p\n", Array);
+                exit(1);
+            }
 
-        memCopyTo(Array->Elements, this->Elements, sizeof(type) * this->Length);
+            memCopyTo(Array->Elements, this->Elements, sizeof(type) * this->Length);
+        }
     }
 
     template <typename type> uint8 array<type>::operator-=(type Value)
