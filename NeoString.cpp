@@ -59,7 +59,7 @@ namespace NeoTypes
     {
         if (Literal == NULL)
         {
-            printf("string(): Literal must not be NULL\nParams: Literal: %p\n", Literal);
+            printf("string=(): Literal must not be NULL\nParams: Literal: %p\n", Literal);
             exit(1);
         }
 
@@ -67,7 +67,7 @@ namespace NeoTypes
         this->Literal = (char*)realloc(this->Literal, sizeof(char*) * this->Length);
         if (this->Literal == NULL)
         {
-            printf("string(): Memory allocation failed\nParams: Literal: %p\n", Literal);
+            printf("string=(): Memory allocation failed\nParams: Literal: %p\n", Literal);
             exit(1);
         }
 
@@ -80,7 +80,7 @@ namespace NeoTypes
     {
         if (String == NULL)
         {
-            printf("string(): String must not be NULL\nParams: String: %p\n", String);
+            printf("string=(): String must not be NULL\nParams: String: %p\n", String);
             exit(1);
         }
 
@@ -88,7 +88,7 @@ namespace NeoTypes
         this->Literal = (char*)realloc(this->Literal, sizeof(char*) * this->Length);
         if (this->Literal == NULL)
         {
-            printf("string(): Memory allocation failed\nParams: String: %p\n", String);
+            printf("string=(): Memory allocation failed\nParams: String: %p\n", String);
             exit(1);
         }
 
