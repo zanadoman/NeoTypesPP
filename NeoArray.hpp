@@ -26,6 +26,8 @@ namespace NeoTypes
             array(uint64 Length);
             ~array();
 
+            uint8 operator-=(type Value);
+            uint8 operator+=(type Value);
             type& operator[](uint64 Index);
 
             uint8 Resize(uint64 Length);
@@ -67,6 +69,37 @@ namespace NeoTypes
     template <typename type> array<type>::~array()
     {
         free(this->Elements);
+    }
+
+    template <typename type> uint8 array<type>::operator-=(type Value)
+    {
+        this->Elements = (type*)realloc(this->Elements, sizeof(type) * ++this->Length);
+        if (this->Elements == NULL)
+        {
+            printf("array-=: Memory allocation failed\nParams: Value: %lld\n", Value);
+            exit(1);
+        }
+
+        for (uint64 i = this->Length - 1; 0 < i; i--)
+        {
+            this->Elements[i] = this->Elements[i - 1];
+        }
+        this->Elements[0] = Value;
+
+        return 0;
+    }
+
+    template <typename type> uint8 array<type>::operator+=(type Value)
+    {
+        this->Elements = (type*)realloc(this->Elements, sizeof(type) * ++this->Length);
+        if (this->Elements == NULL)
+        {
+            printf("array+=: Memory allocation failed\nParams: Value: %lld\n", Value);
+            exit(1);
+        }
+        this->Elements[this->Length - 1] = Value;
+
+        return 0;
     }
 
     template <typename type> type& array<type>::operator[](uint64 Index)
