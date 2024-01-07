@@ -1,4 +1,3 @@
-#include "NeoMemory.hpp"
 #include "NeoTypes.hpp"
 
 namespace NeoTypes
@@ -42,7 +41,7 @@ namespace NeoTypes
             exit(1);
         }
 
-        memCopyTo<char>(Literal, this->Literal);
+        memCopyTo(Literal, this->Literal, this->Length);
     }
 
     string::~string()

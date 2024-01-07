@@ -17,6 +17,7 @@ typedef signed long long sint64;
 
 namespace NeoTypes
 {
+    template <typename type> class array;
     template <typename type> class array
     {
         public:
