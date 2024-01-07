@@ -4,9 +4,17 @@ using namespace NeoTypes;
 
 int main(int argc, char* *argv)
 {
-    int a = 5;
+    array<uint8> arr1;
 
-    printf("%d\n", a += 3);
+    arr1 += 1;
+    arr1 += 2;
+
+    arr1.Insert(0, 3);
+
+    for (uint64 i = 0; i < arr1.Length; i++)
+    {
+        printf("%d\n", arr1[i]);
+    }
 
     return 0;
 }

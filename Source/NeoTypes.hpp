@@ -187,7 +187,7 @@ namespace NeoTypes
             memCopyTo(Array->Elements, this->Elements, sizeof(type) * this->Length);
         }
 
-        return Array;
+        return (array<type>*)Array;
     }
 
     template <typename type> type array<type>::operator-=(const type Value)
@@ -205,7 +205,7 @@ namespace NeoTypes
         }
         this->Elements[0] = Value;
 
-        return Value;
+        return (type)Value;
     }
 
     template <typename type> type array<type>::operator+=(const type Value)
@@ -218,7 +218,7 @@ namespace NeoTypes
         }
         this->Elements[this->Length - 1] = Value;
 
-        return Value;
+        return (type)Value;
     }
 
     template <typename type> array<type>* array<type>::operator+=(const array<type>* Array)
@@ -238,7 +238,7 @@ namespace NeoTypes
 
         memCopyTo(Array->Elements, this->Elements + this->Length - Array->Length, sizeof(type) * Array->Length);
 
-        return Array;
+        return (array<type>*)Array;
     }
 
     template <typename type> bool array<type>::operator==(const array<type>* Array)
