@@ -33,6 +33,12 @@ namespace NeoTypes
 
     string::string(char* Literal)
     {
+        if (Literal == NULL)
+        {
+            printf("string(): Literal must not be NULL\nParams: Literal: %p\n", Literal);
+            exit(1);
+        }
+
         this->Length = strLength(Literal);
         this->Literal = (char*)malloc(sizeof(char*) * this->Length);
         if (this->Literal == NULL)
