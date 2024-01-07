@@ -184,7 +184,7 @@ namespace NeoTypes
         }
     }
 
-    template <typename type> uint8 array<type>::operator-=(type Value)
+    template <typename type> uint8 array<type>::operator-=(const type Value)
     {
         this->Elements = (type*)realloc(this->Elements, sizeof(type) * ++this->Length);
         if (this->Elements == NULL)
