@@ -159,7 +159,7 @@ namespace NeoTypes
         return this->Elements[Index];
     }
 
-    template <typename type> uint8 array<type>::operator=(const array <type>* Array)
+    template <typename type> uint8 array<type>::operator=(const array<type>* Array)
     {
         if (Array == NULL)
         {
