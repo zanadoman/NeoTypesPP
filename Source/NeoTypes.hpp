@@ -271,13 +271,13 @@ namespace NeoTypes
         }
         else
         {
-            this->Elements = (type*)realloc(this->Elements, sizeof(type) * Length);
+            this->Length = Length;
+            this->Elements = (type*)realloc(this->Elements, sizeof(type) * this->Length);
             if (this->Elements == NULL)
             {
                 printf("array.Resize(): Memory allocation failed\nParams: Length: %lld\n", Length);
                 exit(1);
             }
-            this->Length = Length;
         }
 
         return 0;
