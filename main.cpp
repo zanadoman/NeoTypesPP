@@ -2,16 +2,9 @@
 
 using namespace NeoTypes;
 
-sint32 main(sint32 argc, char* *argv)
+int main(int argc, char* *argv)
 {
-    string str;
-
-    str = "hello";
-    str += " szar";
-    str += " van";
-    str += " a palacsintaban";
-
-    printf("%s\n", str());
+    string str = "hello";
 
     return 0;
 }
