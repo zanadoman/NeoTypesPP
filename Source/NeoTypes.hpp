@@ -30,10 +30,10 @@ namespace NeoTypes
             ~array();
 
             type& operator[](uint64 Index);
-            uint8 operator=(const array<type>* Array);
-            uint8 operator-=(const type Value);
-            uint8 operator+=(const type Value);
-            uint8 operator+=(const array<type>* Array);
+            array<type>* operator=(const array<type>* Array);
+            type operator-=(const type Value);
+            type operator+=(const type Value);
+            array<type>* operator+=(const array<type>* Array);
             bool operator==(const array<type>* Array);
             bool operator!=(const array<type>* Array);
 
@@ -160,7 +160,7 @@ namespace NeoTypes
         return this->Elements[Index];
     }
 
-    template <typename type> uint8 array<type>::operator=(const array<type>* Array)
+    template <typename type> array<type>* array<type>::operator=(const array<type>* Array)
     {
         if (Array == NULL)
         {
@@ -187,10 +187,10 @@ namespace NeoTypes
             memCopyTo(Array->Elements, this->Elements, sizeof(type) * this->Length);
         }
 
-        return 0;
+        return Array;
     }
 
-    template <typename type> uint8 array<type>::operator-=(const type Value)
+    template <typename type> type array<type>::operator-=(const type Value)
     {
         this->Elements = (type*)realloc(this->Elements, sizeof(type) * ++this->Length);
         if (this->Elements == NULL)
@@ -205,10 +205,10 @@ namespace NeoTypes
         }
         this->Elements[0] = Value;
 
-        return 0;
+        return Value;
     }
 
-    template <typename type> uint8 array<type>::operator+=(const type Value)
+    template <typename type> type array<type>::operator+=(const type Value)
     {
         this->Elements = (type*)realloc(this->Elements, sizeof(type) * ++this->Length);
         if (this->Elements == NULL)
@@ -218,10 +218,10 @@ namespace NeoTypes
         }
         this->Elements[this->Length - 1] = Value;
 
-        return 0;
+        return Value;
     }
 
-    template <typename type> uint8 array<type>::operator+=(const array<type>* Array)
+    template <typename type> array<type>* array<type>::operator+=(const array<type>* Array)
     {
         if (Array == NULL)
         {
@@ -239,7 +239,7 @@ namespace NeoTypes
 
         memCopyTo(Array->Elements, this->Elements + this->Length - Array->Length, sizeof(type) * Array->Length);
 
-        return 0;
+        return Array;
     }
 
     template <typename type> bool array<type>::operator==(const array<type>* Array)
