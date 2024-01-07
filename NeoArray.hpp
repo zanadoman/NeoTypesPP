@@ -120,6 +120,19 @@ namespace NeoTypes
                 return 0;
             }
 
+            bool Contains(type Value)
+            {
+                for (uint64 i = 0; i < this->Length; i++)
+                {
+                    if (this->Elements[i] == Value)
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+
             uint8 Clear()
             {
                 free(this->Elements);
