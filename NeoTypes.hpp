@@ -132,7 +132,7 @@ namespace NeoTypes
         else
         {
             this->Length = Array->Length;
-            this->Elements = malloc(sizeof(type) * this->Length);
+            this->Elements = (type*)malloc(sizeof(type) * this->Length);
             if (this->Elements == NULL)
             {
                 printf("array(): Memory allocation failed\nParams: Array: %p\n", Array);
@@ -185,6 +185,8 @@ namespace NeoTypes
 
             memCopyTo(Array->Elements, this->Elements, sizeof(type) * this->Length);
         }
+
+        return 0;
     }
 
     template <typename type> uint8 array<type>::operator-=(const type Value)
@@ -192,7 +194,7 @@ namespace NeoTypes
         this->Elements = (type*)realloc(this->Elements, sizeof(type) * ++this->Length);
         if (this->Elements == NULL)
         {
-            printf("array-=: Memory allocation failed\nParams: Value(sizeof): %d\n", sizeof(Value));
+            printf("array-=: Memory allocation failed\nParams: Value(sizeof): %d\n", sizeof(type));
             exit(1);
         }
 
@@ -210,7 +212,7 @@ namespace NeoTypes
         this->Elements = (type*)realloc(this->Elements, sizeof(type) * ++this->Length);
         if (this->Elements == NULL)
         {
-            printf("array+=: Memory allocation failed\nParams: Value(sizeof): %d\n", sizeof(Value));
+            printf("array+=: Memory allocation failed\nParams: Value(sizeof): %d\n", sizeof(type));
             exit(1);
         }
         this->Elements[this->Length - 1] = Value;
@@ -220,6 +222,12 @@ namespace NeoTypes
 
     template <typename type> uint8 array<type>::operator+=(const array<type>* Array)
     {
+        if (Array == NULL)
+        {
+            printf("array+=: Array must not be NULL\nParams: Array: %p\n", Array);
+            exit(1);
+        }
+
         this->Length += Array->Length;
         this->Elements = (type*)realloc(this->Elements, sizeof(type) * this->Length);
         if (this->Elements == NULL)

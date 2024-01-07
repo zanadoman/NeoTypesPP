@@ -164,7 +164,7 @@ namespace NeoTypes
         {
             if (this->Literal[i] != Separator)
             {
-                tmp += this->Literal[i];
+                *tmp += this->Literal[i];
             }
             else if (1 < tmp->Length)
             {
@@ -177,6 +177,7 @@ namespace NeoTypes
         {
             *result += tmp;
         }
+        else
         {
             delete tmp;
         }
