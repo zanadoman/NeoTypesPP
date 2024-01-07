@@ -41,14 +41,14 @@ namespace NeoTypes
         }
         
         this->Length = strLength(Literal);
-        this->Literal = (char*)malloc(sizeof(char*) * this->Length);
+        this->Literal = (char*)malloc(sizeof(char) * this->Length);
         if (this->Literal == NULL)
         {
             printf("string(): Memory allocation failed\nParams: Literal: %s\n", Literal);
             exit(1);
         }
 
-        memCopyTo(Literal, this->Literal, this->Length);
+        memCopyTo(Literal, this->Literal, sizeof(char) * this->Length);
     }
 
     string::string(const string* String)
@@ -60,14 +60,14 @@ namespace NeoTypes
         }
 
         this->Length = String->Length;
-        this->Literal = (char*)malloc(sizeof(char*) * this->Length);
+        this->Literal = (char*)malloc(sizeof(char) * this->Length);
         if (this->Literal == NULL)
         {
             printf("string(): Memory allocation failed\nParams: String: %s\n", String->Literal);
             exit(1);
         }
 
-        memCopyTo(String->Literal, this->Literal, this->Length);
+        memCopyTo(String->Literal, this->Literal, sizeof(char) * this->Length);
     }
 
     string::~string()
@@ -84,14 +84,14 @@ namespace NeoTypes
         }
 
         this->Length = strLength(Literal);
-        this->Literal = (char*)realloc(this->Literal, sizeof(char*) * this->Length);
+        this->Literal = (char*)realloc(this->Literal, sizeof(char) * this->Length);
         if (this->Literal == NULL)
         {
             printf("string=: Memory allocation failed\nParams: Literal: %s\n", Literal);
             exit(1);
         }
 
-        memCopyTo(Literal, this->Literal, this->Length);
+        memCopyTo(Literal, this->Literal, sizeof(char) * this->Length);
 
         return 0;
     }
@@ -105,21 +105,21 @@ namespace NeoTypes
         }
 
         this->Length = String->Length;
-        this->Literal = (char*)realloc(this->Literal, sizeof(char*) * this->Length);
+        this->Literal = (char*)realloc(this->Literal, sizeof(char) * this->Length);
         if (this->Literal == NULL)
         {
             printf("string=: Memory allocation failed\nParams: String: %s\n", String->Literal);
             exit(1);
         }
 
-        memCopyTo(String->Literal, this->Literal, this->Length);
+        memCopyTo(String->Literal, this->Literal, sizeof(char) * this->Length);
 
         return 0;
     }
 
     uint8 string::operator+=(char Character)
     {
-        this->Literal = (char*)realloc(this->Literal, sizeof(char*) * ++this->Length);
+        this->Literal = (char*)realloc(this->Literal, sizeof(char) * ++this->Length);
         if (this->Literal == NULL)
         {
             printf("string+=: Memory allocation failed\nParams: Character: %c\n", Character);
@@ -139,7 +139,7 @@ namespace NeoTypes
         cache = strLength(Literal);
 
         this->Length += cache - 1;
-        this->Literal = (char*)realloc(this->Literal, sizeof(char*) * this->Length);
+        this->Literal = (char*)realloc(this->Literal, sizeof(char) * this->Length);
         if (this->Literal == NULL)
         {
             printf("string+=: Memory allocation failed\nParams: Literal: %s\n", Literal);
