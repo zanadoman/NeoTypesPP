@@ -74,18 +74,13 @@ namespace NeoTypes
         memCopyTo(Literal, this->Literal, this->Length);
     }
 
-    bool string::operator==(string String)
+    bool string::operator==(string* String)
     {
-        if (this->Length != String.Length)
+        if (String == NULL)
         {
             return false;
         }
 
-        return memCompare(this->Literal, String.Literal, this->Length);
-    }
-
-    bool string::operator==(string* String)
-    {
         if (this->Length != String->Length)
         {
             return false;
@@ -96,12 +91,47 @@ namespace NeoTypes
 
     bool string::operator==(char* Literal)
     {
+        if (Literal == NULL)
+        {
+            return false;
+        }
+
         if (this->Length != strLength(Literal))
         {
             return false;
         }
 
         return memCompare(this->Literal, Literal, this->Length);
+    }
+
+    bool string::operator!=(char* Literal)
+    {
+        if (Literal == NULL)
+        {
+            return true;
+        }
+
+        if (this->Length != strLength(Literal))
+        {
+            return true;
+        }
+
+        return !memCompare(this->Literal, Literal, this->Length);
+    }
+
+    bool string::operator!=(string* String)
+    {
+        if (String == NULL)
+        {
+            return true;
+        }
+
+        if (this->Length != String->Length)
+        {
+            return true;
+        }
+
+        return !memCompare(this->Literal, String->Literal, this->Length);
     }
 
     char* string::Get()

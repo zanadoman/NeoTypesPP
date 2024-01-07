@@ -5,9 +5,9 @@ using namespace NeoTypes;
 sint32 main(sint32 argc, char* *argv)
 {
     string str1 = (char*)"szia";
-    string str2 = (char*)"szia";
+    string str2 = (char*)"szib";
 
-    if (str1 == str2)
+    if (str1 != str2.Get())
     {
         printf("equal\n");
     }
