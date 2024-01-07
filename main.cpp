@@ -4,11 +4,11 @@ using namespace NeoTypes;
 
 sint32 main(sint32 argc, char* *argv)
 {
-    string str = (char*)"szia";
+    string* str1 = new string("faszom");
+    string* str2 = new string(str1);
 
-    str = str + 'b';
 
-    printf("%s\n", str.Get());
+    printf("%s\n", str2->Get());
 
     return 0;
 }

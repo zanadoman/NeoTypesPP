@@ -21,31 +21,31 @@ namespace NeoTypes
 {
     //____________________________________________NeoString.c____________________________________________//
 
-    uint64 strLength(char* Literal);
+    uint64 strLength(const char* Literal);
     class string
     {
         public:
             uint64 Length;
 
             string();
-            string(char* Literal);
-            string(string* String);
+            string(const char* Literal);
+            string(const string* String);
             ~string();
 
-            uint8 operator=(char* Literal);
-            uint8 operator=(string* String);
+            uint8 operator=(const char* Literal);
+            uint8 operator=(const string* String);
 
-            string* operator+(char Character);
-            string* operator+(char* Literal);
-            string* operator+(string* String);
-            uint8 operator+=(char Character);
-            uint8 operator+=(char* Literal);
-            string* operator+=(string* String);
+            string* operator+(const char Character);
+            string* operator+(const char* Literal);
+            string* operator+(const string* String);
+            uint8 operator+=(const char Character);
+            uint8 operator+=(const char* Literal);
+            string* operator+=(const string* String);
 
-            bool operator==(string* String);
-            bool operator==(char* Literal);
-            bool operator!=(string* String);
-            bool operator!=(char* Literal);
+            bool operator==(const string* String);
+            bool operator==(const char* Literal);
+            bool operator!=(const string* String);
+            bool operator!=(const char* Literal);
 
             char* Get();
 
@@ -55,12 +55,12 @@ namespace NeoTypes
 
     //____________________________________________NeoMemory.c___________________________________________
 
-    bool memCompare(void* Source1, void* Source2, uint64 Size);
-    void* memCopy(void* Source, uint64 Size);
-    uint8 memCopyTo(void* Source, void* Destination, uint64 Size);
-    void* memLoad(char* FilePath, uint64 Size);
-    uint8 memLoadTo(char* FilePath, void* Destination, uint64 Size);
-    uint8 memSave(void* Source, uint64 Size, char* FilePath);
+    bool memCompare(const void* Source1, const void* Source2, uint64 Size);
+    void* memCopy(const void* Source, uint64 Size);
+    uint8 memCopyTo(const void* Source, void* Destination, uint64 Size);
+    void* memLoad(const char* FilePath, uint64 Size);
+    uint8 memLoadTo(const char* FilePath, void* Destination, uint64 Size);
+    uint8 memSave(const void* Source, uint64 Size, const char* FilePath);
 }
 
 #endif

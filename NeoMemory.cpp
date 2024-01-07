@@ -2,7 +2,7 @@
 
 namespace NeoTypes
 {
-    bool memCompare(void* Source1, void* Source2, uint64 Size)
+    bool memCompare(const void* Source1, const void* Source2, uint64 Size)
     {
         for (uint64 i = 0; i < Size; i++)
         {
@@ -15,7 +15,7 @@ namespace NeoTypes
         return true;
     }
 
-    void* memCopy(void* Source, uint64 Size)
+    void* memCopy(const void* Source, uint64 Size)
     {
         void* result;
 
@@ -41,7 +41,7 @@ namespace NeoTypes
         return result;
     }
 
-    uint8 memCopyTo(void* Source, void* Destination, uint64 Size)
+    uint8 memCopyTo(const void* Source, void* Destination, uint64 Size)
     {
         uint64 i;
 
@@ -72,7 +72,7 @@ namespace NeoTypes
         return 0;
     }
 
-    void* memLoad(char* FilePath, uint64 Size)
+    void* memLoad(const char* FilePath, uint64 Size)
     {
         void* result;
 
@@ -102,7 +102,7 @@ namespace NeoTypes
         return result;
     }
 
-    uint8 memLoadTo(char* FilePath, void* Destination, uint64 Size)
+    uint8 memLoadTo(const char* FilePath, void* Destination, uint64 Size)
     {
         FILE* file;
 
@@ -136,7 +136,7 @@ namespace NeoTypes
         return 0;
     }
 
-    uint8 memSave(void* Source, uint64 Size, char* FilePath)
+    uint8 memSave(const void* Source, uint64 Size, const char* FilePath)
     {
         FILE* file;
 
