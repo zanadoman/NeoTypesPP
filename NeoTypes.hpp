@@ -74,7 +74,7 @@ namespace NeoTypes
             bool operator!=(const char* Literal);
 
             char* Get();
-            array<string>* Split(char Separator);
+            array<string*>* Split(char Separator);
 
         private:
             char* Literal;
