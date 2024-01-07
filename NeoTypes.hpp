@@ -15,8 +15,6 @@ typedef signed int sint32;
 typedef unsigned long long uint64;
 typedef signed long long sint64;
 
-//_____________________________________________NeoArray.c____________________________________________//
-
 #include "NeoArray.hpp"
 
 namespace NeoTypes

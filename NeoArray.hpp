@@ -122,8 +122,8 @@ namespace NeoTypes
     {
         if (this->Length <= Index)
         {
-                    printf("array.Remove(): Index out of range\nParams: Index: %lld\n", Index);
-                    exit(1);
+            printf("array.Remove(): Index out of range\nParams: Index: %lld\n", Index);
+            exit(1);
         }
         if (this->Length == 0)
         {
