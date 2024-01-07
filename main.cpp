@@ -4,17 +4,11 @@ using namespace NeoTypes;
 
 sint32 main(sint32 argc, char* *argv)
 {
-    string str1 = (char*)"szia";
-    string str2 = (char*)"szib";
+    string str = (char*)"szia";
 
-    if (str1 != str2.Get())
-    {
-        printf("equal\n");
-    }
-    else
-    {
-        printf("not equal\n");
-    }
+    str = str + 'b';
+
+    printf("%s\n", str.Get());
 
     return 0;
 }

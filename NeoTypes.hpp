@@ -29,18 +29,23 @@ namespace NeoTypes
 
             string();
             string(char* Literal);
+            string(string* String);
             ~string();
-
-            uint8 operator+(char Character);
-            uint8 operator+(char* Literal);
-            uint8 operator+(string* String);
 
             uint8 operator=(char* Literal);
             uint8 operator=(string* String);
+
+            string* operator+(char Character);
+            string* operator+(char* Literal);
+            string* operator+(string* String);
+            uint8 operator+=(char Character);
+            uint8 operator+=(char* Literal);
+            string* operator+=(string* String);
+
             bool operator==(string* String);
             bool operator==(char* Literal);
-            bool operator!=(char* Literal);
             bool operator!=(string* String);
+            bool operator!=(char* Literal);
 
             char* Get();
 
