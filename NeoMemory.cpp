@@ -4,7 +4,16 @@ namespace NeoTypes
 {
     bool memCompare(const void* Source1, const void* Source2, uint64 Size)
     {
-        for (uint64 i = 0; i < Size; i++)
+        uint64 i;
+        
+        for (i = 0; i < Size / sizeof(uint64); i++)
+        {
+            if (((uint64*)Source1)[i] != ((uint64*)Source2)[i])
+            {
+                return false;
+            }
+        } 
+        for (i *= sizeof(uint64); i < Size; i++)
         {
             if (((uint8*)Source1)[i] != ((uint8*)Source2)[i])
             {
