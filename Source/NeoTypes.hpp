@@ -170,9 +170,9 @@ namespace NeoTypes
 
         if (Array->Length == 0)
         {
+            this->Length = 0;
             free(this->Elements);
             this->Elements = NULL;
-            this->Length = 0;
         }
         else
         {
