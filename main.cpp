@@ -2,11 +2,20 @@
 
 using namespace NeoTypes;
 
+class coordinate
+{
+    public:
+        double X;
+        double Y;
+};
+
 sint32 main(sint32 argc, char* *argv)
 {
-    string str((char*)"Hello World");
+    array<coordinate> arr(3);
 
-    printf("%s\n", str.Get());
+    arr[0].X = 12;
+
+    printf("arr[0].X: %f\n", arr[0].X);
 
     return 0;
 }
