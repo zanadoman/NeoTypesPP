@@ -15,10 +15,13 @@ typedef signed int sint32;
 typedef unsigned long long uint64;
 typedef signed long long sint64;
 
+//_____________________________________________NeoArray.c____________________________________________//
+
 #include "NeoArray.hpp"
 
 namespace NeoTypes
 {
+    //____________________________________________NeoString.c____________________________________________//
 
     uint64 strLength(char* Literal);
     class string
@@ -34,6 +37,8 @@ namespace NeoTypes
         private:
             char* Literal;
     };
+
+    //____________________________________________NeoMemory.c___________________________________________
 
     void* memCopy(void* Source, uint64 Size);
     uint8 memCopyTo(void* Source, void* Destination, uint64 Size);
