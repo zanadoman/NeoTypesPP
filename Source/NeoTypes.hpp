@@ -229,13 +229,12 @@ namespace NeoTypes
             exit(1);
         }
 
-        this->Elements = (type*)realloc(this->Elements, sizeof(type) * Array->Length);
+        this->Elements = (type*)realloc(this->Elements, sizeof(type) * (this->Length += Array->Length));
         if (this->Elements == NULL)
         {
             printf("array+=: Memory allocation failed\nParams: Array %p\n", Array);
             exit(1);
         }
-        this->Length = Array->Length;
 
         memCopyTo(Array->Elements, this->Elements + this->Length - Array->Length, sizeof(type) * Array->Length);
 
