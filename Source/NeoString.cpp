@@ -1,6 +1,4 @@
 #include "NeoTypes.hpp"
-#include <cmath>
-#include <cstdio>
 
 namespace NeoTypes
 {
