@@ -1,4 +1,5 @@
 #include "NeoTypes.hpp"
+#include <cmath>
 #include <cstdio>
 
 namespace NeoTypes
@@ -166,6 +167,11 @@ namespace NeoTypes
         return 0;
     }
 
+    char* string::Get()
+    {
+        return this->Literal;
+    }
+
     array<string*>* string::Split(char Separator)
     {
         array<string*>* result;
@@ -200,8 +206,32 @@ namespace NeoTypes
         return result;
     }
 
-    char* string::Get()
+    uint8 string::ReadLine()
     {
-        return this->Literal;
+        char tmp;
+
+        Clear();
+
+        while((tmp = getchar()) != '\n')
+        {
+            *this += tmp;
+        }
+
+        return 0;
+    }
+
+    uint8 string::Clear()
+    {
+        this->Literal = (char*)realloc(this->Literal, sizeof(char));
+        if (this->Literal == NULL)
+        {
+            printf("string.Clear(): Memory allocation failed\nParams: Literal: %s\n", this->Literal);
+            exit(1);
+        }
+
+        this->Literal[0] = '\0';
+        this->Length = 1;
+
+        return 0;
     }
 }

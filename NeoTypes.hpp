@@ -75,9 +75,11 @@ namespace NeoTypes
 
             char* Get();
             array<string*>* Split(char Separator);
+            uint8 ReadLine();
 
         private:
             char* Literal;
+            uint8 Clear();
     };
 
     //____________________________________________NeoMemory.c___________________________________________//
