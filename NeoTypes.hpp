@@ -70,13 +70,10 @@ namespace NeoTypes
             ~array();
 
             type& operator[](uint64 Index);
-
             uint8 operator=(const array<type>* Array);
-
-            uint8 operator-=(type Value);
-            uint8 operator+=(type Value);
+            uint8 operator-=(const type Value);
+            uint8 operator+=(const type Value);
             uint8 operator+=(const array<type>* Array);
-
             bool operator==(const array<type>* Array);
             bool operator!=(const array<type>* Array);
 
@@ -124,15 +121,23 @@ namespace NeoTypes
             exit(1);
         }
 
-        this->Length = Array->Length;
-        this->Elements = malloc(sizeof(type) * this->Length);
-        if (this->Elements == NULL)
+        if (Array->Length == 0)
         {
-            printf("array(): Memory allocation failed\nParams: Array: %p\n", Array);
-            exit(1);
+            this->Elements = NULL;
+            this->Length = 0;
         }
+        else
+        {
+            this->Length = Array->Length;
+            this->Elements = malloc(sizeof(type) * this->Length);
+            if (this->Elements == NULL)
+            {
+                printf("array(): Memory allocation failed\nParams: Array: %p\n", Array);
+                exit(1);
+            }
 
-        memCopyTo(Array->Elements, this->Elements, sizeof(type) * this->Length);
+            memCopyTo(Array->Elements, this->Elements, sizeof(type) * this->Length);
+        }
     }
 
     template <typename type> array<type>::~array()
