@@ -133,6 +133,27 @@ namespace NeoTypes
                 return false;
             }
 
+            uint8 Reverse()
+            {
+                type tmp;
+
+                for (uint64 i = 0; i < this->Length / 2; i++)
+                {
+                    tmp = this->Elements[i];
+                    this->Elements[i] = this->Elements[this->Length - 1 - i];
+                    this->Elements[this->Length - 1 - i] = tmp;
+                }   
+
+                return 0;
+            }
+
+            uint8 Order()
+            {
+                
+
+                return 0;
+            }
+
             uint8 Clear()
             {
                 free(this->Elements);
