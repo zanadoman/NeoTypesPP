@@ -74,13 +74,22 @@ namespace NeoTypes
 
     template <typename type> uint8 array<type>::Resize(uint64 Length)
     {
-        this->Elements = (type*)realloc(this->Elements, sizeof(type) * Length);
-        if (this->Elements == NULL)
+        if (Length == 0)
         {
-            printf("array.Resize(): Memory allocation failed\nParams: Length: %lld\n", Length);
-            exit(1);
+            free(this->Elements);
+            this->Elements = NULL;
+            this->Length = 0;
         }
-        this->Length = Length;
+        else
+        {
+            this->Elements = (type*)realloc(this->Elements, sizeof(type) * Length);
+            if (this->Elements == NULL)
+            {
+                printf("array.Resize(): Memory allocation failed\nParams: Length: %lld\n", Length);
+                exit(1);
+            }
+            this->Length = Length;
+        }
 
         return 0;
     }
