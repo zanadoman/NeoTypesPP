@@ -17,7 +17,7 @@ sint32 main(sint32 argc, char* *argv)
 
     for (uint64 i = 0; i < arr1.Length; i++)
     {
-        printf("%d ", arr1[i]);
+        printf("%d\n", arr1[i]);
     }
 
     return 0;
