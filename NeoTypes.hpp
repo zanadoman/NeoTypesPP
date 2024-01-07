@@ -33,6 +33,8 @@ namespace NeoTypes
 
             void operator=(char* Literal);
             bool operator==(string String);
+            bool operator==(string* String);
+            bool operator==(char* Literal);
 
             char* Get();
 

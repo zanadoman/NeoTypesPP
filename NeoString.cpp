@@ -55,11 +55,6 @@ namespace NeoTypes
         free(this->Literal);
     }
 
-    char* string::Get()
-    {
-        return this->Literal;
-    }
-
     void string::operator=(char* Literal)
     {
         if (Literal == NULL)
@@ -86,6 +81,31 @@ namespace NeoTypes
             return false;
         }
 
-        
+        return memCompare(this->Literal, String.Literal, this->Length);
+    }
+
+    bool string::operator==(string* String)
+    {
+        if (this->Length != String->Length)
+        {
+            return false;
+        }
+
+        return memCompare(this->Literal, String->Literal, this->Length);
+    }
+
+    bool string::operator==(char* Literal)
+    {
+        if (this->Length != strLength(Literal))
+        {
+            return false;
+        }
+
+        return memCompare(this->Literal, Literal, this->Length);
+    }
+
+    char* string::Get()
+    {
+        return this->Literal;
     }
 }
