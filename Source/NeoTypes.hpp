@@ -176,13 +176,13 @@ namespace NeoTypes
         }
         else
         {
-            this->Elements = (type*)realloc(this->Elements, sizeof(type) * Array->Length);
+            this->Length = Array->Length;
+            this->Elements = (type*)realloc(this->Elements, sizeof(type) * this->Length);
             if (this->Elements == NULL)
             {
                 printf("array=: Memory allocation failed\nParams: Array: %p\n", Array);
                 exit(1);
             }
-            this->Length = Array->Length;
 
             memCopyTo(Array->Elements, this->Elements, sizeof(type) * this->Length);
         }
@@ -265,9 +265,9 @@ namespace NeoTypes
     {
         if (Length == 0)
         {
+            this->Length = 0;
             free(this->Elements);
             this->Elements = NULL;
-            this->Length = 0;
         }
         else
         {
