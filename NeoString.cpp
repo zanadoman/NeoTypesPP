@@ -1,4 +1,5 @@
 #include "NeoTypes.hpp"
+#include <cstdio>
 
 namespace NeoTypes
 {
@@ -148,6 +149,39 @@ namespace NeoTypes
         memCopyTo(Literal, this->Literal + this->Length - cache, cache);
 
         return 0;
+    }
+
+    array<string>* string::Split(char Separator)
+    {
+        array<string>* result;
+
+        string* tmp;
+
+        result = new array<string>;
+        tmp = new string;
+
+        for (uint64 i = 0; i < this->Length - 1; i++)
+        {
+            if (this->Literal[i] != Separator)
+            {
+                tmp += this->Literal[i];
+            }
+            else if (1 < tmp->Length)
+            {
+                *result += tmp;
+                tmp = new string;
+            }
+        }
+
+        if (1 < tmp->Length)
+        {
+            *result += tmp;
+        }
+        {
+            delete tmp;
+        }
+
+        return result;
     }
 
     char* string::Get()
