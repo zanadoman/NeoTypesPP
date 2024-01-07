@@ -59,15 +59,30 @@ namespace NeoTypes
             exit(1);
         }
 
-        this->Length = String->Length;
-        this->Literal = (char*)malloc(sizeof(char) * this->Length);
-        if (this->Literal == NULL)
+        if (String->Length <= 1)
         {
-            printf("string(): Memory allocation failed\nParams: String: %s\n", String->Literal);
-            exit(1);
-        }
+            this->Literal = (char*)malloc(sizeof(char));
+            if (this->Literal == NULL)
+            {
+                printf("string(): Memory allocation failed\nParams: String: %s\n", String->Literal);
+                exit(1);
+            }
 
-        memCopyTo(String->Literal, this->Literal, sizeof(char) * this->Length);
+            this->Literal[0] = '\0';
+            this->Length = 1;
+        }
+        else
+        {
+            this->Length = String->Length;
+            this->Literal = (char*)malloc(sizeof(char) * this->Length);
+            if (this->Literal == NULL)
+            {
+                printf("string(): Memory allocation failed\nParams: String: %s\n", String->Literal);
+                exit(1);
+            }
+
+            memCopyTo(String->Literal, this->Literal, sizeof(char) * this->Length);
+        }
     }
 
     string::~string()
