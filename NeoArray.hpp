@@ -47,35 +47,6 @@ namespace NeoTypes
                 return this->Elements[Index];
             }
 
-            uint8 Init(uint64 Length, type Values, ...)
-            {
-                va_list args;
-
-                if (Length == 0)
-                {
-                    printf("array.Init(): Length must not be 0\nParams: Length: %lld, Values(sizeof): %d\n", Length, sizeof(type));
-                    exit(1);
-                }
-
-                this->Elements = (type*)realloc(this->Elements, sizeof(type) * Length);
-                if (this->Elements == NULL)
-                {
-                    printf("array.Init(): Memory allocation failed\nParams: Length: %lld\n", Length);
-                    exit(1);
-                }
-                this->Length = Length;
-
-                va_start(args, Values);
-                this->Elements[0] = Values;
-                for (uint64 i = 1; i < Length; i++)
-                {
-                    this->Elements[i] = va_arg(args, type);
-                }
-                va_end(args);
-
-                return 0;
-            }
-
             uint8 Resize(uint64 Length)
             {
                 this->Elements = (type*)realloc(this->Elements, sizeof(type) * Length);
