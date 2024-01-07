@@ -94,26 +94,26 @@ namespace NeoTypes
 
     template <typename type> array<type>::array()
     {
-        this->Elements = NULL;
         this->Length = 0;
+        this->Elements = NULL;
     }
 
     template <typename type> array<type>::array(uint64 Length)
     {
         if (Length == 0)
         {
-            this->Elements = NULL;
             this->Length = 0;
+            this->Elements = NULL;
         }
         else
         {
+            this->Length = Length;
             this->Elements = (type*)calloc(Length, sizeof(type));
             if (this->Elements == NULL)
             {
                 printf("array(): Memory allocation failed\nParams: Length: %lld\n", Length);
                 exit(1);
             }
-            this->Length = Length;
         }
     }
 
