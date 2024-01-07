@@ -29,7 +29,7 @@ namespace NeoTypes
             type& operator[](uint64 Index);
 
             uint8 Resize(uint64 Length);
-            uint8 Insert(uint64 Index, type Value);
+            uint8 Insert(uint64 Index, const type Value);
             uint8 Remove(uint64 Index);
             bool Contains(type Value);
             uint8 Reverse();
@@ -102,7 +102,7 @@ namespace NeoTypes
         return 0;
     }
 
-    template <typename type> uint8 array<type>::Insert(uint64 Index, type Value)
+    template <typename type> uint8 array<type>::Insert(uint64 Index, const type Value)
     {
         if (this->Length < Index)
         {
