@@ -91,6 +91,22 @@ namespace NeoTypes
         free(this->Literal);
     }
 
+    const char* string::operator()()
+    {
+        return this->Literal;
+    }
+
+    char& string::operator[](uint64 Index)
+    {
+        if (this->Length - 1 <= Index)
+        {
+            printf("string[]: Index out of range\nParams: Index: %lld\n", Index);
+            exit(1);
+        }
+
+        return this->Literal[Index];
+    }
+
     uint8 string::operator=(const char* Literal)
     {
         if (Literal == NULL)
