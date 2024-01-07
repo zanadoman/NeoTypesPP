@@ -169,8 +169,29 @@ namespace NeoTypes
 
         return (char*)Literal;
     }
+
+    string* string::operator+=(const string* String)
+    {
+        if (String == NULL)
+        {
+            printf("string+=: String must not be NULL\nParams: String: %p\n", String);
+            exit(1);
+        }
+
+        this->Length += String->Length - 1;
+        this->Literal = (char*)realloc(this->Literal, sizeof(char) * this->Length);
+        if (this->Literal == NULL)
+        {
+            printf("string+=: Memory allocation failed\nParams: String: %s\n", String->Literal);
+            exit(1);
+        }
+
+        memCopyTo(String->Literal, this->Literal + this->Length - String->Length, String->Length);
+
+        return (string*)String;
+    }
     
-    uint8 string::Read()
+    const char* string::Read()
     {
         char tmp;
 
@@ -181,7 +202,7 @@ namespace NeoTypes
             *this += tmp;
         }
 
-        return 0;
+        return this->Literal;
     }
 
     array<string*>* string::Split(char Separator)
@@ -220,6 +241,7 @@ namespace NeoTypes
 
     uint8 string::Clear()
     {
+        this->Length = 1;
         this->Literal = (char*)realloc(this->Literal, sizeof(char));
         if (this->Literal == NULL)
         {
@@ -228,7 +250,6 @@ namespace NeoTypes
         }
 
         this->Literal[0] = '\0';
-        this->Length = 1;
 
         return 0;
     }

@@ -73,7 +73,7 @@ namespace NeoTypes
             bool operator!=(const string* String);
             bool operator!=(const char* Literal);
 
-            uint8 Read();
+            const char* Read();
             array<string*>* Split(char Separator);
 
         private:
