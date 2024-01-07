@@ -66,12 +66,19 @@ namespace NeoTypes
 
             array();
             array(uint64 Length);
+            array(const array<type>* Array);
             ~array();
 
             type& operator[](uint64 Index);
+
+            uint8 operator=(const array<type>* Array);
+
             uint8 operator-=(type Value);
             uint8 operator+=(type Value);
-            uint8 operator+=(array<type>* Array);
+            uint8 operator+=(const array<type>* Array);
+
+            bool operator==(const array<type>* Array);
+            bool operator!=(const array<type>* Array);
 
             uint8 Resize(uint64 Length);
             uint8 Insert(uint64 Index, const type Value);
@@ -109,6 +116,25 @@ namespace NeoTypes
         }
     }
 
+    template <typename type> array<type>::array(const array<type>* Array)
+    {
+        if (Array == NULL)
+        {
+            printf("array(): Array must not be NULL\nParams: Array: %p\n", Array);
+            exit(1);
+        }
+
+        this->Length = Array->Length;
+        this->Elements = malloc(sizeof(type) * this->Length);
+        if (this->Elements == NULL)
+        {
+            printf("array(): Memory allocation failed\nParams: Array: %p\n", Array);
+            exit(1);
+        }
+
+        memCopyTo(Array->Elements, this->Elements, sizeof(type) * this->Length);
+    }
+
     template <typename type> array<type>::~array()
     {
         free(this->Elements);
@@ -123,6 +149,25 @@ namespace NeoTypes
         }
 
         return this->Elements[Index];
+    }
+
+    template <typename type> uint8 array<type>::operator=(const array <type>* Array)
+    {
+        if (Array == NULL)
+        {
+            printf("array=(): Array must not be NULL\nParams: Array: %p\n", Array);
+            exit(1);
+        }
+
+        this->Length = Array->Length;
+        this->Elements = (type*)realloc(this->Elements, sizeof(type) * this->Length);
+        if (this->Elements == NULL)
+        {
+            printf("array=(): Memory allocation failed\nParams: Array: %p\n", Array);
+            exit(1);
+        }
+
+        memCopyTo(Array->Elements, this->Elements, sizeof(type) * this->Length);
     }
 
     template <typename type> uint8 array<type>::operator-=(type Value)
