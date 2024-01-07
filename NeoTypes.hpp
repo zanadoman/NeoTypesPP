@@ -6,6 +6,9 @@
 
 namespace NeoTypes
 {
+
+    uint64 strLength(char* Literal);
+
     class string
     {
         public:
