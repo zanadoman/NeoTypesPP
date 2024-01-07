@@ -30,7 +30,9 @@ namespace NeoTypes
             string();
             string(char* Literal);
             ~string();
+
             char* Get();
+            void operator()(char* Literal);
 
         private:
             char* Literal;

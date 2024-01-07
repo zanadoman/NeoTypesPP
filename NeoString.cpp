@@ -59,4 +59,23 @@ namespace NeoTypes
     {
         return this->Literal;
     }
+
+    void string::operator()(char* Literal)
+    {
+        if (Literal == NULL)
+        {
+            printf("string(): Literal must not be NULL\nParams: Literal: %p\n", Literal);
+            exit(1);
+        }
+
+        this->Length = strLength(Literal);
+        this->Literal = (char*)realloc(this->Literal, sizeof(char*) * this->Length);
+        if (this->Literal == NULL)
+        {
+            printf("string(): Memory allocation failed\nParams: Literal: %p\n", Literal);
+            exit(1);
+        }
+
+        memCopyTo(Literal, this->Literal, this->Length);
+    }
 }
