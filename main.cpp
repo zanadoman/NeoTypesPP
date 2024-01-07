@@ -4,11 +4,17 @@ using namespace NeoTypes;
 
 sint32 main(sint32 argc, char* *argv)
 {
-    string str = "Hello";
+    array<uint8> arr;
 
-    str += " World!";
+    arr -= 5;
+    arr += 7;
+    arr += 8;
+    arr -= 9;
 
-    printf("%s\n", str.Get());
+    for (uint64 i = 0; i < arr.Length; i++)
+    {
+        printf("%d\n", arr[i]);
+    }
 
     return 0;
 }

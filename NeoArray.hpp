@@ -26,9 +26,11 @@ namespace NeoTypes
             array(uint64 Length);
             ~array();
 
+            type& operator[](uint64 Index);
+
             uint8 operator-=(type Value);
             uint8 operator+=(type Value);
-            type& operator[](uint64 Index);
+
 
             uint8 Resize(uint64 Length);
             uint8 Insert(uint64 Index, const type Value);
@@ -71,6 +73,17 @@ namespace NeoTypes
         free(this->Elements);
     }
 
+    template <typename type> type& array<type>::operator[](uint64 Index)
+    {
+        if (this->Length <= Index)
+        {
+            printf("array[]: Index out of range\nParams: Index: %lld\n", Index);
+            exit(1);
+        }
+
+        return this->Elements[Index];
+    }
+
     template <typename type> uint8 array<type>::operator-=(type Value)
     {
         this->Elements = (type*)realloc(this->Elements, sizeof(type) * ++this->Length);
@@ -100,17 +113,6 @@ namespace NeoTypes
         this->Elements[this->Length - 1] = Value;
 
         return 0;
-    }
-
-    template <typename type> type& array<type>::operator[](uint64 Index)
-    {
-        if (this->Length <= Index)
-        {
-            printf("array[]: Index out of range\nParams: Index: %lld\n", Index);
-            exit(1);
-        }
-
-        return this->Elements[Index];
     }
 
     template <typename type> uint8 array<type>::Resize(uint64 Length)
