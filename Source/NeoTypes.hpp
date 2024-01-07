@@ -133,7 +133,7 @@ namespace NeoTypes
         else
         {
             this->Length = Array->Length;
-            this->Elements = (type*)malloc(sizeof(type) * Array->Length);
+            this->Elements = (type*)malloc(sizeof(type) * this->Length);
             if (this->Elements == NULL)
             {
                 printf("array(): Memory allocation failed\nParams: Array: %p\n", Array);
