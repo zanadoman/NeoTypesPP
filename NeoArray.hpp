@@ -22,10 +22,12 @@ namespace NeoTypes
         public:
             uint64 Length;
 
+            array();
             array(uint64 Length);
             ~array();
 
             type& operator[](uint64 Index);
+
             uint8 Resize(uint64 Length);
             uint8 Insert(uint64 Index, type Value);
             uint8 Remove(uint64 Index);
@@ -36,6 +38,12 @@ namespace NeoTypes
         private:
             type* Elements;
     };
+
+    template <typename type> array<type>::array()
+    {
+        this->Elements = NULL;
+        this->Length = 0;
+    }
 
     template <typename type> array<type>::array(uint64 Length)
     {
