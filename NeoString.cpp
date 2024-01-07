@@ -116,6 +116,40 @@ namespace NeoTypes
         return 0;
     }
 
+    uint8 string::operator+=(char Character)
+    {
+        this->Literal = (char*)realloc(this->Literal, sizeof(char*) * ++this->Length);
+        if (this->Literal == NULL)
+        {
+            printf("string+=: Memory allocation failed\nParams: Character: %c\n", Character);
+            exit(1);
+        }
+
+        this->Literal[this->Length - 2] = Character;
+        this->Literal[this->Length - 1] = '\0';
+
+        return 0;
+    }
+
+    uint8 string::operator+=(const char* Literal)
+    {
+        uint64 cache;
+
+        cache = strLength(Literal);
+
+        this->Length += cache - 1;
+        this->Literal = (char*)realloc(this->Literal, sizeof(char*) * this->Length);
+        if (this->Literal == NULL)
+        {
+            printf("string+=: Memory allocation failed\nParams: Literal: %s\n", Literal);
+            exit(1);
+        }
+
+        memCopyTo(Literal, this->Literal + this->Length - cache, cache);
+
+        return 0;
+    }
+
     char* string::Get()
     {
         return this->Literal;
