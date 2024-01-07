@@ -20,6 +20,7 @@ namespace NeoTypes
 
     string::string()
     {
+        this->Length = 1;
         this->Literal = (char*)malloc(sizeof(char));
         if (this->Literal == NULL)
         {
@@ -28,7 +29,6 @@ namespace NeoTypes
         }
 
         this->Literal[0] = '\0';
-        this->Length = 1;
     }
 
     string::string(const char* Literal)
