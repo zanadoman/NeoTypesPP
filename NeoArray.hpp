@@ -31,7 +31,7 @@ namespace NeoTypes
             uint8 Resize(uint64 Length);
             uint8 Insert(uint64 Index, const type Value);
             uint8 Remove(uint64 Index);
-            bool Contains(type Value);
+            bool Contains(const type Value);
             uint8 Reverse();
             uint8 Clear();
 
@@ -162,7 +162,7 @@ namespace NeoTypes
         return 0;
     }
 
-    template <typename type> bool array<type>::Contains(type Value)
+    template <typename type> bool array<type>::Contains(const type Value)
     {
         for (uint64 i = 0; i < this->Length; i++)
         {
