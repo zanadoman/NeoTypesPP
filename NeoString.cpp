@@ -182,10 +182,19 @@ namespace NeoTypes
 
         return 0;
     }
-
-    char* string::Get()
+    
+    uint8 string::Read()
     {
-        return this->Literal;
+        char tmp;
+
+        Clear();
+
+        while((tmp = getchar()) != '\n')
+        {
+            *this += tmp;
+        }
+
+        return 0;
     }
 
     array<string*>* string::Split(char Separator)
@@ -220,20 +229,6 @@ namespace NeoTypes
         }
 
         return result;
-    }
-
-    uint8 string::ReadLine()
-    {
-        char tmp;
-
-        Clear();
-
-        while((tmp = getchar()) != '\n')
-        {
-            *this += tmp;
-        }
-
-        return 0;
     }
 
     uint8 string::Clear()

@@ -68,15 +68,13 @@ namespace NeoTypes
             uint8 operator+=(char Character);
             uint8 operator+=(const char* Literal);
             string* operator+=(const string* String);
-
             bool operator==(const string* String);
             bool operator==(const char* Literal);
             bool operator!=(const string* String);
             bool operator!=(const char* Literal);
 
-            char* Get();
+            uint8 Read();
             array<string*>* Split(char Separator);
-            uint8 ReadLine();
 
         private:
             char* Literal;
