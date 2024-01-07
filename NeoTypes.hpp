@@ -31,8 +31,8 @@ namespace NeoTypes
             string(char* Literal);
             ~string();
 
-            void operator=(char* Literal);
-            void operator=(string* String);
+            uint8 operator=(char* Literal);
+            uint8 operator=(string* String);
             bool operator==(string* String);
             bool operator==(char* Literal);
             bool operator!=(char* Literal);

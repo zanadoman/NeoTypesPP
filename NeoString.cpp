@@ -55,7 +55,7 @@ namespace NeoTypes
         free(this->Literal);
     }
 
-    void string::operator=(char* Literal)
+    uint8 string::operator=(char* Literal)
     {
         if (Literal == NULL)
         {
@@ -72,6 +72,29 @@ namespace NeoTypes
         }
 
         memCopyTo(Literal, this->Literal, this->Length);
+
+        return 0;
+    }
+
+    uint8 string::operator=(string* String)
+    {
+        if (String == NULL)
+        {
+            printf("string(): String must not be NULL\nParams: String: %p\n", String);
+            exit(1);
+        }
+
+        this->Length = String->Length;
+        this->Literal = (char*)realloc(this->Literal, sizeof(char*) * this->Length);
+        if (this->Literal == NULL)
+        {
+            printf("string(): Memory allocation failed\nParams: String: %p\n", String);
+            exit(1);
+        }
+
+        memCopyTo(String->Literal, this->Literal, this->Length);
+
+        return 0;
     }
 
     bool string::operator==(string* String)
