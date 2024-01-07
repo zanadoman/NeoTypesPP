@@ -11,9 +11,7 @@ sint32 main(sint32 argc, char* *argv)
         arr.Insert(i, i);
     }
 
-    arr.Reverse();
-
-    for (uint8 i = 0; i < 10; i++)
+    for (uint8 i = 0; i < arr.Length; i++)
     {
         printf("%d ", arr[i]);
     }

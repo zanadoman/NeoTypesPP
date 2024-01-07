@@ -1,9 +1,17 @@
 #ifndef NEOARRAY_HPP
 #define NEOARRAY_HPP
 
-#include "NeoCommon.hpp"
-#include <cstdarg>
-#include <cstdlib>
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef unsigned char uint8;
+typedef signed char sint8;
+typedef unsigned short uint16;
+typedef signed short sint16;
+typedef unsigned int uint32;
+typedef signed int sint32;
+typedef unsigned long long uint64;
+typedef signed long long sint64;
 
 namespace NeoTypes
 {
@@ -131,6 +139,20 @@ namespace NeoTypes
                 }
 
                 return false;
+            }
+
+            uint8 Reverse()
+            {
+                type tmp;
+
+                for (uint64 i = 0; i < this->Length / 2; i++)
+                {
+                    tmp = this->Elements[i];
+                    this->Elements[i] = this->Elements[this->Length - 1 - i];
+                    this->Elements[this->Length - 1 - i] = tmp;
+                }
+
+                return 0;
             }
 
             uint8 Clear()
