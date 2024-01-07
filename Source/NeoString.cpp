@@ -157,9 +157,7 @@ namespace NeoTypes
             exit(1);
         }
 
-        cache = strLength(Literal);
-
-        this->Length += cache - 1;
+        this->Length += (cache = strLength(Literal)) - 1;
         this->Literal = (char*)realloc(this->Literal, sizeof(char) * this->Length);
         if (this->Literal == NULL)
         {
