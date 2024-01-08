@@ -121,8 +121,7 @@ namespace NeoTypesPP
         }
         else
         {
-            this->Elements = (type*)calloc((this->Length = Length), sizeof(type));
-            if (this->Elements == NULL)
+            if ((this->Elements = (type*)calloc((this->Length = Length), sizeof(type))) == NULL)
             {
                 printf("array(): Memory allocation failed\nParams: Length: %lld\n", Length);
                 exit(1);
@@ -156,8 +155,7 @@ namespace NeoTypesPP
         }
         else
         {
-            this->Elements = (type*)malloc(sizeof(type) * (this->Length = Array->Length));
-            if (this->Elements == NULL)
+            if ((this->Elements = (type*)malloc(sizeof(type) * (this->Length = Array->Length))) == NULL)
             {
                 printf("array(): Memory allocation failed\nParams: Array: %p\n", Array);
                 exit(1);
@@ -199,8 +197,7 @@ namespace NeoTypesPP
         }
         else
         {
-            this->Elements = (type*)realloc(this->Elements, sizeof(type) * (this->Length = Array->Length));
-            if (this->Elements == NULL)
+            if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * (this->Length = Array->Length))) == NULL)
             {
                 printf("array=: Memory allocation failed\nParams: Array: %p\n", Array);
                 exit(1);
@@ -214,8 +211,7 @@ namespace NeoTypesPP
 
     template <typename type> uint64 array<type>::operator -= (const type Value)
     {
-        this->Elements = (type*)realloc(this->Elements, sizeof(type) * ++this->Length);
-        if (this->Elements == NULL)
+        if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * ++this->Length)) == NULL)
         {
             printf("array-=: Memory allocation failed\nParams: Value(sizeof): %d\n", sizeof(type));
             exit(1);
@@ -232,8 +228,7 @@ namespace NeoTypesPP
 
     template <typename type> uint64 array<type>::operator += (const type Value)
     {
-        this->Elements = (type*)realloc(this->Elements, sizeof(type) * ++this->Length);
-        if (this->Elements == NULL)
+        if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * ++this->Length)) == NULL)
         {
             printf("array+=: Memory allocation failed\nParams: Value(sizeof): %d\n", sizeof(type));
             exit(1);
@@ -251,8 +246,7 @@ namespace NeoTypesPP
             exit(1);
         }
 
-        this->Elements = (type*)realloc(this->Elements, sizeof(type) * (this->Length += Array->Length));
-        if (this->Elements == NULL)
+        if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * (this->Length += Array->Length))) == NULL)
         {
             printf("array+=: Memory allocation failed\nParams: Array %p\n", Array);
             exit(1);
@@ -288,8 +282,7 @@ namespace NeoTypesPP
         }
         else
         {
-            this->Elements = (type*)realloc(this->Elements, sizeof(type) * (this->Length = Length));
-            if (this->Elements == NULL)
+            if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * (this->Length = Length))) == NULL)
             {
                 printf("array.Resize(): Memory allocation failed\nParams: Length: %lld\n", Length);
                 exit(1);
@@ -307,8 +300,7 @@ namespace NeoTypesPP
             exit(1);
         }
 
-        this->Elements = (type*)realloc(this->Elements, sizeof(type) * ++this->Length);
-        if (this->Elements == NULL)
+        if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * ++this->Length)) == NULL)
         {
             printf("array.Insert(): Memory allocation failed\nParams: Index: %lld, Value(sizeof): %d\n", Index, sizeof(type));
             exit(1);
@@ -348,8 +340,7 @@ namespace NeoTypesPP
                 this->Elements[i] = this->Elements[i + 1];
             }
 
-            this->Elements = (type*)realloc(this->Elements, sizeof(type) * this->Length);
-            if (this->Elements == NULL)
+            if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * this->Length)) == NULL)
             {
                 printf("array.Remove(): Memory allocation failed\nParams: Index: %lld\n", Index);
                 exit(1);
