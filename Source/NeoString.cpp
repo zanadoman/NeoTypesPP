@@ -174,6 +174,28 @@ namespace NeoTypes
 
         return (string*)String;
     }
+
+    bool string::operator == (const char* Literal)
+    {
+        uint64 cache;
+
+        if (Literal == NULL || this->Length != (cache = strLength(Literal)))
+        {
+            return false;
+        }
+
+        return memCompare(this->Literal, Literal, cache);
+    }
+
+    bool string::operator == (const string* String)
+    {
+        if (String == NULL || this->Length != String->Length)
+        {
+            return false;
+        }
+
+        return memCompare(this->Literal, String->Literal, this->Length);
+    }
     
     const char* string::Read()
     {

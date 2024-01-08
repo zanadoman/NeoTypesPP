@@ -69,10 +69,10 @@ namespace NeoTypes
             char operator += (char Character);
             char* operator += (const char* Literal);
             string* operator += (const string* String);
-            bool operator == (const string* String);
             bool operator == (const char* Literal);
-            bool operator != (const string* String);
+            bool operator == (const string* String);
             bool operator != (const char* Literal);
+            bool operator != (const string* String);
 
             const char* Read();
             array<string*>* Split(char Separator);
