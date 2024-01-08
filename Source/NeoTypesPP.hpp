@@ -35,6 +35,7 @@ namespace NeoTypesPP
 
             type& operator [] (uint64 Index);
             uint64 operator = (const type Value);
+            uint64 operator = (std::initializer_list<type> Elements);
             uint64 operator = (const array<type>* Array);
             uint64 operator -= (const type Value);
             uint64 operator -= (const array<type>* Array);
@@ -149,16 +150,16 @@ namespace NeoTypesPP
         }
         else
         {
-            if ((this->Elements = (type*)calloc(this->Length, sizeof(type))) == NULL)
+            if ((this->Elements = (type*)malloc(sizeof(type) * this->Length)) == NULL)
             {
-                printf("array(): Memory allocation failed\nParams: Length: %lld\n", Length);
+                printf("array(): Memory allocation failed\n");
                 exit(1);
             }
-        }
 
-        for (uint64 i = 0; i < this->Length; i++)
-        {
-            this->Elements[i] = *(Elements.begin() + i);
+            for (uint64 i = 0; i < this->Length; i++)
+            {
+                this->Elements[i] = *(Elements.begin() + i);
+            }
         }
     }
 
@@ -211,6 +212,30 @@ namespace NeoTypesPP
         }
 
         this->Elements[0] = Value;
+
+        return this->Length;
+    }
+
+    template <typename type> uint64 array<type>::operator = (std::initializer_list<type> Elements)
+    {
+        if ((this->Length = Elements.size()) == 0)
+        {
+            free(this->Elements);
+            this->Elements = NULL;
+        }
+        else
+        {
+            if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * this->Length)) == NULL)
+            {
+                printf("array=: Memory allocation failed\n");
+                exit(1);
+            }
+
+            for (uint64 i = 0; i < this->Length; i++)
+            {
+                this->Elements[i] = *(Elements.begin() + i);
+            }
+        }
 
         return this->Length;
     }
