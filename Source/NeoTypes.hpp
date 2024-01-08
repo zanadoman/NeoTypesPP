@@ -29,13 +29,13 @@ namespace NeoTypes
             array(const array<type>* Array);
             ~array();
 
-            type& operator[](uint64 Index);
-            array<type>* operator=(const array<type>* Array);
-            type operator-=(const type Value);
-            type operator+=(const type Value);
-            array<type>* operator+=(const array<type>* Array);
-            bool operator==(const array<type>* Array);
-            bool operator!=(const array<type>* Array);
+            type& operator [] (uint64 Index);
+            array<type>* operator = (const array<type>* Array);
+            type operator -= (const type Value);
+            type operator += (const type Value);
+            array<type>* operator += (const array<type>* Array);
+            bool operator == (const array<type>* Array);
+            bool operator != (const array<type>* Array);
 
             uint8 Resize(uint64 Length);
             uint8 Insert(uint64 Index, const type Value);
@@ -149,7 +149,7 @@ namespace NeoTypes
         free(this->Elements);
     }
 
-    template <typename type> type& array<type>::operator[](uint64 Index)
+    template <typename type> type& array<type>::operator [] (uint64 Index)
     {
         if (this->Length <= Index)
         {
@@ -160,7 +160,7 @@ namespace NeoTypes
         return this->Elements[Index];
     }
 
-    template <typename type> array<type>* array<type>::operator=(const array<type>* Array)
+    template <typename type> array<type>* array<type>::operator = (const array<type>* Array)
     {
         if (Array == NULL)
         {
@@ -190,7 +190,7 @@ namespace NeoTypes
         return (array<type>*)Array;
     }
 
-    template <typename type> type array<type>::operator-=(const type Value)
+    template <typename type> type array<type>::operator -= (const type Value)
     {
         this->Elements = (type*)realloc(this->Elements, sizeof(type) * ++this->Length);
         if (this->Elements == NULL)
@@ -208,7 +208,7 @@ namespace NeoTypes
         return (type)Value;
     }
 
-    template <typename type> type array<type>::operator+=(const type Value)
+    template <typename type> type array<type>::operator += (const type Value)
     {
         this->Elements = (type*)realloc(this->Elements, sizeof(type) * ++this->Length);
         if (this->Elements == NULL)
@@ -221,7 +221,7 @@ namespace NeoTypes
         return (type)Value;
     }
 
-    template <typename type> array<type>* array<type>::operator+=(const array<type>* Array)
+    template <typename type> array<type>* array<type>::operator += (const array<type>* Array)
     {
         if (Array == NULL)
         {
@@ -241,7 +241,7 @@ namespace NeoTypes
         return (array<type>*)Array;
     }
 
-    template <typename type> bool array<type>::operator==(const array<type>* Array)
+    template <typename type> bool array<type>::operator == (const array<type>* Array)
     {
         if (Array == NULL || this->Length != Array->Length)
         {
@@ -251,7 +251,7 @@ namespace NeoTypes
         return memCompare(this->Elements, Array->Elements, sizeof(type) * this->Length);
     }
 
-    template <typename type> bool array<type>::operator!=(const array<type>* Array)
+    template <typename type> bool array<type>::operator != (const array<type>* Array)
     {
         if (Array == NULL || this->Length != Array->Length)
         {
