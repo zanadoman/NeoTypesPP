@@ -115,7 +115,7 @@ namespace NeoTypesPP
         {
             if ((this->Elements = (type*)calloc(this->Length, sizeof(type))) == NULL)
             {
-                printf("array(): Memory allocation failed\nParams: Length: %lld\n", length);
+                printf("array(): Memory allocation failed\n");
                 exit(1);
             }
         }
