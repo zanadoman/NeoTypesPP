@@ -40,8 +40,7 @@ namespace NeoTypes
             exit(1);
         }
 
-        this->Length = String->Length;
-        this->Literal = (char*)malloc(sizeof(char) * this->Length);
+        this->Literal = (char*)malloc(sizeof(char) * (this->Length = String->Length));
         if (this->Literal == NULL)
         {
             printf("string(): Memory allocation failed\nParams: String: %s\n", String->Literal);
