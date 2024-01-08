@@ -372,9 +372,9 @@ namespace NeoTypes
 
     template <typename type> uint8 array<type>::Clear()
     {
+        this->Length = 0;
         free(this->Elements);
         this->Elements = NULL;
-        this->Length = 0;
 
         return 0;
     }
