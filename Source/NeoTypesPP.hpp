@@ -114,14 +114,13 @@ namespace NeoTypesPP
 
     template <typename type> array<type>::array(uint64 Length)
     {
-        if (Length == 0)
+        if ((this->Length = Length) == 0)
         {
-            this->Length = 0;
             this->Elements = NULL;
         }
         else
         {
-            if ((this->Elements = (type*)calloc((this->Length = Length), sizeof(type))) == NULL)
+            if ((this->Elements = (type*)calloc(this->Length, sizeof(type))) == NULL)
             {
                 printf("array(): Memory allocation failed\nParams: Length: %lld\n", Length);
                 exit(1);
@@ -136,7 +135,6 @@ namespace NeoTypesPP
             printf("array(): Memory allocation failed\nParams: Value(sizeof): %d\n", sizeof(type));
             exit(1);
         }
-
         this->Elements[0] = Value;
     }
 
@@ -148,14 +146,13 @@ namespace NeoTypesPP
             exit(1);
         }
 
-        if (Array->Length == 0)
+        if ((this->Length = Array->Length) == 0)
         {
-            this->Length = 0;
             this->Elements = NULL;
         }
         else
         {
-            if ((this->Elements = (type*)malloc(sizeof(type) * (this->Length = Array->Length))) == NULL)
+            if ((this->Elements = (type*)malloc(sizeof(type) * this->Length)) == NULL)
             {
                 printf("array(): Memory allocation failed\nParams: Array: %p\n", Array);
                 exit(1);
