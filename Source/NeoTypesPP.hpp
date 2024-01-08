@@ -241,7 +241,7 @@ namespace NeoTypesPP
         {
             if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * (this->Length += Elements.size()))) == NULL)
             {
-                printf("array-=: Memory allocation failed\n");
+                printf("array-=: Memory allocation failed\nParams: Elements(begin): %p\n", Elements.begin());
                 exit(1);
             }
 
@@ -285,13 +285,16 @@ namespace NeoTypesPP
 
     template <typename type> uint64 array<type>::operator += (std::initializer_list<type> Elements)
     {
-        if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * (this->Length += Elements.size()))) == NULL)
+        if (Elements.size() != 0)
         {
-            printf("array+=: Memory allocation failed\n");
-            exit(1);
-        }
+            if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * (this->Length += Elements.size()))) == NULL)
+            {
+                printf("array+=: Memory allocation failed\nParams: Elements(begin): %p\n", Elements.begin());
+                exit(1);
+            }
 
-        memCopyTo(Elements.begin(), this->Elements + this->Length - Elements.size(), sizeof(type) * Elements.size());
+            memCopyTo(Elements.begin(), this->Elements + this->Length - Elements.size(), sizeof(type) * Elements.size());
+        }
 
         return this->Length;
     }
@@ -304,13 +307,16 @@ namespace NeoTypesPP
             exit(1);
         }
 
-        if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * (this->Length += Array->Length))) == NULL)
+        if (Array->Length != 0)
         {
-            printf("array+=: Memory allocation failed\nParams: Array %p\n", Array);
-            exit(1);
-        }
+            if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * (this->Length += Array->Length))) == NULL)
+            {
+                printf("array+=: Memory allocation failed\nParams: Array %p\n", Array);
+                exit(1);
+            }
 
-        memCopyTo(Array->Elements, this->Elements + this->Length - Array->Length, sizeof(type) * Array->Length);
+            memCopyTo(Array->Elements, this->Elements + this->Length - Array->Length, sizeof(type) * Array->Length);
+        }
 
         return this->Length;
     }
