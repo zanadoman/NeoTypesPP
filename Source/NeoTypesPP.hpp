@@ -27,12 +27,15 @@ namespace NeoTypesPP
 
             array();
             array(uint64 Length);
+            array(const type Value);
             array(const array<type>* Array);
             ~array();
 
             type& operator [] (uint64 Index);
+            uint64 operator = (const type Value);
             uint64 operator = (const array<type>* Array);
             uint64 operator -= (const type Value);
+            uint64 operator -= (const array<type>* Array);
             uint64 operator += (const type Value);
             uint64 operator += (const array<type>* Array);
             bool operator == (const array<type>* Array);
@@ -40,6 +43,7 @@ namespace NeoTypesPP
 
             uint64 Resize(uint64 Length);
             uint64 Insert(uint64 Index, const type Value);
+            uint64 Insert(uint64 Index, const array<type>* Array);
             uint64 Remove(uint64 Index);
             bool Contains(const type Value);
             uint64 Reverse();
@@ -124,6 +128,17 @@ namespace NeoTypesPP
                 exit(1);
             }
         }
+    }
+
+    template <typename type> array<type>::array(const type Value)
+    {
+        if ((this->Elements = (type*)malloc(sizeof(type) * (this->Length = 1))) == NULL)
+        {
+            printf("array(): Memory allocation failed\nParams: Value(sizeof): %d\n", sizeof(type));
+            exit(1);
+        }
+
+        this->Elements[0] = Value;
     }
 
     template <typename type> array<type>::array(const array<type>* Array)
