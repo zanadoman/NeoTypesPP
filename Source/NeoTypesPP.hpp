@@ -250,12 +250,12 @@ namespace NeoTypesPP
             exit(1);
         }
 
-        for (uint64 i = this->Length - 1; Array->Length < i; i--)
+        for (uint64 i = this->Length - 1; Array->Length <= i; i--)
         {
             this->Elements[i] = this->Elements[i - Array->Length];
         }
 
-        memCopyTo(Array->Elements, this->Elements + Array->Length, sizeof(type) * Array->Length);
+        memCopyTo(Array->Elements, this->Elements, sizeof(type) * Array->Length);
 
         return this->Length;
     }
