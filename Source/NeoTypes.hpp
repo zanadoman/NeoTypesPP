@@ -1,11 +1,11 @@
-#ifndef NEOTYPES_HPP
-#define NEOTYPES_HPP
+#ifndef NEOTYPESPP_HPP
+#define NEOTYPESPP_HPP
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 
-namespace NeoTypes
+namespace NeoTypesPP
 {
     //_____________________________________________NeoTypes.hpp____________________________________________//
 

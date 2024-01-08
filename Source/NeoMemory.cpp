@@ -1,6 +1,6 @@
 #include "NeoTypes.hpp"
 
-namespace NeoTypes
+namespace NeoTypesPP
 {
     bool memCompare(const void* Source1, const void* Source2, uint64 Size)
     {
