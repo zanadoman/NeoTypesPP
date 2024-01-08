@@ -109,8 +109,7 @@ namespace NeoTypes
         }
         else
         {
-            this->Length = Length;
-            this->Elements = (type*)calloc(this->Length, sizeof(type));
+            this->Elements = (type*)calloc((this->Length = Length), sizeof(type));
             if (this->Elements == NULL)
             {
                 printf("array(): Memory allocation failed\nParams: Length: %lld\n", Length);
@@ -134,8 +133,7 @@ namespace NeoTypes
         }
         else
         {
-            this->Length = Array->Length;
-            this->Elements = (type*)malloc(sizeof(type) * this->Length);
+            this->Elements = (type*)malloc(sizeof(type) * (this->Length = Array->Length));
             if (this->Elements == NULL)
             {
                 printf("array(): Memory allocation failed\nParams: Array: %p\n", Array);
@@ -178,8 +176,7 @@ namespace NeoTypes
         }
         else
         {
-            this->Length = Array->Length;
-            this->Elements = (type*)realloc(this->Elements, sizeof(type) * this->Length);
+            this->Elements = (type*)realloc(this->Elements, sizeof(type) * (this->Length = Array->Length));
             if (this->Elements == NULL)
             {
                 printf("array=: Memory allocation failed\nParams: Array: %p\n", Array);
@@ -255,12 +252,7 @@ namespace NeoTypes
 
     template <typename type> bool array<type>::operator != (const array<type>* Array)
     {
-        if (Array == NULL || this->Length != Array->Length)
-        {
-            return true;
-        }
-
-        return !memCompare(this->Elements, Array->Elements, sizeof(type) * this->Length);
+        return !(*this == Array);
     }
 
     template <typename type> uint8 array<type>::Resize(uint64 Length)
@@ -273,8 +265,7 @@ namespace NeoTypes
         }
         else
         {
-            this->Length = Length;
-            this->Elements = (type*)realloc(this->Elements, sizeof(type) * this->Length);
+            this->Elements = (type*)realloc(this->Elements, sizeof(type) * (this->Length = Length));
             if (this->Elements == NULL)
             {
                 printf("array.Resize(): Memory allocation failed\nParams: Length: %lld\n", Length);
