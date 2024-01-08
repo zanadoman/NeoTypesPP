@@ -196,6 +196,16 @@ namespace NeoTypes
 
         return memCompare(this->Literal, String->Literal, this->Length);
     }
+
+    bool string::operator != (const char* Literal)
+    {
+        return !(*this == Literal);
+    }
+
+    bool string::operator != (const string* String)
+    {
+        return !(*this == String);
+    }
     
     const char* string::Read()
     {
