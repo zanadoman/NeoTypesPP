@@ -370,11 +370,17 @@ namespace NeoTypesPP
 
     template <typename type> uint64 array<type>::Insert(uint64 Index, std::initializer_list<type> Elements)
     {
+        if (this->Length < Index)
+        {
+            printf("array.Insert(): Index out of range\nParams: Index: %lld, Elements(begin): %p\n", Index, Elements.begin());
+            exit(1);
+        }
+
         if (Elements.size() != 0)
         {
             if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * (this->Length += Elements.size()))) == NULL)
             {
-                printf("array.Insert(): Memory allocation failed\nParams: Elements(begin): %p\n", Elements.begin());
+                printf("array.Insert(): Memory allocation failed\nParams: Index: %lld, Elements(begin): %p\n", Index, Elements.begin());
                 exit(1);
             }
 
