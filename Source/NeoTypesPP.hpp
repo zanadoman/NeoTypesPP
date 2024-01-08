@@ -370,18 +370,21 @@ namespace NeoTypesPP
 
     template <typename type> uint64 array<type>::Insert(uint64 Index, std::initializer_list<type> Elements)
     {
-        if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * (this->Length += Elements.size()))) == NULL)
+        if (Elements.size() != 0)
         {
-            printf("array.Insert(): Memory allocation failed\n");
-            exit(1);
-        }
+            if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * (this->Length += Elements.size()))) == NULL)
+            {
+                printf("array.Insert(): Memory allocation failed\nParams: Elements(begin): %p\n", Elements.begin());
+                exit(1);
+            }
 
-        for (uint64 i = this->Length - 1; Index + Elements.size() <= i; i--)
-        {
-            this->Elements[i] = this->Elements[i - Elements.size()];
-        }
+            for (uint64 i = this->Length - 1; Index + Elements.size() <= i; i--)
+            {
+                this->Elements[i] = this->Elements[i - Elements.size()];
+            }
 
-        memCopyTo(Elements.begin(), this->Elements + Index, sizeof(type) * Elements.size());
+            memCopyTo(Elements.begin(), this->Elements + Index, sizeof(type) * Elements.size());
+        }
 
         return this->Length;
     }
@@ -394,18 +397,21 @@ namespace NeoTypesPP
             exit(1);
         }
 
-        if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * (this->Length += Array->Length))) == NULL)
+        if (Array->Length != 0)
         {
-            printf("array.Insert(): Memory allocation failed\nParams: Index: %lld, Array: %p\n", Index, Array);
-            exit(1);
-        }
+            if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * (this->Length += Array->Length))) == NULL)
+            {
+                printf("array.Insert(): Memory allocation failed\nParams: Index: %lld, Array: %p\n", Index, Array);
+                exit(1);
+            }
 
-        for (uint64 i = this->Length - 1; Index + Array->Length <= i; i--)
-        {
-            this->Elements[i] = this->Elements[i - Array->Length];
-        }
+            for (uint64 i = this->Length - 1; Index + Array->Length <= i; i--)
+            {
+                this->Elements[i] = this->Elements[i - Array->Length];
+            }
 
-        memCopyTo(Array->Elements, this->Elements + Index, sizeof(type) * Array->Length);
+            memCopyTo(Array->Elements, this->Elements + Index, sizeof(type) * Array->Length);
+        }
 
         return this->Length;
     }
