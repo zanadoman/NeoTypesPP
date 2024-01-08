@@ -135,6 +135,7 @@ namespace NeoTypesPP
             printf("array(): Memory allocation failed\nParams: Value(sizeof): %d\n", sizeof(type));
             exit(1);
         }
+
         this->Elements[0] = Value;
     }
 
@@ -176,6 +177,19 @@ namespace NeoTypesPP
         }
 
         return this->Elements[Index];
+    }
+
+    template <typename type> uint64 array<type>::operator = (const type Value)
+    {
+        if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * (this->Length = 1))) == NULL)
+        {
+            printf("array=: Memory allocation failed\nParams: Value(sizeof): %d\n", sizeof(type));
+            exit(1);
+        }
+
+        this->Elements[0] = Value;
+
+        return this->Length;
     }
 
     template <typename type> uint64 array<type>::operator = (const array<type>* Array)
