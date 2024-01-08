@@ -4,8 +4,7 @@ namespace NeoTypes
 {
     string::string()
     {
-        this->Length = 1;
-        this->Literal = (char*)malloc(sizeof(char));
+        this->Literal = (char*)malloc(sizeof(char) * (this->Length = 1));
         if (this->Literal == NULL)
         {
             printf("string(): Memory allocation failed\n");
@@ -23,8 +22,7 @@ namespace NeoTypes
             exit(1);
         }
         
-        this->Length = strLength(Literal);
-        this->Literal = (char*)malloc(sizeof(char) * this->Length);
+        this->Literal = (char*)malloc(sizeof(char) * (this->Length = strLength(Literal)));
         if (this->Literal == NULL)
         {
             printf("string(): Memory allocation failed\nParams: Literal: %s\n", Literal);
