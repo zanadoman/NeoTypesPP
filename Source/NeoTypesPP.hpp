@@ -38,8 +38,10 @@ namespace NeoTypesPP
             uint64 operator = (std::initializer_list<type> Elements);
             uint64 operator = (const array<type>* Array);
             uint64 operator -= (const type Value);
+            uint64 operator -= (std::initializer_list<type> Elements);
             uint64 operator -= (const array<type>* Array);
             uint64 operator += (const type Value);
+            uint64 operator += (std::initializer_list<type> Elements);
             uint64 operator += (const array<type>* Array);
             bool operator == (const array<type>* Array);
             bool operator != (const array<type>* Array);
@@ -284,6 +286,27 @@ namespace NeoTypesPP
         return this->Length;
     }
 
+    template <typename type> uint64 array<type>::operator -= (std::initializer_list<type> Elements)
+    {
+        if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * (this->Length += Elements.size()))) == NULL)
+        {
+            printf("array-=: Memory allocation failed\n");
+            exit(1);
+        }
+
+        for (uint64 i = this->Length - 1; Elements.size() <= i; i--)
+        {
+            this->Elements[i] = this->Elements[i - Elements.size()];
+        }
+
+        for (uint64 i = 0; i < Elements.size(); i++)
+        {
+            this->Elements[i] = *(Elements.begin() + i);
+        }
+
+        return this->Length;
+    }
+
     template <typename type> uint64 array<type>::operator -= (const array<type>* Array)
     {
         if (Array == NULL)
@@ -317,6 +340,22 @@ namespace NeoTypesPP
         }
 
         this->Elements[this->Length - 1] = Value;
+
+        return this->Length;
+    }
+
+    template <typename type> uint64 array<type>::operator += (std::initializer_list<type> Elements)
+    {
+        if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * (this->Length += Elements.size()))) == NULL)
+        {
+            printf("array+=: Memory allocation failed\n");
+            exit(1);
+        }
+
+        for (uint64 i = this->Length - Elements.size(), j = 0; i < this->Length; i++, j++)
+        {
+            this->Elements[i] = *(Elements.begin() + j);
+        }
 
         return this->Length;
     }
