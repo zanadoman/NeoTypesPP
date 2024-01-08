@@ -198,14 +198,11 @@ namespace NeoTypesPP
         {
             if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * this->Length)) == NULL)
             {
-                printf("array=: Memory allocation failed\n");
+                printf("array=: Memory allocation failed\nParams: Elements(begin): %p\n", Elements.begin());
                 exit(1);
             }
 
-            for (uint64 i = 0; i < this->Length; i++)
-            {
-                this->Elements[i] = *(Elements.begin() + i);
-            }
+            memCopyTo(Elements.begin(), this->Elements, sizeof(type) * this->Length);
         }
 
         return this->Length;
