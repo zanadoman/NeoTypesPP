@@ -250,8 +250,7 @@ namespace NeoTypes
 
     uint8 string::Clear()
     {
-        this->Length = 1;
-        this->Literal = (char*)realloc(this->Literal, sizeof(char));
+        this->Literal = (char*)realloc(this->Literal, sizeof(char) * (this->Length = 1));
         if (this->Literal == NULL)
         {
             printf("string.Clear(): Memory allocation failed\nParams: Literal: %s\n", this->Literal);
