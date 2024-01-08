@@ -43,7 +43,9 @@ namespace NeoTypesPP
             uint64 operator += (const type Value);
             uint64 operator += (std::initializer_list<type> Elements);
             uint64 operator += (const array<type>* Array);
+            bool operator == (std::initializer_list<type> Elements);
             bool operator == (const array<type>* Array);
+            bool operator != (std::initializer_list<type> Elements);
             bool operator != (const array<type>* Array);
 
             uint64 Resize(uint64 Length);
@@ -379,6 +381,24 @@ namespace NeoTypesPP
         return this->Length;
     }
 
+    template <typename type> bool array<type>::operator == (std::initializer_list<type> Elements)
+    {
+        if (this->Length != Elements.size())
+        {
+            return false;
+        }
+
+        for (uint64 i = 0; i < this->Length; i++)
+        {
+            if (this->Elements[i] != *(Elements.begin() + i))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     template <typename type> bool array<type>::operator == (const array<type>* Array)
     {
         if (Array == NULL || this->Length != Array->Length)
@@ -388,6 +408,11 @@ namespace NeoTypesPP
 
         return memCompare(this->Elements, Array->Elements, sizeof(type) * this->Length);
     }
+
+    template <typename type> bool array<type>::operator != (std::initializer_list<type> Elements)
+    {
+        return !(*this == Elements);
+    } 
 
     template <typename type> bool array<type>::operator != (const array<type>* Array)
     {
