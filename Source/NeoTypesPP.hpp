@@ -236,6 +236,30 @@ namespace NeoTypesPP
         return this->Length;
     }
 
+    template <typename type> uint64 array<type>::operator -= (const array<type>* Array)
+    {
+        if (Array == NULL)
+        {
+            printf("array-=: Array must not be NULL\nParams: Array: %p\n", Array);
+            exit(1);
+        }
+
+        if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * (this->Length += Array->Length))) == NULL)
+        {
+            printf("array-=: Memory allocation failed\nParams: Array %p\n", Array);
+            exit(1);
+        }
+
+        for (uint64 i = this->Length - 1; Array->Length < i; i--)
+        {
+            this->Elements[i] = this->Elements[i - Array->Length];
+        }
+
+        memCopyTo(Array->Elements, this->Elements + Array->Length, sizeof(type) * Array->Length);
+
+        return this->Length;
+    }
+
     template <typename type> uint64 array<type>::operator += (const type Value)
     {
         if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * ++this->Length)) == NULL)
