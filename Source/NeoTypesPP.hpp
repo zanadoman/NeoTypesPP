@@ -340,11 +340,36 @@ namespace NeoTypesPP
             exit(1);
         }
 
-        for (uint64 i = this->Length - 1; Index < i; i--)
+        for (uint64 i = this->Length - 1; Index + 1 <= i; i--)
         {
             this->Elements[i] = this->Elements[i - 1];
         }
+
         this->Elements[Index] = Value;
+
+        return this->Length;
+    }
+
+    template <typename type> uint64 array<type>::Insert(uint64 Index, const array<type>* Array)
+    {
+        if (Array == NULL)
+        {
+            printf("array.Insert(): Array must not be NULL\nParams: Index: %lld, Array: %p\n", Index, Array);
+            exit(1);
+        }
+
+        if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * (this->Length += Array->Length))) == NULL)
+        {
+            printf("array.Insert(): Memory allocation failed\nParams: Index: %lld, Array: %p\n", Index, Array);
+            exit(1);
+        }
+
+        for (uint64 i = this->Length - 1; Index + Array->Length <= i; i--)
+        {
+            this->Elements[i] = this->Elements[i - Array->Length];
+        }
+
+        memCopyTo(Array->Elements, this->Elements + Index, Array->Length);
 
         return this->Length;
     }
