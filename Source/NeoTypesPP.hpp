@@ -227,7 +227,7 @@ namespace NeoTypesPP
             exit(1);
         }
 
-        for (uint64 i = this->Length - 1; 0 < i; i--)
+        for (uint64 i = this->Length - 1; 1 <= i; i--)
         {
             this->Elements[i] = this->Elements[i - 1];
         }
