@@ -52,7 +52,6 @@ namespace NeoTypes
 
     //____________________________________________NeoString.hpp____________________________________________//
 
-    uint64 strLength(const char* Literal);
     class string
     {
         public:
@@ -82,6 +81,7 @@ namespace NeoTypes
             char* Literal;
             uint8 Clear();
     };
+    uint64 strLength(const char* Literal);
 
     //____________________________________________NeoMemory.hpp____________________________________________//
 
