@@ -66,9 +66,15 @@ namespace NeoTypes
             char& operator [] (uint64 Index);
             const char* operator = (const char* Literal);
             const char* operator = (const string* String);
+            const char* operator = (uint64 Number);
+            const char* operator = (sint64 Number);
+            const char* operator = (double Number);
             const char* operator += (char Character);
             const char* operator += (const char* Literal);
             const char* operator += (const string* String);
+            const char* operator += (uint64 Number);
+            const char* operator += (sint64 Number);
+            const char* operator += (double Number);
             bool operator == (const char* Literal);
             bool operator == (const string* String);
             bool operator != (const char* Literal);
@@ -76,6 +82,9 @@ namespace NeoTypes
 
             const char* Read();
             array<string*>* Split(char Separator);
+            uint64 ToUINT();
+            sint64 ToSINT();
+            double ToDOUBLE();
 
         private:
             char* Literal;
