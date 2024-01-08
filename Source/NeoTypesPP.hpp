@@ -338,18 +338,25 @@ namespace NeoTypesPP
 
     template <typename type> uint64 array<type>::Resize(uint64 Length)
     {
-        if ((this->Length = Length) == 0)
+        if (Length == 0)
         {
+            this->Length = 0;
             free(this->Elements);
             this->Elements = NULL;
         }
         else
         {
-            if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * this->Length)) == NULL)
+            if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * Length)) == NULL)
             {
                 printf("array.Resize(): Memory allocation failed\nParams: Length: %lld\n", Length);
                 exit(1);
             }
+
+            for (uint64 i = Length - (Length - this->Length); i < Length; i++)
+            {
+                this->Elements[i] = 0;
+            }
+            this->Length = Length;
         }
 
         return this->Length;

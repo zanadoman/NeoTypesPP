@@ -231,14 +231,14 @@ namespace NeoTypesPP
             }
             else if (1 < tmp->Length)
             {
-                *result += tmp;
+                *result += {tmp};
                 tmp = new string;
             }
         }
 
         if (1 < tmp->Length)
         {
-            *result += tmp;
+            *result += {tmp};
         }
         else
         {
