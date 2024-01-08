@@ -50,7 +50,7 @@ namespace NeoTypes
             type* Elements;
     };
 
-    //____________________________________________NeoString.cpp____________________________________________//
+    //____________________________________________NeoString.hpp____________________________________________//
 
     uint64 strLength(const char* Literal);
     class string
@@ -63,17 +63,17 @@ namespace NeoTypes
             string(const string* String);
             ~string();
 
-            const char* operator()();
-            char& operator[](uint64 Index);
-            char* operator=(const char* Literal);
-            string* operator=(const string* String);
-            char operator+=(char Character);
-            char* operator+=(const char* Literal);
-            string* operator+=(const string* String);
-            bool operator==(const string* String);
-            bool operator==(const char* Literal);
-            bool operator!=(const string* String);
-            bool operator!=(const char* Literal);
+            const char* operator () ();
+            char& operator [] (uint64 Index);
+            char* operator = (const char* Literal);
+            string* operator = (const string* String);
+            char operator += (char Character);
+            char* operator += (const char* Literal);
+            string* operator += (const string* String);
+            bool operator == (const string* String);
+            bool operator == (const char* Literal);
+            bool operator != (const string* String);
+            bool operator != (const char* Literal);
 
             const char* Read();
             array<string*>* Split(char Separator);
@@ -83,7 +83,7 @@ namespace NeoTypes
             uint8 Clear();
     };
 
-    //____________________________________________NeoMemory.cpp____________________________________________//
+    //____________________________________________NeoMemory.hpp____________________________________________//
 
     bool memCompare(const void* Source1, const void* Source2, uint64 Size);
     void* memCopy(const void* Source, uint64 Size);
