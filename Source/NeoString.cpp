@@ -79,8 +79,7 @@ namespace NeoTypes
             exit(1);
         }
 
-        this->Length = strLength(Literal);
-        this->Literal = (char*)realloc(this->Literal, sizeof(char) * this->Length);
+        this->Literal = (char*)realloc(this->Literal, sizeof(char) * (this->Length = strLength(Literal)));
         if (this->Literal == NULL)
         {
             printf("string=: Memory allocation failed\nParams: Literal: %s\n", Literal);
@@ -100,8 +99,7 @@ namespace NeoTypes
             exit(1);
         }
 
-        this->Length = String->Length;
-        this->Literal = (char*)realloc(this->Literal, sizeof(char) * this->Length);
+        this->Literal = (char*)realloc(this->Literal, sizeof(char) * (this->Length = String->Length));
         if (this->Literal == NULL)
         {
             printf("string=: Memory allocation failed\nParams: String: %s\n", String->Literal);
@@ -138,8 +136,7 @@ namespace NeoTypes
             exit(1);
         }
 
-        this->Length += (cache = strLength(Literal)) - 1;
-        this->Literal = (char*)realloc(this->Literal, sizeof(char) * this->Length);
+        this->Literal = (char*)realloc(this->Literal, sizeof(char) * (this->Length += (cache = strLength(Literal)) - 1));
         if (this->Literal == NULL)
         {
             printf("string+=: Memory allocation failed\nParams: Literal: %s\n", Literal);
@@ -159,8 +156,7 @@ namespace NeoTypes
             exit(1);
         }
 
-        this->Length += String->Length - 1;
-        this->Literal = (char*)realloc(this->Literal, sizeof(char) * this->Length);
+        this->Literal = (char*)realloc(this->Literal, sizeof(char) * (this->Length += String->Length - 1));
         if (this->Literal == NULL)
         {
             printf("string+=: Memory allocation failed\nParams: String: %s\n", String->Literal);
