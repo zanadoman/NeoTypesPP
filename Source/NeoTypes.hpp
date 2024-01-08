@@ -64,11 +64,11 @@ namespace NeoTypes
 
             const char* operator () ();
             char& operator [] (uint64 Index);
-            char* operator = (const char* Literal);
-            string* operator = (const string* String);
-            char operator += (char Character);
-            char* operator += (const char* Literal);
-            string* operator += (const string* String);
+            const char* operator = (const char* Literal);
+            const char* operator = (const string* String);
+            const char* operator += (char Character);
+            const char* operator += (const char* Literal);
+            const char* operator += (const string* String);
             bool operator == (const char* Literal);
             bool operator == (const string* String);
             bool operator != (const char* Literal);

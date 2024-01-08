@@ -71,7 +71,7 @@ namespace NeoTypes
         return this->Literal[Index];
     }
 
-    char* string::operator = (const char* Literal)
+    const char* string::operator = (const char* Literal)
     {
         if (Literal == NULL)
         {
@@ -88,10 +88,10 @@ namespace NeoTypes
 
         memCopyTo(Literal, this->Literal, sizeof(char) * this->Length);
 
-        return (char*)Literal;
+        return this->Literal;
     }
 
-    string* string::operator = (const string* String)
+    const char* string::operator = (const string* String)
     {
         if (String == NULL)
         {
@@ -108,10 +108,10 @@ namespace NeoTypes
 
         memCopyTo(String->Literal, this->Literal, sizeof(char) * this->Length);
 
-        return (string*)String;
+        return this->Literal;
     }
 
-    char string::operator += (char Character)
+    const char* string::operator += (char Character)
     {
         this->Literal = (char*)realloc(this->Literal, sizeof(char) * ++this->Length);
         if (this->Literal == NULL)
@@ -123,10 +123,10 @@ namespace NeoTypes
         this->Literal[this->Length - 2] = Character;
         this->Literal[this->Length - 1] = '\0';
 
-        return Character;
+        return this->Literal;
     }
 
-    char* string::operator += (const char* Literal)
+    const char* string::operator += (const char* Literal)
     {
         uint64 cache;
 
@@ -145,10 +145,10 @@ namespace NeoTypes
 
         memCopyTo(Literal, this->Literal + this->Length - cache, cache);
 
-        return (char*)Literal;
+        return this->Literal;
     }
 
-    string* string::operator += (const string* String)
+    const char* string::operator += (const string* String)
     {
         if (String == NULL)
         {
@@ -165,7 +165,7 @@ namespace NeoTypes
 
         memCopyTo(String->Literal, this->Literal + this->Length - String->Length, String->Length);
 
-        return (string*)String;
+        return this->Literal;
     }
 
     bool string::operator == (const char* Literal)
