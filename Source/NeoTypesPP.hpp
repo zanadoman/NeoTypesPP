@@ -43,13 +43,12 @@ namespace NeoTypesPP
             uint64 operator += (const type Value);
             uint64 operator += (std::initializer_list<type> Elements);
             uint64 operator += (const array<type>* Array);
-            bool operator == (std::initializer_list<type> Elements);
             bool operator == (const array<type>* Array);
-            bool operator != (std::initializer_list<type> Elements);
             bool operator != (const array<type>* Array);
 
             uint64 Resize(uint64 Length);
             uint64 Insert(uint64 Index, const type Value);
+            uint64 Insert(uint64 Index, std::initializer_list<type> Elements);
             uint64 Insert(uint64 Index, const array<type>* Array);
             uint64 Remove(uint64 Index);
             bool Contains(const type Value);
@@ -301,10 +300,7 @@ namespace NeoTypesPP
             this->Elements[i] = this->Elements[i - Elements.size()];
         }
 
-        for (uint64 i = 0; i < Elements.size(); i++)
-        {
-            this->Elements[i] = *(Elements.begin() + i);
-        }
+        memCopyTo(Elements.begin(), this->Elements, sizeof(type) * Elements.size());
 
         return this->Length;
     }
@@ -354,10 +350,7 @@ namespace NeoTypesPP
             exit(1);
         }
 
-        for (uint64 i = this->Length - Elements.size(), j = 0; i < this->Length; i++, j++)
-        {
-            this->Elements[i] = *(Elements.begin() + j);
-        }
+        memCopyTo(Elements.begin(), this->Elements + this->Length - Elements.size(), sizeof(type) * Elements.size());
 
         return this->Length;
     }
@@ -381,24 +374,6 @@ namespace NeoTypesPP
         return this->Length;
     }
 
-    template <typename type> bool array<type>::operator == (std::initializer_list<type> Elements)
-    {
-        if (this->Length != Elements.size())
-        {
-            return false;
-        }
-
-        for (uint64 i = 0; i < this->Length; i++)
-        {
-            if (this->Elements[i] != *(Elements.begin() + i))
-            {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
     template <typename type> bool array<type>::operator == (const array<type>* Array)
     {
         if (Array == NULL || this->Length != Array->Length)
@@ -408,11 +383,6 @@ namespace NeoTypesPP
 
         return memCompare(this->Elements, Array->Elements, sizeof(type) * this->Length);
     }
-
-    template <typename type> bool array<type>::operator != (std::initializer_list<type> Elements)
-    {
-        return !(*this == Elements);
-    } 
 
     template <typename type> bool array<type>::operator != (const array<type>* Array)
     {
@@ -462,6 +432,24 @@ namespace NeoTypesPP
         return this->Length;
     }
 
+    template <typename type> uint64 array<type>::Insert(uint64 Index, std::initializer_list<type> Elements)
+    {
+        if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * (this->Length += Elements.size()))) == NULL)
+        {
+            printf("array.Insert(): Memory allocation failed\n");
+            exit(1);
+        }
+
+        for (uint64 i = this->Length - 1; Index + Elements.size() <= i; i--)
+        {
+            this->Elements[i] = this->Elements[i - Elements.size()];
+        }
+
+        memCopyTo(Elements.begin(), this->Elements + Index, sizeof(type) * Elements.size());
+
+        return this->Length;
+    }
+
     template <typename type> uint64 array<type>::Insert(uint64 Index, const array<type>* Array)
     {
         if (Array == NULL)
@@ -481,7 +469,7 @@ namespace NeoTypesPP
             this->Elements[i] = this->Elements[i - Array->Length];
         }
 
-        memCopyTo(Array->Elements, this->Elements + Index, Array->Length);
+        memCopyTo(Array->Elements, this->Elements + Index, sizeof(type) * Array->Length);
 
         return this->Length;
     }
