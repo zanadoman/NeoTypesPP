@@ -3,7 +3,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdarg.h>
 #include <math.h>
 
 namespace NeoTypes
@@ -32,19 +31,19 @@ namespace NeoTypes
             ~array();
 
             type& operator [] (uint64 Index);
-            array<type>* operator = (const array<type>* Array);
-            type operator -= (const type Value);
-            type operator += (const type Value);
-            array<type>* operator += (const array<type>* Array);
+            uint64 operator = (const array<type>* Array);
+            uint64 operator -= (const type Value);
+            uint64 operator += (const type Value);
+            uint64 operator += (const array<type>* Array);
             bool operator == (const array<type>* Array);
             bool operator != (const array<type>* Array);
 
-            uint8 Resize(uint64 Length);
-            uint8 Insert(uint64 Index, const type Value);
-            uint8 Remove(uint64 Index);
+            uint64 Resize(uint64 Length);
+            uint64 Insert(uint64 Index, const type Value);
+            uint64 Remove(uint64 Index);
             bool Contains(const type Value);
-            uint8 Reverse();
-            uint8 Clear();
+            uint64 Reverse();
+            uint64 Clear();
 
         private:
             type* Elements;
@@ -169,7 +168,7 @@ namespace NeoTypes
         return this->Elements[Index];
     }
 
-    template <typename type> array<type>* array<type>::operator = (const array<type>* Array)
+    template <typename type> uint64 array<type>::operator = (const array<type>* Array)
     {
         if (Array == NULL)
         {
@@ -195,10 +194,10 @@ namespace NeoTypes
             memCopyTo(Array->Elements, this->Elements, sizeof(type) * this->Length);
         }
 
-        return (array<type>*)Array;
+        return this->Length;
     }
 
-    template <typename type> type array<type>::operator -= (const type Value)
+    template <typename type> uint64 array<type>::operator -= (const type Value)
     {
         this->Elements = (type*)realloc(this->Elements, sizeof(type) * ++this->Length);
         if (this->Elements == NULL)
@@ -213,10 +212,10 @@ namespace NeoTypes
         }
         this->Elements[0] = Value;
 
-        return (type)Value;
+        return this->Length;
     }
 
-    template <typename type> type array<type>::operator += (const type Value)
+    template <typename type> uint64 array<type>::operator += (const type Value)
     {
         this->Elements = (type*)realloc(this->Elements, sizeof(type) * ++this->Length);
         if (this->Elements == NULL)
@@ -226,10 +225,10 @@ namespace NeoTypes
         }
         this->Elements[this->Length - 1] = Value;
 
-        return (type)Value;
+        return this->Length;
     }
 
-    template <typename type> array<type>* array<type>::operator += (const array<type>* Array)
+    template <typename type> uint64 array<type>::operator += (const array<type>* Array)
     {
         if (Array == NULL)
         {
@@ -246,7 +245,7 @@ namespace NeoTypes
 
         memCopyTo(Array->Elements, this->Elements + this->Length - Array->Length, sizeof(type) * Array->Length);
 
-        return (array<type>*)Array;
+        return this->Length;
     }
 
     template <typename type> bool array<type>::operator == (const array<type>* Array)
@@ -264,7 +263,7 @@ namespace NeoTypes
         return !(*this == Array);
     }
 
-    template <typename type> uint8 array<type>::Resize(uint64 Length)
+    template <typename type> uint64 array<type>::Resize(uint64 Length)
     {
         if (Length == 0)
         {
@@ -282,10 +281,10 @@ namespace NeoTypes
             }
         }
 
-        return 0;
+        return this->Length;
     }
 
-    template <typename type> uint8 array<type>::Insert(uint64 Index, const type Value)
+    template <typename type> uint64 array<type>::Insert(uint64 Index, const type Value)
     {
         if (this->Length < Index)
         {
@@ -306,10 +305,10 @@ namespace NeoTypes
         }
         this->Elements[Index] = Value;
 
-        return 0;
+        return this->Length;
     }
 
-    template <typename type> uint8 array<type>::Remove(uint64 Index)
+    template <typename type> uint64 array<type>::Remove(uint64 Index)
     {
         if (this->Length <= Index)
         {
@@ -342,7 +341,7 @@ namespace NeoTypes
             }
         }
 
-        return 0;
+        return this->Length;
     }
 
     template <typename type> bool array<type>::Contains(const type Value)
@@ -358,7 +357,7 @@ namespace NeoTypes
         return false;
     }
 
-    template <typename type> uint8 array<type>::Reverse()
+    template <typename type> uint64 array<type>::Reverse()
     {
         type tmp;
 
@@ -369,16 +368,16 @@ namespace NeoTypes
             this->Elements[this->Length - 1 - i] = tmp;
         }
 
-        return 0;
+        return this->Length;
     }
 
-    template <typename type> uint8 array<type>::Clear()
+    template <typename type> uint64 array<type>::Clear()
     {
         this->Length = 0;
         free(this->Elements);
         this->Elements = NULL;
 
-        return 0;
+        return this->Length;
     }
 }
 
