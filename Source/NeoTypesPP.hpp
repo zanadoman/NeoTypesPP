@@ -402,6 +402,11 @@ namespace NeoTypesPP
             printf("array.Insert(): Array must not be NULL\nParams: Index: %lld, Array: %p\n", Index, Array);
             exit(1);
         }
+        if (this->Length < Index)
+        {
+            printf("array.Insert(): Index out of range\nParams: Index: %lld, Array: %p\n", Index, Array);
+            exit(1);
+        }
 
         if (Array->Length != 0)
         {
