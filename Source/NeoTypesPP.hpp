@@ -1,10 +1,10 @@
 #ifndef NEOTYPESPP_HPP
 #define NEOTYPESPP_HPP
 
-#include <initializer_list>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <initializer_list>
 
 namespace NeoTypesPP
 {
