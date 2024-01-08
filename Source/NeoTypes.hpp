@@ -325,7 +325,7 @@ namespace NeoTypes
             free(this->Elements);
             this->Elements = NULL;
         }
-        else 
+        else
         {
             for (uint64 i = Index; i < this->Length; i++)
             {
