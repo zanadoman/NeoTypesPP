@@ -214,13 +214,13 @@ namespace NeoTypesPP
         return this->Literal;
     }
 
-    array<string*, 0>* string::Split(char Separator)
+    array<string*>* string::Split(char Separator)
     {
-        array<string*, 0>* result;
+        array<string*>* result;
 
         string* tmp;
 
-        result = new array<string*, 0>;
+        result = new array<string*>;
         tmp = new string;
 
         for (uint64 i = 0; i < this->Length - 1; i++)
