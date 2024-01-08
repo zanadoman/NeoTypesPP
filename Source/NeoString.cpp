@@ -58,12 +58,12 @@ namespace NeoTypes
         free(this->Literal);
     }
 
-    const char* string::operator()()
+    const char* string::operator () ()
     {
         return this->Literal;
     }
 
-    char& string::operator[](uint64 Index)
+    char& string::operator [] (uint64 Index)
     {
         if (this->Length - 1 <= Index)
         {
@@ -74,7 +74,7 @@ namespace NeoTypes
         return this->Literal[Index];
     }
 
-    char* string::operator=(const char* Literal)
+    char* string::operator = (const char* Literal)
     {
         if (Literal == NULL)
         {
@@ -95,7 +95,7 @@ namespace NeoTypes
         return (char*)Literal;
     }
 
-    string* string::operator=(const string* String)
+    string* string::operator = (const string* String)
     {
         if (String == NULL)
         {
@@ -116,7 +116,7 @@ namespace NeoTypes
         return (string*)String;
     }
 
-    char string::operator+=(char Character)
+    char string::operator += (char Character)
     {
         this->Literal = (char*)realloc(this->Literal, sizeof(char) * ++this->Length);
         if (this->Literal == NULL)
@@ -131,7 +131,7 @@ namespace NeoTypes
         return Character;
     }
 
-    char* string::operator+=(const char* Literal)
+    char* string::operator += (const char* Literal)
     {
         uint64 cache;
 
@@ -154,7 +154,7 @@ namespace NeoTypes
         return (char*)Literal;
     }
 
-    string* string::operator+=(const string* String)
+    string* string::operator += (const string* String)
     {
         if (String == NULL)
         {
