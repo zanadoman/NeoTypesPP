@@ -267,6 +267,7 @@ namespace NeoTypesPP
             printf("array+=: Memory allocation failed\nParams: Value(sizeof): %d\n", sizeof(type));
             exit(1);
         }
+
         this->Elements[this->Length - 1] = Value;
 
         return this->Length;
@@ -308,15 +309,14 @@ namespace NeoTypesPP
 
     template <typename type> uint64 array<type>::Resize(uint64 Length)
     {
-        if (Length == 0)
+        if ((this->Length = Length) == 0)
         {
-            this->Length = 0;
             free(this->Elements);
             this->Elements = NULL;
         }
         else
         {
-            if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * (this->Length = Length))) == NULL)
+            if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * this->Length)) == NULL)
             {
                 printf("array.Resize(): Memory allocation failed\nParams: Length: %lld\n", Length);
                 exit(1);
