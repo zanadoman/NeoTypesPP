@@ -6,18 +6,20 @@
 #include <stdarg.h>
 #include <math.h>
 
-typedef unsigned char uint8;
-typedef signed char sint8;
-typedef unsigned short uint16;
-typedef signed short sint16;
-typedef unsigned int uint32;
-typedef signed int sint32;
-typedef unsigned long long uint64;
-typedef signed long long sint64;
-
 namespace NeoTypes
 {
-    //____________________________________________NeoArray.c_____________________________________________//
+    //_____________________________________________NeoTypes.hpp____________________________________________//
+
+    typedef unsigned char uint8;
+    typedef signed char sint8;
+    typedef unsigned short uint16;
+    typedef signed short sint16;
+    typedef unsigned int uint32;
+    typedef signed int sint32;
+    typedef unsigned long long uint64;
+    typedef signed long long sint64;
+
+    //_____________________________________________NeoArray.hpp____________________________________________//
 
     template <typename type> class array
     {
@@ -48,7 +50,7 @@ namespace NeoTypes
             type* Elements;
     };
 
-    //____________________________________________NeoString.c____________________________________________//
+    //____________________________________________NeoString.cpp____________________________________________//
 
     uint64 strLength(const char* Literal);
     class string
@@ -81,7 +83,7 @@ namespace NeoTypes
             uint8 Clear();
     };
 
-    //____________________________________________NeoMemory.c___________________________________________//
+    //____________________________________________NeoMemory.cpp____________________________________________//
 
     bool memCompare(const void* Source1, const void* Source2, uint64 Size);
     void* memCopy(const void* Source, uint64 Size);
@@ -90,7 +92,7 @@ namespace NeoTypes
     uint8 memLoadTo(const char* FilePath, void* Destination, uint64 Size);
     uint8 memSave(const void* Source, uint64 Size, const char* FilePath);
 
-    //____________________________________________NeoArray.c_____________________________________________//
+    //_____________________________________________NeoArray.cpp____________________________________________//
 
     template <typename type> array<type>::array()
     {
