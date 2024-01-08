@@ -200,15 +200,14 @@ namespace NeoTypesPP
             exit(1);
         }
 
-        if (Array->Length == 0)
+        if ((this->Length = Array->Length) == 0)
         {
-            this->Length = 0;
             free(this->Elements);
             this->Elements = NULL;
         }
         else
         {
-            if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * (this->Length = Array->Length))) == NULL)
+            if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * this->Length)) == NULL)
             {
                 printf("array=: Memory allocation failed\nParams: Array: %p\n", Array);
                 exit(1);
