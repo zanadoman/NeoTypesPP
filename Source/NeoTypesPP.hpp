@@ -1,6 +1,7 @@
 #ifndef NEOTYPESPP_HPP
 #define NEOTYPESPP_HPP
 
+#include <initializer_list>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -28,6 +29,7 @@ namespace NeoTypesPP
             array();
             array(uint64 Length);
             array(const type Value);
+            array(std::initializer_list<type> Elements);
             array(const array<type>* Array);
             ~array();
 
@@ -137,6 +139,27 @@ namespace NeoTypesPP
         }
 
         this->Elements[0] = Value;
+    }
+
+    template <typename type> array<type>::array(std::initializer_list<type> Elements)
+    {
+        if ((this->Length = Elements.size()) == 0)
+        {
+            this->Elements = NULL;
+        }
+        else
+        {
+            if ((this->Elements = (type*)calloc(this->Length, sizeof(type))) == NULL)
+            {
+                printf("array(): Memory allocation failed\nParams: Length: %lld\n", Length);
+                exit(1);
+            }
+        }
+
+        for (uint64 i = 0; i < this->Length; i++)
+        {
+            this->Elements[i] = *(Elements.begin() + i);
+        }
     }
 
     template <typename type> array<type>::array(const array<type>* Array)
