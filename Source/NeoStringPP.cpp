@@ -7,7 +7,7 @@ namespace neo
     {
         if ((this->literal = (char*)malloc(sizeof(char) * (this->length = 1))) == NULL)
         {
-            printf("string(): Memory allocation failed\nParams: Length: %lld\n", this->length);
+            printf("string(): Memory allocation failed\n");
             exit(1);
         }
         this->literal[0] = '\0';
