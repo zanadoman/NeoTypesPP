@@ -1,12 +1,12 @@
 #ifndef NEOTYPESPP_HPP
 #define NEOTYPESPP_HPP
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+#include <cstdio>
+#include <cstdlib>
 #include <initializer_list>
+#include <cmath>
 
-namespace NeoTypesPP
+namespace neo
 {
     //_____________________________________________NeoTypes.hpp____________________________________________//
 

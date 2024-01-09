@@ -1,6 +1,6 @@
 #include "NeoTypesPP.hpp"
 
-namespace NeoTypesPP
+namespace neo
 {
     string::string()
     {
