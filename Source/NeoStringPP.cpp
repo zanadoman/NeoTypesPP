@@ -160,7 +160,7 @@ namespace neo
 
         return &this->literal[Index];
     }
-
+    
     uint64 strLength(const char* Literal)
     {
         uint64 result;
