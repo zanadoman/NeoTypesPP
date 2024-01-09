@@ -66,7 +66,7 @@ namespace neo
             string(std::initializer_list<string*> Strings);
             string(std::initializer_list<uint64> Numbers);
             string(std::initializer_list<sint64> Numbers);
-            string(std::initializer_list<double> Double);
+            string(std::initializer_list<double> Numbers);
             ~string();
 
             uint64 Length;
@@ -77,19 +77,19 @@ namespace neo
             const char operator = (std::initializer_list<string*> Strings);
             const char operator = (std::initializer_list<uint64> Numbers);
             const char operator = (std::initializer_list<sint64> Numbers);
-            const char operator = (std::initializer_list<double> Double);
+            const char operator = (std::initializer_list<double> Numbers);
 
             const char operator -= (std::initializer_list<const char*> Literals);
             const char operator -= (std::initializer_list<string*> Strings);
             const char operator -= (std::initializer_list<uint64> Numbers);
             const char operator -= (std::initializer_list<sint64> Numbers);
-            const char operator -= (std::initializer_list<double> Double);
+            const char operator -= (std::initializer_list<double> Numbers);
 
             const char operator += (std::initializer_list<const char*> Literals);
             const char operator += (std::initializer_list<string*> Strings);
             const char operator += (std::initializer_list<uint64> Numbers);
             const char operator += (std::initializer_list<sint64> Numbers);
-            const char operator += (std::initializer_list<double> Double);
+            const char operator += (std::initializer_list<double> Numbers);
 
             bool operator == (const char* Literal);
             bool operator == (string* String);
@@ -105,7 +105,7 @@ namespace neo
             const char Insert(uint64 Index, std::initializer_list<string*> Strings);
             const char Insert(uint64 Index, std::initializer_list<uint64> Numbers);
             const char Insert(uint64 Index, std::initializer_list<sint64> Numbers);
-            const char Insert(uint64 Index, std::initializer_list<double> Double);
+            const char Insert(uint64 Index, std::initializer_list<double> Numbers);
 
             const char Remove(uint64 Index);
             array<string*>* Split(char Separator);
