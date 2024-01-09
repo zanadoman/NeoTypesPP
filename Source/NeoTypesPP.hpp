@@ -169,7 +169,7 @@ namespace neo
             this->length = 0;
             for (uint64 i = 0; i < Arrays.size(); i++)
             {
-                this->length += (Arrays.begin()[i])->length;
+                this->length += Arrays.begin()[i]->length;
             }
 
             if ((this->elements = (type*)malloc(sizeof(type) * this->length)) == NULL)
@@ -180,8 +180,8 @@ namespace neo
 
             for (uint64 i = 0, j = 0; i < Arrays.size(); i++)
             {
-                memCopyTo((Arrays.begin()[i])->elements, &this->elements[j], sizeof(type) * (Arrays.begin()[i])->length);
-                j += (Arrays.begin()[i])->length;
+                memCopyTo(Arrays.begin()[i]->elements, &this->elements[j], sizeof(type) * Arrays.begin()[i]->length);
+                j += Arrays.begin()[i]->length;
             }
         }
     }
