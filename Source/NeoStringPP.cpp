@@ -163,6 +163,27 @@ namespace neo
 
     const char* string::operator = (std::initializer_list<char> Characters)
     {
+        if (Characters.size() == 0)
+        {
+            if ((this->literal = (char*)realloc(this->literal, sizeof(char) * (this->length = 1))) == NULL)
+            {
+                printf("string=: Memory allocation failed\nParams: Characters(length): %ld\n", Characters.size());
+                exit(1);
+            }
+            this->literal[0] = '\0';
+        }
+        else
+        {
+            if (this->length != Characters.size() && (this->literal = (char*)realloc(this->literal, sizeof(char) * (this->length = Characters.size() + 1))) == NULL)
+            {
+                printf("string=: Memory allocation failed\nParams: Characters(length): %ld\n", Characters.size());
+                exit(1);
+            }
+
+            memCopyTo(Characters.begin(), this->literal, Characters.size());
+            this->literal[this->length - 1] = '\0';
+        }
+
         return this->literal;
     }
 
