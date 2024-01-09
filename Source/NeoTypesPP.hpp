@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstddef>
 #include <stdio.h>
 #include <stdlib.h>
 #include <initializer_list>
@@ -162,6 +163,11 @@ namespace neo
                 if (Arrays.begin()[i] == NULL)
                 {
                     printf("array(): Arrays[%lld] must not be NULL\nParams: Arrays(type, length): %ld, %ld\n", i, sizeof(type), Arrays.size());
+                    exit(1);
+                }
+                if (Arrays.begin()[i] == this)
+                {
+                    printf("array(): Arrays[%lld] must not be Self\nParams: Arrays(type, length): %ld, %ld\n", i, sizeof(type), Arrays.size());
                     exit(1);
                 }
             }
@@ -333,7 +339,7 @@ namespace neo
         {
             if ((this->elements = (type*)realloc(this->elements, sizeof(type) * (this->length += Elements.size()))) == NULL)
             {
-                printf("array+=: Memory allocation failed\nParams: Elements(type): %d\n", sizeof(type));
+                printf("array+=: Memory allocation failed\nParams: Elements(type, length): %ld, %ld\n", sizeof(type), Elements.size());
                 exit(1);
             }
 
@@ -345,26 +351,40 @@ namespace neo
 
     template <typename type> uint64 array<type>::operator += (std::initializer_list<array<type>*> Arrays)
     {
-        for (uint64 i = 0; i < Arrays.size(); i++)
-        {
-            if (Arrays.begin()[i] == NULL)
-            {
-                printf("array+=: Array must not be NULL\nParams: Arrays(type): %d\n", sizeof(type));
-                exit(1);
-            }
-        }
+        uint64 lengthPrev;
 
-        for (uint64 i = 0; i < Arrays.size(); i++)
+        if (Arrays.size() != 0)
         {
-            if (Arrays.begin()[i]->Length != 0)
+            for (uint64 i = 0; i < Arrays.size(); i++)
             {
-                if ((this->elements = (type*)realloc(this->elements, sizeof(type) * (this->length += Arrays.begin()[i]->Length))) == NULL)
+                if (Arrays.begin()[i] == NULL)
                 {
-                    printf("array+=: Memory allocation failed\nParams: Arrays(type): %d\n", sizeof(type));
+                    printf("array+=: Arrays[%lld] must not be NULL\nParams: Arrays(type, length): %ld, %ld\n", i, sizeof(type), Arrays.size());
                     exit(1);
                 }
+                if (Arrays.begin()[i] == this)
+                {
+                    printf("array+=: Arrays[%lld] must not be Self\nParams: Arrays(type, length): %ld, %ld\n", i, sizeof(type), Arrays.size());
+                    exit(1);
+                }
+            }
 
-                memCopyTo(Arrays.begin()[i]->Elements, &this->elements[this->length - Arrays.begin()[i]->Length], sizeof(type) * Arrays.begin()[i]->Length);
+            lengthPrev = this->length;
+            for (uint64 i = 0; i < Arrays.size(); i++)
+            {
+                this->length += Arrays.begin()[i]->length;
+            }
+
+            if ((this->elements = (type*)realloc(this->elements, sizeof(type) * this->length)) == NULL)
+            {
+                printf("array+=: Memory allocation failed\nParams: Arrays(type, length): %ld, %ld\n", sizeof(type), Arrays.size());
+                exit(1);
+            }
+
+            for (uint64 i = 0, j = lengthPrev; i < Arrays.size(); i++)
+            {
+                memCopyTo(Arrays.begin()[i]->elements, &this->elements[j], sizeof(type) * Arrays.begin()[i]->length);
+                j += Arrays.begin()[i]->length;
             }
         }
 
