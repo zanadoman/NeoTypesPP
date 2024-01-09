@@ -139,7 +139,7 @@ namespace neo
         {
             if ((this->Elements = (type*)malloc(sizeof(type) * this->Length)) == NULL)
             {
-                printf("array(): Memory allocation failed\nParams: Elements(size): %d\n", sizeof(type));
+                printf("array(): Memory allocation failed\nParams: Elements(size, length): %d, %d\n", sizeof(type), Elements.size());
                 exit(1);
             }
 
@@ -149,31 +149,36 @@ namespace neo
 
     template <typename type> array<type>::array(std::initializer_list<const array<type>*> Arrays)
     {
-        for (uint64 i = 0; i < Arrays.size(); i++)
+        if (Arrays.size() == 0)
         {
-            if (Arrays[i] == NULL)
-            {
-                printf("array(): Array must not be NULL\nParams: Arrays(type): %d\n", sizeof(type));
-                exit(1);
-            }
+            this->Length = 0;
+            this->Elements = NULL;
         }
 
         for (uint64 i = 0; i < Arrays.size(); i++)
         {
-            if ((this->Length = Arrays.begin()[i]->Length) == 0)
+            if (Arrays.begin()[i] == NULL)
             {
-                this->Elements = NULL;
+                printf("array(): Arrays[%d] must not be NULL\nParams: Arrays(type, length): %d, %d\n", i, sizeof(type), Arrays.size());
+                exit(1);
             }
-            else
-            {
-                if ((this->Elements = (type*)malloc(sizeof(type) * this->Length)) == NULL)
-                {
-                    printf("array(): Memory allocation failed\nParams: Arrays(type): %d\n", sizeof(type));
-                    exit(1);
-                }
+        }
 
-                memCopyTo(Arrays.begin()[i]->Elements, this->Elements, sizeof(type) * this->Length);
-            }
+        this->Length = 0;
+        for (uint64 i = 0; i < Arrays.size(); i++)
+        {
+            this->Length += (Arrays.begin()[i])->Length;
+        }
+
+        if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * this->Length)) == NULL)
+        {
+            printf("array(): Memory allocation failed\nParams: Arrays(type, length): %d, %d\n", sizeof(type), Arrays.size());
+            exit(1);
+        }
+
+        for (uint64 i = 0, j = 0; i < Arrays.size(); i++)
+        {
+            memCopyTo((Arrays.begin()[i])->Elements, &this->Elements[j], sizeof(type) * Arrays.size());
         }
     }
 
@@ -230,6 +235,7 @@ namespace neo
         {
             this->Length += (Arrays.begin()[i])->Length;
         }
+
         if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * this->Length)) == NULL)
         {
             printf("array=: Memory allocation failed\nParams: Arrays(type, length): %d %d\n", sizeof(type), Arrays.size());
