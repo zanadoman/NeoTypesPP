@@ -160,7 +160,12 @@ namespace neo
 
         return &this->literal[Index];
     }
-    
+
+    const char* string::operator = (std::initializer_list<char> Characters)
+    {
+        return this->literal;
+    }
+
     uint64 strLength(const char* Literal)
     {
         uint64 result;
