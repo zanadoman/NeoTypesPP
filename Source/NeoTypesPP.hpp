@@ -149,8 +149,9 @@ namespace neo
 
     template <typename type> array<type>::array(std::initializer_list<const array<type>*> Arrays)
     {
-        if ((this->Length = Arrays.size()) == 0)
+        if (Arrays.size() == 0)
         {
+            this->Length = 0;
             this->Elements = NULL;
         }
         else
@@ -164,6 +165,7 @@ namespace neo
                 }
             }
 
+            this->Length = 0;
             for (uint64 i = 0; i < Arrays.size(); i++)
             {
                 this->Length += (Arrays.begin()[i])->Length;
