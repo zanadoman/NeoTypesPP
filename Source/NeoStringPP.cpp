@@ -402,7 +402,7 @@ namespace neo
     {
         double result;
 
-        uint64 decimal, cache;
+        uint64 decimal;
 
         if (Success == NULL)
         {
@@ -410,6 +410,55 @@ namespace neo
             exit(1);
         }
 
+        result = 0;
+
+        decimal = this->length - 1;
+        for (uint64 i = 0; i < this->length - 1; i++)
+        {
+            if (this->literal[i] == '.')
+            {
+                decimal = i;
+                break;
+            }
+        }
+
+        for (uint64 i = 1; i < decimal; i++)
+        {
+            if (this->literal[i] < '0' || '9' < this->literal[i])
+            {
+                *Success = false;
+                return 0;
+            }
+
+            result += (this->literal[i] - '0') * pow(10, decimal - 1 - i);
+        }
+        for (uint64 i = decimal + 1; i < this->length - 1; i++)
+        {
+            if (this->literal[i] < '0' || '9' < this->literal[i])
+            {
+                *Success = false;
+                return 0;
+            }
+
+            result += (this->literal[i] - '0') / pow(10, decimal - 1 - decimal);
+        }
+
+        if (this->literal[0] == '-')
+        {
+            result *= -1;
+        }
+        else
+        {
+            if (this->literal[0] < '0' || '9' < this->literal[0])
+            {
+                *Success = false;
+                return 0;
+            }
+
+            result += (this->literal[0] - '0') * pow(10, decimal - 1);
+        }
+
+        *Success = true;
         return result;
     }
 
