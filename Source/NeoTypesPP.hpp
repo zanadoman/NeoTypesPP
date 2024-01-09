@@ -520,7 +520,13 @@ namespace neo
 
             for (uint64 i = this->length - 1; Index + this->length - lengthPrev <= i; i--)
             {
-                this->elements[i] = this->elements[i - (Index + this->length - lengthPrev)];
+                this->elements[i] = this->elements[i - (this->length - lengthPrev)];
+            }
+
+            for (uint64 i = 0, j = Index; i < Arrays.size(); i++)
+            {
+                memCopyTo(Arrays.begin()[i]->elements, &this->elements[j], sizeof(type) * Arrays.begin()[i]->length);
+                j += Arrays.begin()[i]->length;
             }
         }
 
