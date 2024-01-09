@@ -218,30 +218,28 @@ namespace neo
     {
         for (uint64 i = 0; i < Arrays.size(); i++)
         {
-            if (Arrays[i] == NULL)
+            if (Arrays.begin()[i] == NULL)
             {
-                printf("array=: Array must not be NULL\nParams: Arrays(type): %d\n", sizeof(type));
+                printf("array=: Arrays[%d] must not be NULL\nParams: Arrays(type, length): %d, %d\n", i, sizeof(type), Arrays.size());
                 exit(1);
             }
         }
 
+        this->Length = 0;
         for (uint64 i = 0; i < Arrays.size(); i++)
         {
-            if ((this->Length = Arrays.begin()[i]->Length) == 0)
-            {
-                free(this->Elements);
-                this->Elements = NULL;
-            }
-            else
-            {
-                if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * this->Length)) == NULL)
-                {
-                    printf("array=: Memory allocation failed\nParams: Arrays(type): %d\n", sizeof(type));
-                    exit(1);
-                }
+            this->Length += (Arrays.begin()[i])->Length;
+        }
+        if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * this->Length)) == NULL)
+        {
+            printf("array=: Memory allocation failed\nParams: Arrays(type, length): %d %d\n", sizeof(type), Arrays.size());
+            exit(1);
+        }
 
-                memCopyTo(Arrays.begin()[i]->Elements, this->Elements, sizeof(type) * this->Length);
-            }
+        for (uint64 i = 0, j = 0; i < Arrays.size(); i++)
+        {
+            memCopyTo((Arrays.begin()[i])->Elements, &this->Elements[j], sizeof(type) * (Arrays.begin()[i])->Length);
+            j += (Arrays.begin()[i])->Length;
         }
 
         return this->Length;
