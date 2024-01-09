@@ -32,7 +32,7 @@ namespace NeoTypesPP
             array(const array<type>* Array);
             ~array();
 
-            type& operator [] (uint64 Index);
+            type* operator [] (uint64 Index);
             uint64 operator = (std::initializer_list<type> Elements);
             uint64 operator = (const array<type>* Array);
             uint64 operator -= (std::initializer_list<type> Elements);
@@ -176,7 +176,7 @@ namespace NeoTypesPP
         free(this->Elements);
     }
 
-    template <typename type> type& array<type>::operator [] (uint64 Index)
+    template <typename type> type* array<type>::operator [] (uint64 Index)
     {
         if (this->Length <= Index)
         {
@@ -184,7 +184,7 @@ namespace NeoTypesPP
             exit(1);
         }
 
-        return this->Elements[Index];
+        return &this->Elements[Index];
     }
 
     template <typename type> uint64 array<type>::operator = (std::initializer_list<type> Elements)
