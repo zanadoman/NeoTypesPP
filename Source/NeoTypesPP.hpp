@@ -24,15 +24,15 @@ namespace neo
     template <typename type> class array
     {
         public:
-            uint64 Length;
-
             array();
             array(uint64 Length);
             array(std::initializer_list<type> Elements);
             array(std::initializer_list<const array <type>*> Arrays);
             ~array();
 
+            uint64 Length();
             type* operator [] (uint64 Index);
+
             uint64 operator = (std::initializer_list<type> Elements);
             uint64 operator = (std::initializer_list<const array <type>*> Arrays);
             uint64 operator -= (std::initializer_list<type> Elements);
@@ -51,7 +51,8 @@ namespace neo
             uint64 Clear();
 
         private:
-            type* Elements;
+            uint64 length;
+            type* elements;
     };
 
     //____________________________________________NeoString.hpp____________________________________________//
@@ -109,19 +110,19 @@ namespace neo
 
     template <typename type> array<type>::array()
     {
-        this->Length = 0;
-        this->Elements = NULL;
+        this->length = 0;
+        this->elements = NULL;
     }
 
     template <typename type> array<type>::array(uint64 Length)
     {
-        if ((this->Length = Length) == 0)
+        if ((this->length = Length) == 0)
         {
-            this->Elements = NULL;
+            this->elements = NULL;
         }
         else
         {
-            if ((this->Elements = (type*)calloc(this->Length, sizeof(type))) == NULL)
+            if ((this->elements = (type*)calloc(this->length, sizeof(type))) == NULL)
             {
                 printf("array(): Memory allocation failed\nParams: Length: %lld\n", Length);
                 exit(1);
@@ -131,19 +132,19 @@ namespace neo
 
     template <typename type> array<type>::array(std::initializer_list<type> Elements)
     {
-        if ((this->Length = Elements.size()) == 0)
+        if ((this->length = Elements.size()) == 0)
         {
-            this->Elements = NULL;
+            this->elements = NULL;
         }
         else
         {
-            if ((this->Elements = (type*)malloc(sizeof(type) * this->Length)) == NULL)
+            if ((this->elements = (type*)malloc(sizeof(type) * this->length)) == NULL)
             {
                 printf("array(): Memory allocation failed\nParams: Elements(size, length): %ld, %ld\n", sizeof(type), Elements.size());
                 exit(1);
             }
 
-            memCopyTo(Elements.begin(), this->Elements, sizeof(type) * this->Length);
+            memCopyTo(Elements.begin(), this->elements, sizeof(type) * this->length);
         }
     }
 
@@ -151,8 +152,8 @@ namespace neo
     {
         if (Arrays.size() == 0)
         {
-            this->Length = 0;
-            this->Elements = NULL;
+            this->length = 0;
+            this->elements = NULL;
         }
         else
         {
@@ -165,13 +166,13 @@ namespace neo
                 }
             }
 
-            this->Length = 0;
+            this->length = 0;
             for (uint64 i = 0; i < Arrays.size(); i++)
             {
-                this->Length += (Arrays.begin()[i])->Length;
+                this->length += (Arrays.begin()[i])->length;
             }
 
-            if ((this->Elements = (type*)malloc(sizeof(type) * this->Length)) == NULL)
+            if ((this->elements = (type*)malloc(sizeof(type) * this->length)) == NULL)
             {
                 printf("array(): Memory allocation failed\nParams: Arrays(type, length): %ld, %ld\n", sizeof(type), Arrays.size());
                 exit(1);
@@ -179,47 +180,52 @@ namespace neo
 
             for (uint64 i = 0, j = 0; i < Arrays.size(); i++)
             {
-                memCopyTo((Arrays.begin()[i])->Elements, &this->Elements[j], sizeof(type) * (Arrays.begin()[i])->Length);
-                j += (Arrays.begin()[i])->Length;
+                memCopyTo((Arrays.begin()[i])->elements, &this->elements[j], sizeof(type) * (Arrays.begin()[i])->length);
+                j += (Arrays.begin()[i])->length;
             }
         }
     }
 
     template <typename type> array<type>::~array()
     {
-        free(this->Elements);
+        free(this->elements);
+    }
+
+    template <typename type> uint64 array<type>::Length()
+    {
+        return this->length;
     }
 
     template <typename type> type* array<type>::operator [] (uint64 Index)
     {
-        if (this->Length <= Index)
+        if (this->length <= Index)
         {
             printf("array[]: Index out of range\nParams: Index: %lld\n", Index);
             exit(1);
         }
 
-        return &this->Elements[Index];
+        return &this->elements[Index];
     }
 
     template <typename type> uint64 array<type>::operator = (std::initializer_list<type> Elements)
     {
-        if ((this->Length = Elements.size()) == 0)
+        if ((this->length = Elements.size()) == 0)
         {
-            free(this->Elements);
-            this->Elements = NULL;
+            free(this->elements);
+            this->elements = NULL;
         }
         else
         {
-            if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * this->Length)) == NULL)
+            if ((this->elements = (type*)realloc(this->elements, sizeof(type) * this->length)) == NULL)
             {
                 printf("array=: Memory allocation failed\nParams: Elements(type): %d\n", sizeof(type));
                 exit(1);
             }
 
-            memCopyTo(Elements.begin(), this->Elements, sizeof(type) * this->Length);
+            memCopyTo(Elements.begin(), this->elements, sizeof(type) * this->length);
         }
 
-        return this->Length;
+        return this->length;
     }
 
     template <typename type> uint64 array<type>::operator = (std::initializer_list<const array <type>*> Arrays)
@@ -233,13 +239,13 @@ namespace neo
             }
         }
 
-        this->Length = 0;
+        this->length = 0;
         for (uint64 i = 0; i < Arrays.size(); i++)
         {
-            this->Length += (Arrays.begin()[i])->Length;
+            this->length += (Arrays.begin()[i])->length;
         }
 
-        if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * this->Length)) == NULL)
+        if ((this->elements = (type*)realloc(this->elements, sizeof(type) * this->length)) == NULL)
         {
             printf("array=: Memory allocation failed\nParams: Arrays(type, length): %d %d\n", sizeof(type), Arrays.size());
             exit(1);
@@ -247,32 +253,32 @@ namespace neo
 
         for (uint64 i = 0, j = 0; i < Arrays.size(); i++)
         {
-            memCopyTo((Arrays.begin()[i])->Elements, &this->Elements[j], sizeof(type) * (Arrays.begin()[i])->Length);
-            j += (Arrays.begin()[i])->Length;
+            memCopyTo((Arrays.begin()[i])->elements, &this->elements[j], sizeof(type) * (Arrays.begin()[i])->length);
+            j += (Arrays.begin()[i])->length;
         }
 
-        return this->Length;
+        return this->length;
     }
 
     template <typename type> uint64 array<type>::operator -= (std::initializer_list<type> Elements)
     {
         if (Elements.size() != 0)
         {
-            if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * (this->Length += Elements.size()))) == NULL)
+            if ((this->elements = (type*)realloc(this->elements, sizeof(type) * (this->length += Elements.size()))) == NULL)
             {
                 printf("array-=: Memory allocation failed\nParams: Elements(type): %d\n", sizeof(type));
                 exit(1);
             }
 
-            for (uint64 i = this->Length - 1; Elements.size() <= i; i--)
+            for (uint64 i = this->length - 1; Elements.size() <= i; i--)
             {
-                this->Elements[i] = this->Elements[i - Elements.size()];
+                this->elements[i] = this->elements[i - Elements.size()];
             }
 
-            memCopyTo(Elements.begin(), this->Elements, sizeof(type) * Elements.size());
+            memCopyTo(Elements.begin(), this->elements, sizeof(type) * Elements.size());
         }
 
-        return this->Length;
+        return this->length;
     }
 
     template <typename type> uint64 array<type>::operator -= (std::initializer_list<const array <type>*> Arrays)
@@ -293,39 +299,39 @@ namespace neo
         {
             if (Arrays.begin()[i]->Length != 0)
             {
-                if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * (this->Length += Arrays.begin()[i]->Length))) == NULL)
+                if ((this->elements = (type*)realloc(this->elements, sizeof(type) * (this->length += Arrays.begin()[i]->Length))) == NULL)
                 {
                     printf("array-=: Memory allocation failed\nParams: Arrays(type): %d\n", sizeof(type));
                     exit(1);
                 }
 
-                for (uint64 j = this->Length - 1; Arrays.begin()[i]->Length <= j; j--)
+                for (uint64 j = this->length - 1; Arrays.begin()[i]->Length <= j; j--)
                 {
-                    this->Elements[j] = this->Elements[j - Arrays.begin()[i]->Length];
+                    this->elements[j] = this->elements[j - Arrays.begin()[i]->Length];
                 }
 
-                memCopyTo(Arrays.begin()[i]->Elements, &this->Elements[index], sizeof(type) * Arrays.begin()[i]->Length);
+                memCopyTo(Arrays.begin()[i]->Elements, &this->elements[index], sizeof(type) * Arrays.begin()[i]->Length);
                 index += Arrays.begin()[i]->Length;
             }
         }
 
-        return this->Length;
+        return this->length;
     }
 
     template <typename type> uint64 array<type>::operator += (std::initializer_list<type> Elements)
     {
         if (Elements.size() != 0)
         {
-            if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * (this->Length += Elements.size()))) == NULL)
+            if ((this->elements = (type*)realloc(this->elements, sizeof(type) * (this->length += Elements.size()))) == NULL)
             {
                 printf("array+=: Memory allocation failed\nParams: Elements(type): %d\n", sizeof(type));
                 exit(1);
             }
 
-            memCopyTo(Elements.begin(), &this->Elements[this->Length - Elements.size()], sizeof(type) * Elements.size());
+            memCopyTo(Elements.begin(), &this->elements[this->length - Elements.size()], sizeof(type) * Elements.size());
         }
 
-        return this->Length;
+        return this->length;
     }
 
     template <typename type> uint64 array<type>::operator += (std::initializer_list<const array<type>*> Arrays)
@@ -343,27 +349,27 @@ namespace neo
         {
             if (Arrays.begin()[i]->Length != 0)
             {
-                if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * (this->Length += Arrays.begin()[i]->Length))) == NULL)
+                if ((this->elements = (type*)realloc(this->elements, sizeof(type) * (this->length += Arrays.begin()[i]->Length))) == NULL)
                 {
                     printf("array+=: Memory allocation failed\nParams: Arrays(type): %d\n", sizeof(type));
                     exit(1);
                 }
 
-                memCopyTo(Arrays.begin()[i]->Elements, &this->Elements[this->Length - Arrays.begin()[i]->Length], sizeof(type) * Arrays.begin()[i]->Length);
+                memCopyTo(Arrays.begin()[i]->Elements, &this->elements[this->length - Arrays.begin()[i]->Length], sizeof(type) * Arrays.begin()[i]->Length);
             }
         }
 
-        return this->Length;
+        return this->length;
     }
 
     template <typename type> bool array<type>::operator == (const array<type>* Array)
     {
-        if (Array == NULL || this->Length != Array->Length)
+        if (Array == NULL || this->length != Array->Length)
         {
             return false;
         }
 
-        return memCompare(this->Elements, Array->Elements, sizeof(type) * this->Length);
+        return memCompare(this->elements, Array->Elements, sizeof(type) * this->length);
     }
 
     template <typename type> bool array<type>::operator != (const array<type>* Array)
@@ -373,39 +379,39 @@ namespace neo
 
     template <typename type> uint64 array<type>::Resize(uint64 Length)
     {
-        if (this->Length != Length)
+        if (this->length != Length)
         {
             if (Length == 0)
             {
-                this->Length = 0;
-                free(this->Elements);
-                this->Elements = NULL;
+                this->length = 0;
+                free(this->elements);
+                this->elements = NULL;
             }
             else
             {
-                if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * Length)) == NULL)
+                if ((this->elements = (type*)realloc(this->elements, sizeof(type) * Length)) == NULL)
                 {
                     printf("array.Resize(): Memory allocation failed\nParams: Length: %lld\n", Length);
                     exit(1);
                 }
 
-                if (this->Length < Length)
+                if (this->length < Length)
                 {
-                    for (uint64 i = Length - (Length - this->Length); i < Length; i++)
+                    for (uint64 i = Length - (Length - this->length); i < Length; i++)
                     {
-                        this->Elements[i] = 0;
+                        this->elements[i] = 0;
                     }
                 }
-                this->Length = Length;
+                this->length = Length;
             }
         }
 
-        return this->Length;
+        return this->length;
     }
 
     template <typename type> uint64 array<type>::Insert(uint64 Index, std::initializer_list<type> Elements)
     {
-        if (this->Length < Index)
+        if (this->length < Index)
         {
             printf("array.Insert(): Index out of range\nParams: Index: %lld, Elements(type): %d\n", Index, sizeof(type));
             exit(1);
@@ -413,21 +419,21 @@ namespace neo
 
         if (Elements.size() != 0)
         {
-            if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * (this->Length += Elements.size()))) == NULL)
+            if ((this->elements = (type*)realloc(this->elements, sizeof(type) * (this->length += Elements.size()))) == NULL)
             {
                 printf("array.Insert(): Memory allocation failed\nParams: Index: %lld, Elements(type): %d\n", Index, sizeof(type));
                 exit(1);
             }
 
-            for (uint64 i = this->Length - 1; Index + Elements.size() <= i; i--)
+            for (uint64 i = this->length - 1; Index + Elements.size() <= i; i--)
             {
-                this->Elements[i] = this->Elements[i - Elements.size()];
+                this->elements[i] = this->elements[i - Elements.size()];
             }
 
-            memCopyTo(Elements.begin(), &this->Elements[Index], sizeof(type) * Elements.size());
+            memCopyTo(Elements.begin(), &this->elements[Index], sizeof(type) * Elements.size());
         }
 
-        return this->Length;
+        return this->length;
     }
 
     template <typename type> uint64 array<type>::Insert(uint64 Index, std::initializer_list<const array<type>*> Arrays)
@@ -440,7 +446,7 @@ namespace neo
                 exit(1);
             }
         }
-        if (this->Length < Index)
+        if (this->length < Index)
         {
             printf("array.Insert(): Index out of range\nParams: Index: %lld, Arrays(type): %d\n", Index, sizeof(type));
             exit(1);
@@ -450,65 +456,65 @@ namespace neo
         {
             if (Arrays.begin()[i]->Length != 0)
             {
-                if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * (this->Length += Arrays.begin()[i]->Length))) == NULL)
+                if ((this->elements = (type*)realloc(this->elements, sizeof(type) * (this->length += Arrays.begin()[i]->Length))) == NULL)
                 {
                     printf("array.Insert(): Memory allocation failed\nParams: Index: %lld, Arrays(type): %d\n", Index, sizeof(type));
                     exit(1);
                 }
 
-                for (uint64 j = this->Length - 1; Index + Arrays.begin()[i]->Length <= j; j--)
+                for (uint64 j = this->length - 1; Index + Arrays.begin()[i]->Length <= j; j--)
                 {
-                    this->Elements[j] = this->Elements[j - Arrays.begin()[i]->Length];
+                    this->elements[j] = this->elements[j - Arrays.begin()[i]->Length];
                 }
 
-                memCopyTo(Arrays.begin()[i]->Elements, &this->Elements[Index], sizeof(type) * Arrays.begin()[i]->Length);
+                memCopyTo(Arrays.begin()[i]->Elements, &this->elements[Index], sizeof(type) * Arrays.begin()[i]->Length);
                 Index += Arrays.begin()[i]->Length;
             }
         }
 
-        return this->Length;
+        return this->length;
     }
 
     template <typename type> uint64 array<type>::Remove(uint64 Index)
     {
-        if (this->Length <= Index)
+        if (this->length <= Index)
         {
             printf("array.Remove(): Index out of range\nParams: Index: %lld\n", Index);
             exit(1);
         }
-        if (this->Length == 0)
+        if (this->length == 0)
         {
             printf("array.Remove(): Array must not be empty\nParams: Index: %lld\n", Index);
             exit(1);
         }
 
-        if (--this->Length == 0)
+        if (--this->length == 0)
         {
-            free(this->Elements);
-            this->Elements = NULL;
+            free(this->elements);
+            this->elements = NULL;
         }
         else
         {
-            for (uint64 i = Index; i < this->Length; i++)
+            for (uint64 i = Index; i < this->length; i++)
             {
-                this->Elements[i] = this->Elements[i + 1];
+                this->elements[i] = this->elements[i + 1];
             }
 
-            if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * this->Length)) == NULL)
+            if ((this->elements = (type*)realloc(this->elements, sizeof(type) * this->length)) == NULL)
             {
                 printf("array.Remove(): Memory allocation failed\nParams: Index: %lld\n", Index);
                 exit(1);
             }
         }
 
-        return this->Length;
+        return this->length;
     }
 
     template <typename type> bool array<type>::Contains(const type Value)
     {
-        for (uint64 i = 0; i < this->Length; i++)
+        for (uint64 i = 0; i < this->length; i++)
         {
-            if (this->Elements[i] == Value)
+            if (this->elements[i] == Value)
             {
                 return true;
             }
@@ -521,23 +527,23 @@ namespace neo
     {
         type tmp;
 
-        for (uint64 i = 0; i < this->Length / 2; i++)
+        for (uint64 i = 0; i < this->length / 2; i++)
         {
-            tmp = this->Elements[i];
-            this->Elements[i] = this->Elements[this->Length - 1 - i];
-            this->Elements[this->Length - 1 - i] = tmp;
+            tmp = this->elements[i];
+            this->elements[i] = this->elements[this->length - 1 - i];
+            this->elements[this->length - 1 - i] = tmp;
         }
 
-        return this->Length;
+        return this->length;
     }
 
     template <typename type> uint64 array<type>::Clear()
     {
-        this->Length = 0;
-        free(this->Elements);
-        this->Elements = NULL;
+        this->length = 0;
+        free(this->elements);
+        this->elements = NULL;
 
-        return this->Length;
+        return this->length;
     }
 }
 
