@@ -230,31 +230,40 @@ namespace neo
 
     template <typename type> uint64 array<type>::operator = (std::initializer_list<const array <type>*> Arrays)
     {
-        for (uint64 i = 0; i < Arrays.size(); i++)
+        if (Arrays.size() == 0)
         {
-            if (Arrays.begin()[i] == NULL)
+            this->length = 0;
+            free(this->elements);
+            this->elements = NULL;
+        }
+        else 
+        {
+            for (uint64 i = 0; i < Arrays.size(); i++)
             {
-                printf("array=: Arrays[%d] must not be NULL\nParams: Arrays(type, length): %d, %d\n", i, sizeof(type), Arrays.size());
+                if (Arrays.begin()[i] == NULL)
+                {
+                    printf("array=: Arrays[%lld] must not be NULL\nParams: Arrays(type, length): %ld, %ld\n", i, sizeof(type), Arrays.size());
+                    exit(1);
+                }
+            }
+
+            this->length = 0;
+            for (uint64 i = 0; i < Arrays.size(); i++)
+            {
+                this->length += Arrays.begin()[i]->length;
+            }
+
+            if ((this->elements = (type*)realloc(this->elements, sizeof(type) * this->length)) == NULL)
+            {
+                printf("array=: Memory allocation failed\nParams: Arrays(type, length): %ld %ld\n", sizeof(type), Arrays.size());
                 exit(1);
             }
-        }
 
-        this->length = 0;
-        for (uint64 i = 0; i < Arrays.size(); i++)
-        {
-            this->length += (Arrays.begin()[i])->length;
-        }
-
-        if ((this->elements = (type*)realloc(this->elements, sizeof(type) * this->length)) == NULL)
-        {
-            printf("array=: Memory allocation failed\nParams: Arrays(type, length): %d %d\n", sizeof(type), Arrays.size());
-            exit(1);
-        }
-
-        for (uint64 i = 0, j = 0; i < Arrays.size(); i++)
-        {
-            memCopyTo((Arrays.begin()[i])->elements, &this->elements[j], sizeof(type) * (Arrays.begin()[i])->length);
-            j += (Arrays.begin()[i])->length;
+            for (uint64 i = 0, j = 0; i < Arrays.size(); i++)
+            {
+                memCopyTo(Arrays.begin()[i]->elements, &this->elements[j], sizeof(type) * Arrays.begin()[i]->length);
+                j += Arrays.begin()[i]->length;
+            }
         }
 
         return this->length;
