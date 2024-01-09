@@ -247,6 +247,8 @@ namespace neo
 
     template <typename type> uint64 array<type>::operator = (std::initializer_list<array<type>*> Arrays)
     {
+        uint64 lengthPrev;
+
         if (Arrays.size() == 0)
         {
             this->length = 0;
@@ -269,13 +271,14 @@ namespace neo
                 }
             }
 
+            lengthPrev = this->length;
             this->length = 0;
             for (uint64 i = 0; i < Arrays.size(); i++)
             {
                 this->length += Arrays.begin()[i]->length;
             }
 
-            if ((this->elements = (type*)realloc(this->elements, sizeof(type) * this->length)) == NULL)
+            if (this->length != lengthPrev && (this->elements = (type*)realloc(this->elements, sizeof(type) * this->length)) == NULL)
             {
                 printf("array=: Memory allocation failed\nParams: Arrays(type, length): %ld %ld\n", sizeof(type), Arrays.size());
                 exit(1);
