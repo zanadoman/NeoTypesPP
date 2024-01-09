@@ -292,9 +292,9 @@ namespace neo
                     exit(1);
                 }
 
-                for (uint64 i = this->Length - 1; Arrays.begin()[i]->Length <= i; i--)
+                for (uint64 j = this->Length - 1; Arrays.begin()[i]->Length <= j; j--)
                 {
-                    this->Elements[i] = this->Elements[i - Arrays.begin()[i]->Length];
+                    this->Elements[j] = this->Elements[j - Arrays.begin()[i]->Length];
                 }
 
                 memCopyTo(Arrays.begin()[i]->Elements, &this->Elements[index], sizeof(type) * Arrays.begin()[i]->Length);
