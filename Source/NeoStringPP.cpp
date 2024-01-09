@@ -1,4 +1,5 @@
 #include "NeoTypesPP.hpp"
+#include <cstdio>
 
 namespace neo
 {
@@ -313,7 +314,58 @@ namespace neo
                 return 0;
             }
 
-            result += (uint64)(this->literal - '0') * pow(10, cache - 1 - i);
+            result += (this->literal[i] - '0') * pow(10, cache - 1 - i);
+        }
+
+        if (Success != NULL)
+        {
+            *Success = true;
+        }
+
+        return result;
+    }
+
+    sint64 string::ToSINT(double* Success)
+    {
+        sint64 result;
+
+        uint64 cache;
+
+        result = 0;
+        cache = strLength(this->literal) - 1;
+
+        for (uint64 i = 1; i < cache; i++)
+        {
+            if (this->literal[i] < '0' || '9' < this->literal[i])
+            {
+                if (Success != NULL)
+                {
+                    *Success = false;
+                }
+
+                return 0;
+            }
+
+            result += (this->literal[i] - '0') * pow(10, cache - 1 - i);
+        }
+
+        if (this->literal[0] == '-')
+        {
+            result *= -1;
+        }
+        else
+        {
+            if (this->literal[0] < '0' || '9' < this->literal[0])
+            {
+                if (Success != NULL)
+                {
+                    *Success = false;
+                }
+
+                return 0;
+            }
+
+            result += (this->literal[0] - '0') * pow(10, cache - 1);
         }
 
         if (Success != NULL)
