@@ -1,5 +1,4 @@
 #include "NeoTypesPP.hpp"
-#include <initializer_list>
 
 namespace neo
 {
