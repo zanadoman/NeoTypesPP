@@ -62,6 +62,7 @@ namespace neo
     {
         public:
             string();
+            string(std::initializer_list<char> Characters);
             string(std::initializer_list<const char*> Literals);
             string(std::initializer_list<string*> Strings);
             string(std::initializer_list<uint64> Numbers);
@@ -73,24 +74,28 @@ namespace neo
             const char* operator () ();
             char* operator [] (uint64 Index);
 
+            const char operator = (std::initializer_list<char> Characters);
             const char operator = (std::initializer_list<const char*> Literals);
             const char operator = (std::initializer_list<string*> Strings);
             const char operator = (std::initializer_list<uint64> Numbers);
             const char operator = (std::initializer_list<sint64> Numbers);
             const char operator = (std::initializer_list<double> Numbers);
 
+            const char operator -= (std::initializer_list<char> Characters);
             const char operator -= (std::initializer_list<const char*> Literals);
             const char operator -= (std::initializer_list<string*> Strings);
             const char operator -= (std::initializer_list<uint64> Numbers);
             const char operator -= (std::initializer_list<sint64> Numbers);
             const char operator -= (std::initializer_list<double> Numbers);
 
+            const char operator += (std::initializer_list<char> Characters);
             const char operator += (std::initializer_list<const char*> Literals);
             const char operator += (std::initializer_list<string*> Strings);
             const char operator += (std::initializer_list<uint64> Numbers);
             const char operator += (std::initializer_list<sint64> Numbers);
             const char operator += (std::initializer_list<double> Numbers);
 
+            bool operator == (char Character);
             bool operator == (const char* Literal);
             bool operator == (string* String);
             bool operator == (uint64 Number);
@@ -101,6 +106,7 @@ namespace neo
             sint64 ToSINT();
             double ToDOUBLE();
 
+            const char Insert(uint64 Index, std::initializer_list<char> Characters);
             const char Insert(uint64 Index, std::initializer_list<const char*> Literals);
             const char Insert(uint64 Index, std::initializer_list<string*> Strings);
             const char Insert(uint64 Index, std::initializer_list<uint64> Numbers);
