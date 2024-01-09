@@ -293,7 +293,7 @@ namespace neo
         return this->literal;
     }
 
-    uint64 string::ToUINT(double* Success)
+    uint64 string::ToUINT()
     {
         uint64 result;
 
@@ -306,22 +306,42 @@ namespace neo
         {
             if (this->literal[i] < '0' || '9' < this->literal[i])
             {
-                if (Success != NULL)
-                {
-                    *Success = false;
-                }
-
                 return 0;
             }
 
             result += (this->literal[i] - '0') * pow(10, cache - 1 - i);
         }
 
-        if (Success != NULL)
+        return result;
+    }
+
+    uint64 string::ToUINT(double* Success)
+    {
+        uint64 result;
+
+        uint64 cache;
+
+        if (Success == NULL)
         {
-            *Success = true;
+            printf("string.ToUINT(): Success must not be NULL\nParams: Success: %p\n", Success);
+            exit(1);
         }
 
+        result = 0;
+        cache = strLength(this->literal) - 1;
+
+        for (uint64 i = 0; i < cache; i++)
+        {
+            if (this->literal[i] < '0' || '9' < this->literal[i])
+            {
+                *Success = false;
+                return 0;
+            }
+
+            result += (this->literal[i] - '0') * pow(10, cache - 1 - i);
+        }
+
+        *Success = true;
         return result;
     }
 
@@ -338,11 +358,6 @@ namespace neo
         {
             if (this->literal[i] < '0' || '9' < this->literal[i])
             {
-                if (Success != NULL)
-                {
-                    *Success = false;
-                }
-
                 return 0;
             }
 
@@ -357,20 +372,10 @@ namespace neo
         {
             if (this->literal[0] < '0' || '9' < this->literal[0])
             {
-                if (Success != NULL)
-                {
-                    *Success = false;
-                }
-
                 return 0;
             }
 
             result += (this->literal[0] - '0') * pow(10, cache - 1);
-        }
-
-        if (Success != NULL)
-        {
-            *Success = true;
         }
 
         return result;

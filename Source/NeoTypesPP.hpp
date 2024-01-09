@@ -86,8 +86,11 @@ namespace neo
             bool operator == (const char* Literal);
             bool operator == (string* String);
 
+            uint64 ToUINT();
             uint64 ToUINT(double* Success);
+            sint64 ToSINT();
             sint64 ToSINT(double* Success);
+            double ToDOUBLE();
             double ToDOUBLE(double* Success);
 
             const char* Insert(uint64 Index, std::initializer_list<char> Characters);
