@@ -13,6 +13,30 @@ namespace neo
         this->literal[0] = '\0';
     }
 
+    string::string(std::initializer_list<char> Characters)
+    {
+        if (Characters.size() == 0)
+        {
+            if ((this->literal = (char*)malloc(sizeof(char) * (this->length = 1))) == NULL)
+            {
+                printf("string(): Memory allocation failed\nParams: Characters(length): %ld\n", Characters.size());
+                exit(1);
+            }
+            this->literal[0] = '\0';
+        }
+        else
+        {
+            if ((this->literal = (char*)malloc(sizeof(char) * (this->length = Characters.size() + 1))) == NULL)
+            {
+                printf("string(): Memory allocation failed\nParams: Characters(length): %ld\n", Characters.size());
+                exit(1);
+            }
+
+            memCopyTo(Characters.begin(), this->literal, Characters.size());
+            this->literal[Characters.size()] = '\0';
+        }
+    }
+
     string::string(std::initializer_list<const char*> Literals)
     {
         uint64 cache;
