@@ -33,7 +33,7 @@ namespace neo
             }
 
             memCopyTo(Characters.begin(), this->literal, Characters.size());
-            this->literal[Characters.size()] = '\0';
+            this->literal[this->length - 1] = '\0';
         }
     }
 
@@ -91,9 +91,25 @@ namespace neo
         free(this->literal);
     }
 
+    uint64 string::Length()
+    {
+        return this->length;
+    }
+
     const char* string::operator () ()
     {
         return this->literal;
+    }
+
+    char* string::operator [] (uint64 Index)
+    {
+        if (this->length - 1 <= Index)
+        {
+            printf("string[]: Index out of range\nParams: Index: %lld\n", Index);
+            exit(1);
+        }
+
+        return &this->literal[Index];
     }
 
     uint64 strLength(const char* Literal)
