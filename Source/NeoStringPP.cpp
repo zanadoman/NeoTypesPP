@@ -292,6 +292,38 @@ namespace neo
         return this->literal;
     }
 
+    uint64 string::ToUINT(double* Success)
+    {
+        uint64 result;
+
+        uint64 cache;
+
+        result = 0;
+        cache = strLength(this->literal) - 1;
+
+        for (uint64 i = 0; i < cache; i++)
+        {
+            if (this->literal[i] < '0' || '9' < this->literal[i])
+            {
+                if (Success != NULL)
+                {
+                    *Success = false;
+                }
+
+                return 0;
+            }
+
+            result += (this->literal - '0') * pow(10, cache - 1 - i);
+        }
+
+        if (Success != NULL)
+        {
+            *Success = true;
+        }
+
+        return result;
+    }
+
     uint64 strLength(const char* Literal)
     {
         uint64 result;
