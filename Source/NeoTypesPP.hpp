@@ -27,24 +27,24 @@ namespace neo
             array();
             array(uint64 Length);
             array(std::initializer_list<type> Elements);
-            array(std::initializer_list<const array <type>*> Arrays);
+            array(std::initializer_list<array <type>*> Arrays);
             ~array();
 
             uint64 Length();
             type* operator [] (uint64 Index);
 
             uint64 operator = (std::initializer_list<type> Elements);
-            uint64 operator = (std::initializer_list<const array <type>*> Arrays);
+            uint64 operator = (std::initializer_list<array <type>*> Arrays);
             uint64 operator -= (std::initializer_list<type> Elements);
-            uint64 operator -= (std::initializer_list<const array <type>*> Arrays);
+            uint64 operator -= (std::initializer_list<array <type>*> Arrays);
             uint64 operator += (std::initializer_list<type> Elements);
-            uint64 operator += (std::initializer_list<const array <type>*> Arrays);
-            bool operator == (const array<type>* Array);
-            bool operator != (const array<type>* Array);
+            uint64 operator += (std::initializer_list<array <type>*> Arrays);
+            bool operator == (array<type>* Array);
+            bool operator != (array<type>* Array);
 
             uint64 Resize(uint64 Length);
             uint64 Insert(uint64 Index, std::initializer_list<type> Elements);
-            uint64 Insert(uint64 Index, std::initializer_list<const array <type>*> Arrays);
+            uint64 Insert(uint64 Index, std::initializer_list<array <type>*> Arrays);
             uint64 Remove(uint64 Index);
             bool Contains(const type Value);
             uint64 Reverse();
@@ -148,7 +148,7 @@ namespace neo
         }
     }
 
-    template <typename type> array<type>::array(std::initializer_list<const array<type>*> Arrays)
+    template <typename type> array<type>::array(std::initializer_list<array<type>*> Arrays)
     {
         if (Arrays.size() == 0)
         {
@@ -228,7 +228,7 @@ namespace neo
         return this->length;
     }
 
-    template <typename type> uint64 array<type>::operator = (std::initializer_list<const array <type>*> Arrays)
+    template <typename type> uint64 array<type>::operator = (std::initializer_list<array <type>*> Arrays)
     {
         if (Arrays.size() == 0)
         {
@@ -290,7 +290,7 @@ namespace neo
         return this->length;
     }
 
-    template <typename type> uint64 array<type>::operator -= (std::initializer_list<const array <type>*> Arrays)
+    template <typename type> uint64 array<type>::operator -= (std::initializer_list<array <type>*> Arrays)
     {
         uint64 index;
 
@@ -343,7 +343,7 @@ namespace neo
         return this->length;
     }
 
-    template <typename type> uint64 array<type>::operator += (std::initializer_list<const array<type>*> Arrays)
+    template <typename type> uint64 array<type>::operator += (std::initializer_list<array<type>*> Arrays)
     {
         for (uint64 i = 0; i < Arrays.size(); i++)
         {
@@ -371,7 +371,7 @@ namespace neo
         return this->length;
     }
 
-    template <typename type> bool array<type>::operator == (const array<type>* Array)
+    template <typename type> bool array<type>::operator == (array<type>* Array)
     {
         if (Array == NULL || this->length != Array->Length)
         {
@@ -381,7 +381,7 @@ namespace neo
         return memCompare(this->elements, Array->Elements, sizeof(type) * this->length);
     }
 
-    template <typename type> bool array<type>::operator != (const array<type>* Array)
+    template <typename type> bool array<type>::operator != (array<type>* Array)
     {
         return !(*this == Array);
     }
@@ -445,7 +445,7 @@ namespace neo
         return this->length;
     }
 
-    template <typename type> uint64 array<type>::Insert(uint64 Index, std::initializer_list<const array<type>*> Arrays)
+    template <typename type> uint64 array<type>::Insert(uint64 Index, std::initializer_list<array<type>*> Arrays)
     {
         for (uint64 i = 0; i < Arrays.size(); i++)
         {
