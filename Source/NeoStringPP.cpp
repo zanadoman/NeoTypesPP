@@ -83,6 +83,7 @@ namespace neo
                 memCopyTo(Literals.begin()[i], &this->literal[j], sizeof(char) * (cache = strLength(Literals.begin()[i]) - 1));
                 j += cache;
             }
+            this->literal[this->length - 1] = '\0';
         }
     }
 
@@ -130,6 +131,7 @@ namespace neo
                 memCopyTo(Strings.begin()[i]->literal, &this->literal[j], sizeof(char) * (Strings.begin()[i]->length - 1));
                 j += Strings.begin()[i]->length - 1;
             }
+            this->literal[this->length - 1] = '\0';
         }
     }
 
