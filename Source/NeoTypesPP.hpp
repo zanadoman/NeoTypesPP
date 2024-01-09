@@ -61,40 +61,59 @@ namespace neo
     class string
     {
         public:
-            uint64 Length;
-
             string();
-            string(const char* Literal);
-            string(const string* String);
+            string(std::initializer_list<const char*> Literals);
+            string(std::initializer_list<string*> Strings);
+            string(std::initializer_list<uint64> Numbers);
+            string(std::initializer_list<sint64> Numbers);
+            string(std::initializer_list<double> Double);
             ~string();
 
+            uint64 Length;
             const char* operator () ();
-            char& operator [] (uint64 Index);
-            const char* operator = (const char* Literal);
-            const char* operator = (const string* String);
-            const char* operator = (uint64 Number);
-            const char* operator = (sint64 Number);
-            const char* operator = (double Number);
-            const char* operator += (char Character);
-            const char* operator += (const char* Literal);
-            const char* operator += (const string* String);
-            const char* operator += (uint64 Number);
-            const char* operator += (sint64 Number);
-            const char* operator += (double Number);
-            bool operator == (const char* Literal);
-            bool operator == (const string* String);
-            bool operator != (const char* Literal);
-            bool operator != (const string* String);
+            char* operator [] (uint64 Index);
 
-            const char* Read();
-            array<string*>* Split(char Separator);
+            const char operator = (std::initializer_list<const char*> Literals);
+            const char operator = (std::initializer_list<string*> Strings);
+            const char operator = (std::initializer_list<uint64> Numbers);
+            const char operator = (std::initializer_list<sint64> Numbers);
+            const char operator = (std::initializer_list<double> Double);
+
+            const char operator -= (std::initializer_list<const char*> Literals);
+            const char operator -= (std::initializer_list<string*> Strings);
+            const char operator -= (std::initializer_list<uint64> Numbers);
+            const char operator -= (std::initializer_list<sint64> Numbers);
+            const char operator -= (std::initializer_list<double> Double);
+
+            const char operator += (std::initializer_list<const char*> Literals);
+            const char operator += (std::initializer_list<string*> Strings);
+            const char operator += (std::initializer_list<uint64> Numbers);
+            const char operator += (std::initializer_list<sint64> Numbers);
+            const char operator += (std::initializer_list<double> Double);
+
+            bool operator == (const char* Literal);
+            bool operator == (string* String);
+            bool operator == (uint64 Number);
+            bool operator == (sint64 Number);
+            bool operator == (double Number);
+
             uint64 ToUINT();
             sint64 ToSINT();
             double ToDOUBLE();
 
+            const char Insert(uint64 Index, std::initializer_list<const char*> Literals);
+            const char Insert(uint64 Index, std::initializer_list<string*> Strings);
+            const char Insert(uint64 Index, std::initializer_list<uint64> Numbers);
+            const char Insert(uint64 Index, std::initializer_list<sint64> Numbers);
+            const char Insert(uint64 Index, std::initializer_list<double> Double);
+
+            const char Remove(uint64 Index);
+            const char Reverse();
+            const char Clear();
+
         private:
-            char* Literal;
-            uint8 Clear();
+            uint64 length;
+            char* literal;
     };
     uint64 strLength(const char* Literal);
 
