@@ -198,6 +198,7 @@ namespace neo
                 printf("string=: Memory allocation failed\nParams: Literals(length): %ld\n", Literals.size());
                 exit(1);
             }
+            this->literal[0] = '\0';
         }
         else
         {
@@ -222,7 +223,7 @@ namespace neo
                 this->length += strLength(Literals.begin()[i]) - 1;
             }
 
-            if ((this->length += 1) != lengthPrev && (this->literal = (char*)realloc(this->literal, sizeof(char) * this->Length())) == NULL)
+            if ((this->length += 1) != lengthPrev && (this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
             {
                 printf("string=: Memory allocation failed\nParams: Literals(length): %ld\n", Literals.size());
                 exit(1);
@@ -232,6 +233,59 @@ namespace neo
             {
                 memCopyTo(Literals.begin()[i], &this->literal[j], sizeof(char) * (cache = strLength(Literals.begin()[i]) - 1));
                 j += cache;
+            }
+            this->literal[this->length - 1] = '\0';
+        }
+
+        return this->literal;
+    }
+
+    const char* string::operator = (std::initializer_list<string*> Strings)
+    {
+        uint64 lengthPrev;
+
+        if (Strings.size() == 0)
+        {
+            if ((this->literal = (char*)realloc(this->literal, sizeof(char) * (this->length = 1))) == NULL)
+            {
+                printf("string=: Memory allocation failed\nParams: Strings(length): %ld\n", Strings.size());
+                exit(1);
+            }
+            this->literal[0] = '\0';
+        }
+        else
+        {
+            for (uint64 i = 0; i < Strings.size(); i++)
+            {
+                if (Strings.begin()[i] == NULL)
+                {
+                    printf("string=: Strings[%lld] must not be NULL\nParams: Strings(length): %ld\n", i, Strings.size());
+                    exit(1);
+                }
+                if (Strings.begin()[i] == this)
+                {
+                    printf("string=: Strings[%lld] must not be Self\nParams: Strings(length): %ld\n", i, Strings.size());
+                    exit(1);
+                }
+            }
+
+            lengthPrev = this->length;
+            this->length = 0;
+            for (uint64 i = 0; i < Strings.size(); i++)
+            {
+                this->length += Strings.begin()[i]->length - 1;
+            }
+
+            if ((this->length += 1) != lengthPrev && (this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
+            {
+                printf("string=: Memory allocation failed\nParams: Strings(length): %ld\n", Strings.size());
+                exit(1);
+            }
+
+            for (uint64 i = 0, j = 0; i < Strings.size(); i++)
+            {
+                memCopyTo(Strings.begin()[i]->literal, &this->literal[j], sizeof(char) * (Strings.begin()[i]->length - 1));
+                j += Strings.begin()[i]->length - 1;
             }
             this->literal[this->length - 1] = '\0';
         }
