@@ -440,7 +440,7 @@ namespace neo
                 return 0;
             }
 
-            result += (this->literal[i] - '0') / pow(10, decimal - 1 - decimal);
+            result += (this->literal[i] - '0') / pow(10, i - decimal);
         }
 
         if (this->literal[0] == '-')
