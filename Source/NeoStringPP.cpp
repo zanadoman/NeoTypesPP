@@ -398,6 +398,45 @@ namespace neo
         return result;
     }
 
+    double string::ToDOUBLE()
+    {
+        double result;
+
+        uint64 decimal;
+
+        result = 0;
+
+        decimal = this->length - 1;
+        for (uint64 i = 0; i < this->length - 1; i++)
+        {
+            if (this->literal[i] == '.')
+            {
+                decimal = i;
+                break;
+            }
+        }
+
+        for (uint64 i = 1; i < decimal; i++)
+        {
+            result += (this->literal[i] - '0') * pow(10, decimal - 1 - i);
+        }
+        for (uint64 i = decimal + 1; i < this->length - 1; i++)
+        {
+            result += (this->literal[i] - '0') / pow(10, i - decimal);
+        }
+
+        if (this->literal[0] == '-')
+        {
+            result *= -1;
+        }
+        else
+        {
+            result += (this->literal[0] - '0') * pow(10, decimal - 1);
+        }
+
+        return result;
+    }
+
     double string::ToDOUBLE(bool* Success)
     {
         double result;
