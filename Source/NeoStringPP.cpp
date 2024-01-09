@@ -313,7 +313,7 @@ namespace neo
                 return 0;
             }
 
-            result += (this->literal - '0') * pow(10, cache - 1 - i);
+            result += (uint64)(this->literal - '0') * pow(10, cache - 1 - i);
         }
 
         if (Success != NULL)
