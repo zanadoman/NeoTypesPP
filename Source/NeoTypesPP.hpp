@@ -108,12 +108,17 @@ namespace neo
             const char Insert(uint64 Index, std::initializer_list<double> Double);
 
             const char Remove(uint64 Index);
+            array<string*>* Split(char Separator);
             const char Reverse();
             const char Clear();
 
         private:
             uint64 length;
             char* literal;
+
+            const char* ToString(uint64 Number);
+            const char* ToString(sint64 Number);
+            const char* ToString(double Number);
     };
     uint64 strLength(const char* Literal);
 
