@@ -1,6 +1,5 @@
 #pragma once
 
-#include <cstddef>
 #include <stdio.h>
 #include <stdlib.h>
 #include <initializer_list>
