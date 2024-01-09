@@ -66,13 +66,13 @@ namespace neo
                 }
             }
 
-            this->length = 1;
+            this->length = 0;
             for (uint64 i = 0; i < Literals.size(); i++)
             {
                 this->length += strLength(Literals.begin()[i]) - 1;
             }
 
-            if ((this->literal = (char*)malloc(sizeof(char) * this->length)) == NULL)
+            if ((this->literal = (char*)malloc(sizeof(char) * ++this->length)) == NULL)
             {
                 printf("string(): Memory allocation failed\nParams: Literals(length): %ld\n", Literals.size());
                 exit(1);
