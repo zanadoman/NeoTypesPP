@@ -296,7 +296,7 @@ namespace neo
     {
         uint64 result;
 
-        result = 0;;
+        result = 0;
 
         for (uint64 i = 0; i < this->length - 1; i++)
         {
@@ -306,7 +306,7 @@ namespace neo
         return result;
     }
 
-    uint64 string::ToUINT(double* Success)
+    uint64 string::ToUINT(bool* Success)
     {
         uint64 result;
 
@@ -356,7 +356,7 @@ namespace neo
         return result;
     }
 
-    sint64 string::ToSINT(double* Success)
+    sint64 string::ToSINT(bool* Success)
     {
         sint64 result;
 
@@ -398,7 +398,7 @@ namespace neo
         return result;
     }
 
-    double string::ToDOUBLE(double* Success)
+    double string::ToDOUBLE(bool* Success)
     {
         double result;
 
