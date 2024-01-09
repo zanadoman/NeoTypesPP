@@ -46,7 +46,8 @@ namespace neo
             uint64 Insert(uint64 Index, std::initializer_list<type> Elements);
             uint64 Insert(uint64 Index, std::initializer_list<array <type>*> Arrays);
             uint64 Remove(uint64 Index);
-            bool Contains(const type Value);
+            bool Contains(std::initializer_list<type> Elements);
+            bool Contains(std::initializer_list<array <type>*> Arrays);
             uint64 Reverse();
             uint64 Clear();
 
@@ -519,13 +520,54 @@ namespace neo
         return this->length;
     }
 
-    template <typename type> bool array<type>::Contains(const type Value)
+    template <typename type> bool array<type>::Contains(std::initializer_list<type> Elements)
     {
+        if (this->length == 0 || Elements.size() == 0)
+        {
+            return false;
+        }
+
         for (uint64 i = 0; i < this->length; i++)
         {
-            if (this->elements[i] == Value)
+            for (uint64 j = 0; j < Elements.size(); j++)
             {
-                return true;
+                if (this->elements[i] == Elements.begin()[j])
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    template <typename type> bool array<type>::Contains(std::initializer_list<array<type>*> Arrays)
+    {
+        if (this->length == 0 || Arrays.size() == 0)
+        {
+            return false;
+        }
+
+        for (uint64 i = 0; i < Arrays.size(); i++)
+        {
+            if (Arrays.begin()[i] == NULL)
+            {
+                printf("array.Contains(): Arrays[%lld] must not be NULL\nParams: Arrays(type, length): %ld, %ld\n", i, sizeof(type), Arrays.size());
+                exit(1);
+            }
+        }
+
+        for (uint64 i = 0; i < this->length; i++)
+        {
+            for (uint64 j = 0; j < Arrays.size(); j++)
+            {
+                for (uint64 k = 0; k < Arrays.begin()[j]->length; k++)
+                {
+                    if (this->elements[i] == Arrays.begin()[j]->elements[k])
+                    {
+                        return true;
+                    }
+                }
             }
         }
 
