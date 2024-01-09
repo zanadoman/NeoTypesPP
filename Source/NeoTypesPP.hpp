@@ -457,7 +457,7 @@ namespace neo
     {
         if (this->length < Index)
         {
-            printf("array.Insert(): Index out of range\nParams: Index: %lld, Elements(type): %d\n", Index, sizeof(type));
+            printf("array.Insert(): Index out of range\nParams: Index: %lld, Elements(type, length): %ld, %ld\n", Index, sizeof(type), Elements.size());
             exit(1);
         }
 
@@ -465,7 +465,7 @@ namespace neo
         {
             if ((this->elements = (type*)realloc(this->elements, sizeof(type) * (this->length += Elements.size()))) == NULL)
             {
-                printf("array.Insert(): Memory allocation failed\nParams: Index: %lld, Elements(type): %d\n", Index, sizeof(type));
+                printf("array.Insert(): Memory allocation failed\nParams: Index: %lld, Elements(type, length): %ld, %ld\n", Index, sizeof(type), Elements.size());
                 exit(1);
             }
 
@@ -482,37 +482,45 @@ namespace neo
 
     template <typename type> uint64 array<type>::Insert(uint64 Index, std::initializer_list<array<type>*> Arrays)
     {
-        for (uint64 i = 0; i < Arrays.size(); i++)
-        {
-            if (Arrays.begin()[i] == NULL)
-            {
-                printf("array.Insert(): Array must not be NULL\nParams: Index: %lld, Arrays(type): %d\n", Index, sizeof(type));
-                exit(1);
-            }
-        }
+        uint64 lengthPrev;
+
         if (this->length < Index)
         {
-            printf("array.Insert(): Index out of range\nParams: Index: %lld, Arrays(type): %d\n", Index, sizeof(type));
+            printf("array.Insert(): Index out of range\nParams: Index: %lld, Arrays(type, length): %ld, %ld\n", Index, sizeof(type), Arrays.size());
             exit(1);
         }
 
-        for (uint64 i = 0; i < Arrays.size(); i++)
+        if (Arrays.size() != 0)
         {
-            if (Arrays.begin()[i]->Length != 0)
+            for (uint64 i = 0; i < Arrays.size(); i++)
             {
-                if ((this->elements = (type*)realloc(this->elements, sizeof(type) * (this->length += Arrays.begin()[i]->Length))) == NULL)
+                if (Arrays.begin()[i] == NULL)
                 {
-                    printf("array.Insert(): Memory allocation failed\nParams: Index: %lld, Arrays(type): %d\n", Index, sizeof(type));
+                    printf("array.Insert(): Array must not be NULL\nParams: Index: %lld, Arrays(type, length): %ld, %ld\n", Index, sizeof(type), Arrays.size());
                     exit(1);
                 }
-
-                for (uint64 j = this->length - 1; Index + Arrays.begin()[i]->Length <= j; j--)
+                if (Arrays.begin()[i] == this)
                 {
-                    this->elements[j] = this->elements[j - Arrays.begin()[i]->Length];
+                    printf("array.Insert(): Array must not be Self\nParams: Index: %lld, Arrays(type, length): %ld, %ld\n", Index, sizeof(type), Arrays.size());
+                    exit(1);
                 }
+            }
 
-                memCopyTo(Arrays.begin()[i]->Elements, &this->elements[Index], sizeof(type) * Arrays.begin()[i]->Length);
-                Index += Arrays.begin()[i]->Length;
+            lengthPrev = this->length;
+            for (uint64 i = 0; i < Arrays.size(); i++)
+            {
+                this->length += Arrays.begin()[i]->length;
+            }
+
+            if ((this->elements = (type*)realloc(this->elements, sizeof(type) * this->length)) == NULL)
+            {
+                printf("array.Insert(): Memory allocation failed\nParams: Index: %lld, Arrays(type, length): %ld, %ld\n", Index, sizeof(type), Arrays.size());
+                exit(1);
+            }
+
+            for (uint64 i = this->length - 1; Index + this->length - lengthPrev <= i; i--)
+            {
+                this->elements[i] = this->elements[i - (Index + this->length - lengthPrev)];
             }
         }
 
