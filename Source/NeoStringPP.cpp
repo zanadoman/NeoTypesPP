@@ -340,6 +340,32 @@ namespace neo
         return result;
     }
 
+    sint64 string::ToSINT()
+    {
+        sint64 result;
+
+        uint64 cache;
+
+        result = 0;
+        cache = strLength(this->literal) - 1;
+
+        for (uint64 i = 1; i < cache; i++)
+        {
+            result += (this->literal[i] - '0') * pow(10, cache - 1 - i);
+        }
+
+        if (this->literal[0] == '-')
+        {
+            result *= -1;
+        }
+        else
+        {
+            result += (this->literal[0] - '0') * pow(10, cache - 1);
+        }
+
+        return result;
+    }
+
     sint64 string::ToSINT(double* Success)
     {
         sint64 result;
