@@ -441,12 +441,9 @@ namespace neo
                     exit(1);
                 }
 
-                if (lengthPrev < this->length)
+                for (uint64 i = lengthPrev; i < this->length; i++)
                 {
-                    for (uint64 i = lengthPrev; i < this->length; i++)
-                    {
-                        this->elements[i] = 0;
-                    }
+                    this->elements[i] = 0;
                 }
             }
         }
