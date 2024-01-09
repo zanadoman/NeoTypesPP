@@ -1,5 +1,4 @@
-#ifndef NEOTYPESPP_HPP
-#define NEOTYPESPP_HPP
+#pragma once
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -597,5 +596,3 @@ namespace neo
         return this->length;
     }
 }
-
-#endif
