@@ -218,7 +218,7 @@ namespace neo
         {
             if ((this->elements = (type*)realloc(this->elements, sizeof(type) * this->length)) == NULL)
             {
-                printf("array=: Memory allocation failed\nParams: Elements(type): %d\n", sizeof(type));
+                printf("array=: Memory allocation failed\nParams: Elements(type, length): %ld, %ld\n", sizeof(type), Elements.size());
                 exit(1);
             }
 
