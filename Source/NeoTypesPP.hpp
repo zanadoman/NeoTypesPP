@@ -527,7 +527,7 @@ namespace neo
     {
         type tmp;
 
-        for (uint64 i = 0; i < this->length / 2; i++)
+        for (uint64 i = 0; i < this->length >> 2; i++)
         {
             tmp = this->elements[i];
             this->elements[i] = this->elements[this->length - 1 - i];
