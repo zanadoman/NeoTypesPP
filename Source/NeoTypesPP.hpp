@@ -27,18 +27,18 @@ namespace neo
             array();
             array(uint64 Length);
             array(std::initializer_list<type> Elements);
-            array(std::initializer_list<array <type>*> Arrays);
+            array(std::initializer_list<array<type>*> Arrays);
             ~array();
 
             uint64 Length();
             type* operator [] (uint64 Index);
 
             uint64 operator = (std::initializer_list<type> Elements);
-            uint64 operator = (std::initializer_list<array <type>*> Arrays);
+            uint64 operator = (std::initializer_list<array<type>*> Arrays);
             uint64 operator -= (std::initializer_list<type> Elements);
-            uint64 operator -= (std::initializer_list<array <type>*> Arrays);
+            uint64 operator -= (std::initializer_list<array<type>*> Arrays);
             uint64 operator += (std::initializer_list<type> Elements);
-            uint64 operator += (std::initializer_list<array <type>*> Arrays);
+            uint64 operator += (std::initializer_list<array<type>*> Arrays);
             bool operator == (array<type>* Array);
             bool operator != (array<type>* Array);
 
@@ -229,7 +229,7 @@ namespace neo
         return this->length;
     }
 
-    template <typename type> uint64 array<type>::operator = (std::initializer_list<array <type>*> Arrays)
+    template <typename type> uint64 array<type>::operator = (std::initializer_list<array<type>*> Arrays)
     {
         if (Arrays.size() == 0)
         {
@@ -291,7 +291,7 @@ namespace neo
         return this->length;
     }
 
-    template <typename type> uint64 array<type>::operator -= (std::initializer_list<array <type>*> Arrays)
+    template <typename type> uint64 array<type>::operator -= (std::initializer_list<array<type>*> Arrays)
     {
         uint64 index;
 
