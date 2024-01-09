@@ -533,14 +533,14 @@ namespace neo
 
     template <typename type> uint64 array<type>::Remove(uint64 Index)
     {
-        if (this->length <= Index)
-        {
-            printf("array.Remove(): Index out of range\nParams: Index: %lld\n", Index);
-            exit(1);
-        }
         if (this->length == 0)
         {
             printf("array.Remove(): Array must not be empty\nParams: Index: %lld\n", Index);
+            exit(1);
+        }
+        if (this->length <= Index)
+        {
+            printf("array.Remove(): Index out of range\nParams: Index: %lld\n", Index);
             exit(1);
         }
 
