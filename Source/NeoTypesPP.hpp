@@ -69,7 +69,7 @@ namespace neo
             string(std::initializer_list<double> Numbers);
             ~string();
 
-            uint64 Length;
+            uint64 Length();
             const char* operator () ();
             char* operator [] (uint64 Index);
 
