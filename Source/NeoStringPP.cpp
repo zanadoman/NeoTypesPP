@@ -1,5 +1,4 @@
 #include "NeoTypesPP.hpp"
-#include <cstdio>
 
 namespace neo
 {
@@ -297,14 +296,11 @@ namespace neo
     {
         uint64 result;
 
-        uint64 cache;
+        result = 0;;
 
-        result = 0;
-        cache = strLength(this->literal) - 1;
-
-        for (uint64 i = 0; i < cache; i++)
+        for (uint64 i = 0; i < this->length - 1; i++)
         {
-            result += (this->literal[i] - '0') * pow(10, cache - 1 - i);
+            result += (this->literal[i] - '0') * pow(10, this->length - 2 - i);
         }
 
         return result;
@@ -314,8 +310,6 @@ namespace neo
     {
         uint64 result;
 
-        uint64 cache;
-
         if (Success == NULL)
         {
             printf("string.ToUINT(): Success must not be NULL\nParams: Success: %p\n", Success);
@@ -323,9 +317,8 @@ namespace neo
         }
 
         result = 0;
-        cache = strLength(this->literal) - 1;
 
-        for (uint64 i = 0; i < cache; i++)
+        for (uint64 i = 0; i < this->length - 1; i++)
         {
             if (this->literal[i] < '0' || '9' < this->literal[i])
             {
@@ -333,7 +326,7 @@ namespace neo
                 return 0;
             }
 
-            result += (this->literal[i] - '0') * pow(10, cache - 1 - i);
+            result += (this->literal[i] - '0') * pow(10, this->length - 2 - i);
         }
 
         *Success = true;
@@ -344,14 +337,11 @@ namespace neo
     {
         sint64 result;
 
-        uint64 cache;
-
         result = 0;
-        cache = strLength(this->literal) - 1;
 
-        for (uint64 i = 1; i < cache; i++)
+        for (uint64 i = 1; i < this->length - 1; i++)
         {
-            result += (this->literal[i] - '0') * pow(10, cache - 1 - i);
+            result += (this->literal[i] - '0') * pow(10, this->length - 2 - i);
         }
 
         if (this->literal[0] == '-')
@@ -360,7 +350,7 @@ namespace neo
         }
         else
         {
-            result += (this->literal[0] - '0') * pow(10, cache - 1);
+            result += (this->literal[0] - '0') * pow(10, this->length - 2);
         }
 
         return result;
@@ -370,8 +360,6 @@ namespace neo
     {
         sint64 result;
 
-        uint64 cache;
-
         if (Success == NULL)
         {
             printf("string.ToSINT(): Success must not be NULL\nParams: Success: %p\n", Success);
@@ -379,9 +367,8 @@ namespace neo
         }
 
         result = 0;
-        cache = strLength(this->literal) - 1;
 
-        for (uint64 i = 1; i < cache; i++)
+        for (uint64 i = 1; i < this->length - 1; i++)
         {
             if (this->literal[i] < '0' || '9' < this->literal[i])
             {
@@ -389,7 +376,7 @@ namespace neo
                 return 0;
             }
 
-            result += (this->literal[i] - '0') * pow(10, cache - 1 - i);
+            result += (this->literal[i] - '0') * pow(10, this->length - 2 - i);
         }
 
         if (this->literal[0] == '-')
@@ -404,10 +391,25 @@ namespace neo
                 return 0;
             }
 
-            result += (this->literal[0] - '0') * pow(10, cache - 1);
+            result += (this->literal[0] - '0') * pow(10, this->length - 2);
         }
 
         *Success = true;
+        return result;
+    }
+
+    double string::ToDOUBLE(double* Success)
+    {
+        double result;
+
+        uint64 decimal, cache;
+
+        if (Success == NULL)
+        {
+            printf("string.ToDOUBLE(): Success must not be NULL\nParams: Success: %p\n", Success);
+            exit(1);
+        }
+
         return result;
     }
 
