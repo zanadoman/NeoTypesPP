@@ -139,7 +139,7 @@ namespace neo
         {
             if ((this->Elements = (type*)malloc(sizeof(type) * this->Length)) == NULL)
             {
-                printf("array(): Memory allocation failed\nParams: Elements(size, length): %d, %d\n", sizeof(type), Elements.size());
+                printf("array(): Memory allocation failed\nParams: Elements(size, length): %ld, %ld\n", sizeof(type), Elements.size());
                 exit(1);
             }
 
@@ -160,7 +160,7 @@ namespace neo
             {
                 if (Arrays.begin()[i] == NULL)
                 {
-                    printf("array(): Arrays[%lld] must not be NULL\nParams: Arrays(type, length): %d, %d\n", i, sizeof(type), Arrays.size());
+                    printf("array(): Arrays[%lld] must not be NULL\nParams: Arrays(type, length): %ld, %ld\n", i, sizeof(type), Arrays.size());
                     exit(1);
                 }
             }
@@ -173,7 +173,7 @@ namespace neo
 
             if ((this->Elements = (type*)malloc(sizeof(type) * this->Length)) == NULL)
             {
-                printf("array(): Memory allocation failed\nParams: Arrays(type, length): %d, %d\n", sizeof(type), Arrays.size());
+                printf("array(): Memory allocation failed\nParams: Arrays(type, length): %ld, %ld\n", sizeof(type), Arrays.size());
                 exit(1);
             }
 
