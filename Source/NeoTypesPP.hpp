@@ -151,7 +151,6 @@ namespace neo
     {
         if ((this->Length = Arrays.size()) == 0)
         {
-            this->Length = 0;
             this->Elements = NULL;
         }
         else
