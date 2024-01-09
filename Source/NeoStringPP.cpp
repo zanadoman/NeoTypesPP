@@ -304,11 +304,6 @@ namespace neo
 
         for (uint64 i = 0; i < cache; i++)
         {
-            if (this->literal[i] < '0' || '9' < this->literal[i])
-            {
-                return 0;
-            }
-
             result += (this->literal[i] - '0') * pow(10, cache - 1 - i);
         }
 
@@ -351,6 +346,12 @@ namespace neo
 
         uint64 cache;
 
+        if (Success == NULL)
+        {
+            printf("string.ToSINT(): Success must not be NULL\nParams: Success: %p\n", Success);
+            exit(1);
+        }
+
         result = 0;
         cache = strLength(this->literal) - 1;
 
@@ -358,6 +359,7 @@ namespace neo
         {
             if (this->literal[i] < '0' || '9' < this->literal[i])
             {
+                *Success = false;
                 return 0;
             }
 
@@ -372,12 +374,14 @@ namespace neo
         {
             if (this->literal[0] < '0' || '9' < this->literal[0])
             {
+                *Success = false;
                 return 0;
             }
 
             result += (this->literal[0] - '0') * pow(10, cache - 1);
         }
 
+        *Success = true;
         return result;
     }
 
