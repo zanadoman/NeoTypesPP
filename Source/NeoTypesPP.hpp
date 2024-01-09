@@ -423,30 +423,31 @@ namespace neo
 
     template <typename type> uint64 array<type>::Resize(uint64 Length)
     {
+        uint64 lengthPrev;
+
         if (this->length != Length)
         {
-            if (Length == 0)
+            lengthPrev = this->length;
+            if ((this->length = Length) == 0)
             {
-                this->length = 0;
                 free(this->elements);
                 this->elements = NULL;
             }
             else
             {
-                if ((this->elements = (type*)realloc(this->elements, sizeof(type) * Length)) == NULL)
+                if ((this->elements = (type*)realloc(this->elements, sizeof(type) * this->length)) == NULL)
                 {
                     printf("array.Resize(): Memory allocation failed\nParams: Length: %lld\n", Length);
                     exit(1);
                 }
 
-                if (this->length < Length)
+                if (lengthPrev < this->length)
                 {
-                    for (uint64 i = Length - (Length - this->length); i < Length; i++)
+                    for (uint64 i = lengthPrev; i < this->length; i++)
                     {
                         this->elements[i] = 0;
                     }
                 }
-                this->length = Length;
             }
         }
 
