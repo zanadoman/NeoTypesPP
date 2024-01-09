@@ -86,13 +86,6 @@ namespace neo
             bool operator == (const char* Literal);
             bool operator == (string* String);
 
-            uint64 ToUINT();
-            uint64 ToUINT(bool* Success);
-            sint64 ToSINT();
-            sint64 ToSINT(bool* Success);
-            double ToDOUBLE();
-            double ToDOUBLE(bool* Success);
-
             const char* Insert(uint64 Index, std::initializer_list<char> Characters);
             const char* Insert(uint64 Index, std::initializer_list<const char*> Literals);
             const char* Insert(uint64 Index, std::initializer_list<string*> Strings);
@@ -102,6 +95,13 @@ namespace neo
             array<string*>* Split(char Separator);
             const char* Reverse();
             const char* Clear();
+
+            uint64 ToUINT();
+            uint64 ToUINT(bool* Success);
+            sint64 ToSINT();
+            sint64 ToSINT(bool* Success);
+            double ToDOUBLE();
+            double ToDOUBLE(bool* Success);
 
         private:
             uint64 length;
