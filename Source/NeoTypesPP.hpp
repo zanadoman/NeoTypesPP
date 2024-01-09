@@ -169,7 +169,7 @@ namespace neo
                 this->Length += (Arrays.begin()[i])->Length;
             }
 
-            if ((this->Elements = (type*)realloc(this->Elements, sizeof(type) * this->Length)) == NULL)
+            if ((this->Elements = (type*)malloc(sizeof(type) * this->Length)) == NULL)
             {
                 printf("array(): Memory allocation failed\nParams: Arrays(type, length): %d, %d\n", sizeof(type), Arrays.size());
                 exit(1);
@@ -177,7 +177,8 @@ namespace neo
 
             for (uint64 i = 0, j = 0; i < Arrays.size(); i++)
             {
-                memCopyTo((Arrays.begin()[i])->Elements, &this->Elements[j], sizeof(type) * Arrays.size());
+                memCopyTo((Arrays.begin()[i])->Elements, &this->Elements[j], sizeof(type) * (Arrays.begin()[i])->Length);
+                j += (Arrays.begin()[i])->Length;
             }
         }
     }
