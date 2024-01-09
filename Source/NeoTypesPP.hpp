@@ -1,10 +1,10 @@
 #ifndef NEOTYPESPP_HPP
 #define NEOTYPESPP_HPP
 
-#include <cstdio>
-#include <cstdlib>
+#include <stdio.h>
+#include <stdlib.h>
 #include <initializer_list>
-#include <cmath>
+#include <math.h>
 
 namespace neo
 {
