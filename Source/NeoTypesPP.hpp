@@ -160,7 +160,7 @@ namespace neo
             {
                 if (Arrays.begin()[i] == NULL)
                 {
-                    printf("array(): Arrays[%d] must not be NULL\nParams: Arrays(type, length): %d, %d\n", i, sizeof(type), Arrays.size());
+                    printf("array(): Arrays[%lld] must not be NULL\nParams: Arrays(type, length): %d, %d\n", i, sizeof(type), Arrays.size());
                     exit(1);
                 }
             }
