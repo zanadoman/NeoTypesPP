@@ -173,7 +173,7 @@ namespace neo
         }
         else
         {
-            if (this->length != Characters.size() && (this->literal = (char*)realloc(this->literal, sizeof(char) * (this->length = Characters.size() + 1))) == NULL)
+            if (this->length != Characters.size() + 1 && (this->literal = (char*)realloc(this->literal, sizeof(char) * (this->length = Characters.size() + 1))) == NULL)
             {
                 printf("string=: Memory allocation failed\nParams: Characters(length): %ld\n", Characters.size());
                 exit(1);
