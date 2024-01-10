@@ -42,15 +42,17 @@ namespace neo
             bool operator == (array<type>* Array);
             bool operator != (array<type>* Array);
 
-            uint64 Resize(uint64 Length);
             uint64 Insert(uint64 Index, uint64 Length);
             uint64 Insert(uint64 Index, std::initializer_list<type> Elements);
             uint64 Insert(uint64 Index, std::initializer_list<array <type>*> Arrays);
-            uint64 Remove(uint64 Index);
+
             uint64 Remove(uint64 Index, uint64 Length);
+
             bool Contains(std::initializer_list<type> Elements);
             bool Contains(std::initializer_list<array <type>*> Arrays);
+
             uint64 Reverse();
+
             uint64 Clear();
 
         private:
@@ -462,41 +464,6 @@ namespace neo
         return !(*this == Array);
     }
 
-    template <typename type> uint64 array<type>::Resize(uint64 Length)
-    {
-        uint64 lengthPrev;
-
-        if (this->length != Length)
-        {
-            lengthPrev = this->length;
-            if ((this->length = Length) == 0)
-            {
-                free(this->elements);
-                this->elements = NULL;
-            }
-            else
-            {
-                for (uint64 i = lengthPrev - 1; this->length <= i; i--)
-                {
-                    this->allocator.destroy(&this->elements[i]);
-                }
-
-                if ((this->elements = (type*)realloc(this->elements, sizeof(type) * this->length)) == NULL)
-                {
-                    printf("array.Resize(): Memory allocation failed\nParams: Length: %lld\n", Length);
-                    exit(1);
-                }
-
-                for (uint64 i = lengthPrev; i < this->length; i++)
-                {
-                    this->allocator.construct(&this->elements[i]);
-                }
-            }
-        }
-
-        return this->length;
-    }
-
     template <typename type> uint64 array<type>::Insert(uint64 Index, uint64 Length)
     {
         if (this->length < Index)
@@ -601,38 +568,6 @@ namespace neo
             {
                 memCopyTo(Arrays.begin()[i]->elements, &this->elements[j], sizeof(type) * Arrays.begin()[i]->length);
                 j += Arrays.begin()[i]->length;
-            }
-        }
-
-        return this->length;
-    }
-
-    template <typename type> uint64 array<type>::Remove(uint64 Index)
-    {
-        if (this->length <= Index)
-        {
-            printf("array.Remove(): Index out of range\nParams: Index: %lld\n", Index);
-            exit(1);
-        }
-
-        this->allocator.destroy(&this->elements[Index]);
-
-        if (--this->length == 0)
-        {
-            free(this->elements);
-            this->elements = NULL;
-        }
-        else
-        {
-            for (uint64 i = Index; i < this->length; i++)
-            {
-                this->elements[i] = this->elements[i + 1];
-            }
-
-            if ((this->elements = (type*)realloc(this->elements, sizeof(type) * this->length)) == NULL)
-            {
-                printf("array.Remove(): Memory allocation failed\nParams: Index: %lld\n", Index);
-                exit(1);
             }
         }
 
