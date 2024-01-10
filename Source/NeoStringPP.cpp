@@ -151,10 +151,14 @@ namespace neo
 
     char* string::operator [] (uint64 Index)
     {
-        if (this->length - 1 <= Index)
+        if (this->length <= Index)
         {
             printf("string[]: Index out of range\nParams: Index: %lld\n", Index);
             exit(1);
+        }
+        if (this->length - 1 == Index)
+        {
+            printf("string[]: Illegal access to trailing NULL\nParams: Index: %lld\n", Index);
         }
 
         return &this->literal[Index];
