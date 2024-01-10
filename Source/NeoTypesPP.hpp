@@ -214,6 +214,11 @@ namespace neo
 
     template <typename type> array<type>::~array()
     {
+        for (uint64 i = 0; i < this->length; i++)
+        {
+            this->allocator.destroy(&this->elements[i]);
+        }
+
         free(this->elements);
     }
 
@@ -235,6 +240,11 @@ namespace neo
 
     template <typename type> uint64 array<type>::operator = (std::initializer_list<type> Elements)
     {
+        for (uint64 i = 0; i < this->length; i++)
+        {
+            this->allocator.destroy(&this->elements[i]);
+        }
+
         if (Elements.size() == 0)
         {
             this->length = 0;
@@ -258,6 +268,11 @@ namespace neo
     template <typename type> uint64 array<type>::operator = (std::initializer_list<array<type>*> Arrays)
     {
         uint64 lengthPrev;
+
+        for (uint64 i = 0; i < this->length; i++)
+        {
+            this->allocator.destroy(&this->elements[i]);
+        }
 
         if (Arrays.size() == 0)
         {
@@ -567,6 +582,8 @@ namespace neo
             printf("array.Remove(): Index out of range\nParams: Index: %lld\n", Index);
             exit(1);
         }
+
+        this->allocator.destroy(&this->elements[Index]);
 
         if (--this->length == 0)
         {
