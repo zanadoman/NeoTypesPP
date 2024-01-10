@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <memory>
 #include <initializer_list>
 #include <math.h>
 
@@ -51,6 +52,8 @@ namespace neo
             uint64 Clear();
 
         private:
+            std::allocator<type> allocator;
+
             uint64 length;
             type* elements;
     };
@@ -139,6 +142,11 @@ namespace neo
             {
                 printf("array(): Memory allocation failed\nParams: Length: %lld\n", Length);
                 exit(1);
+            }
+
+            for (uint64 i = 0; i < this->Length(); i++)
+            {
+                this->allocator.construct(&this->elements[i]);
             }
         }
     }
@@ -451,6 +459,11 @@ namespace neo
             }
             else
             {
+                for (uint64 i = lengthPrev - 1; this->length <= i; i--)
+                {
+                    this->allocator.destroy(&this->elements[i]);
+                }
+
                 if ((this->elements = (type*)realloc(this->elements, sizeof(type) * this->length)) == NULL)
                 {
                     printf("array.Resize(): Memory allocation failed\nParams: Length: %lld\n", Length);
@@ -459,7 +472,7 @@ namespace neo
 
                 for (uint64 i = lengthPrev; i < this->length; i++)
                 {
-                    this->elements[i] = 0;
+                    this->allocator.construct(&this->elements[i]);
                 }
             }
         }
