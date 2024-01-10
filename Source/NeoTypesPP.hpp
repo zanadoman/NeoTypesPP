@@ -43,6 +43,7 @@ namespace neo
             bool operator != (array<type>* Array);
 
             uint64 Resize(uint64 Length);
+            uint64 Insert(uint64 Index, uint64 Length);
             uint64 Insert(uint64 Index, std::initializer_list<type> Elements);
             uint64 Insert(uint64 Index, std::initializer_list<array <type>*> Arrays);
             uint64 Remove(uint64 Index);
@@ -489,6 +490,36 @@ namespace neo
                 {
                     this->allocator.construct(&this->elements[i]);
                 }
+            }
+        }
+
+        return this->length;
+    }
+
+    template <typename type> uint64 array<type>::Insert(uint64 Index, uint64 Length)
+    {
+        if (this->length < Index)
+        {
+            printf("array.Insert(): Index out of range\nParams: Index: %lld, Length: %lld\n", Index, Length);
+            exit(1);
+        }
+
+        if (Length != 0)
+        {
+            if ((this->elements = (type*)realloc(this->elements, sizeof(type) * (this->length += Length))) == NULL)
+            {
+                printf("array.Insert(): Memory allocation failed\nParams: Index: %lld, Length: %lld\n", Index, Length);
+                exit(1);
+            }
+
+            for (uint64 i = this->length - 1; Index + Length <= i; i--)
+            {
+                this->elements[i] = this->elements[i - Length];
+            }
+
+            for (uint64 i = Index; i < Index + Length; i++)
+            {
+                this->allocator.construct(&this->elements[i]);
             }
         }
 
