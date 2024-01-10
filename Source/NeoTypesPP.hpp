@@ -139,7 +139,7 @@ namespace neo
         }
         else
         {
-            if ((this->elements = (type*)calloc(this->length, sizeof(type))) == NULL)
+            if ((this->elements = (type*)malloc(sizeof(type) * this->length)) == NULL)
             {
                 printf("array(): Memory allocation failed\nParams: Length: %lld\n", Length);
                 exit(1);
