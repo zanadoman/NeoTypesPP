@@ -60,7 +60,7 @@ namespace neo
 
             uint64 length;
             type* elements;
-            
+
     };
 
     //____________________________________________NeoString.hpp____________________________________________//
@@ -693,6 +693,11 @@ namespace neo
 
     template <typename type> uint64 array<type>::Clear()
     {
+        for (uint64 i = 0; i < this->length; i++)
+        {
+            this->allocator.destroy(&this->elements[i]);
+        }
+
         this->length = 0;
         free(this->elements);
         this->elements = NULL;
