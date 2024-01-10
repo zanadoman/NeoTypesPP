@@ -159,6 +159,7 @@ namespace neo
         if (this->length - 1 == Index)
         {
             printf("string[]: Illegal access to trailing NULL\nParams: Index: %lld\n", Index);
+            exit(1);
         }
 
         return &this->literal[Index];
