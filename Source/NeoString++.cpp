@@ -516,6 +516,41 @@ namespace neo
         return this->literal;
     }
 
+    bool string::operator == (char Character)
+    {
+        return (this->length == 2 && this->literal[0] == Character);
+    }
+
+    bool string::operator == (const char* Literal)
+    {
+        if (Literal == NULL || this->length != strLength(Literal))
+        {
+            return false;
+        }
+
+        if (this->literal == Literal)
+        {
+            return true;
+        }
+
+        return memCompare(this->literal, Literal, sizeof(char) * this->length);
+    }
+
+    bool string::operator == (string* String)
+    {
+        if (String == NULL || this->length != String->length)
+        {
+            return false;
+        }
+
+        if (this == String)
+        {
+            return true;
+        }
+
+        return memCompare(this->literal, String->literal, sizeof(char) * this->length);
+    }
+
     uint64 string::ToUINT()
     {
         uint64 result;

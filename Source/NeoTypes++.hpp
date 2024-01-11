@@ -93,6 +93,9 @@ namespace neo
             bool operator == (char Character);
             bool operator == (const char* Literal);
             bool operator == (string* String);
+            bool operator != (char Character);
+            bool operator != (const char* Literal);
+            bool operator != (string* String);
 
             const char* Insert(uint64 Index, std::initializer_list<char> Characters);
             const char* Insert(uint64 Index, std::initializer_list<const char*> Literals);
@@ -455,6 +458,11 @@ namespace neo
         if (Array == NULL || this->length != Array->Length)
         {
             return false;
+        }
+
+        if (this == Array)
+        {
+            return true;
         }
 
         return memCompare(this->elements, Array->Elements, sizeof(type) * this->length);
