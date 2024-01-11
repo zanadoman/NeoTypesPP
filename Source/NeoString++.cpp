@@ -598,6 +598,64 @@ namespace neo
         return this->literal;
     }
 
+    const char* string::Insert(uint64 Index, std::initializer_list<const char*> Literals)
+    {
+        uint64 lengthPrev, cache;
+
+        if (this->length < Index)
+        {
+            printf("string.Insert(): Index out of range\nParams: Index: %lld, Literals(length): %ld\n", Index, Literals.size());
+            exit(1);
+        }
+        if (this->length == Index)
+        {
+            printf("string.Insert(): Illegal insertion after EOF\nParams: Index: %lld, Literals(length): %ld\n", Index, Literals.size());
+            exit(1);
+        }
+
+        if (Literals.size() != 0)
+        {
+            for (uint64 i = 0; i < Literals.size(); i++)
+            {
+                if (Literals.begin()[i] == NULL)
+                {
+                    printf("string.Insert(): Literals[%lld] must not be NULL\nParams: Literals(length): %ld\n", i, Literals.size());
+                    exit(1);
+                }
+                if (Literals.begin()[i] == this->literal)
+                {
+                    printf("string.Insert(): Literals[%lld] must not be Self\nParams: Literals(length): %ld\n", i, Literals.size());
+                    exit(1);
+                }
+            }
+
+            lengthPrev = this->length;
+            for (uint64 i = 0; i < Literals.size(); i++)
+            {
+                this->length += strLength(Literals.begin()[i]) - 1;
+            }
+
+            if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
+            {
+                printf("string.Insert(): Memory allocation failed\nParams: Index: %lld, Literals(length): %ld\n", Index, Literals.size());
+                exit(1);
+            }
+
+            for (uint64 i = this->length - 1; Index + this->length - lengthPrev <= i; i--)
+            {
+                this->literal[i] = this->literal[i - (this->length - lengthPrev)];
+            }
+
+            for (uint64 i = 0, j = Index; i < Literals.size(); i++)
+            {
+                memCopyTo(Literals.begin()[i], &this->literal[j], sizeof(char) * (cache = strLength(Literals.begin()[i]) - 1));
+                j += cache;
+            }
+        }
+
+        return this->literal;
+    }
+
     uint64 string::ToUINT()
     {
         uint64 result;
