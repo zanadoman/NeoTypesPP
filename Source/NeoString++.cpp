@@ -714,6 +714,53 @@ namespace neo
         return this->literal;
     }
 
+    const char* string::Remove(uint64 Index, uint64 Length)
+    {
+        if (this->length <= Index)
+        {
+            printf("string.Remove(): Index out of range\nParams: Index: %lld, Length: %lld\n", Index, Length);
+            exit(1);
+        }
+        if (this->length - 1 == Index)
+        {
+            printf("string.Remove(): Illegal removal of EOF\nParams: Index: %lld, Length: %lld\n", Index, Length);
+            exit(1);
+        }
+        if (this->length < Index + Length)
+        {
+            printf("string.Remove(): Length out of range\nParams: Index: %lld, Length: %lld\n", Index, Length);
+            exit(1);
+        }
+        if (this->length - 1 < Index + Length)
+        {
+            printf("string.Remove(): Illegal removal of EOF\nParams: Index: %lld, Length: %lld\n", Index, Length);
+            exit(1);
+        }
+
+        if (Length != 0)
+        {
+            if ((this->length -= Length) == 1)
+            {
+                this->literal[0] = '\0';
+            }
+            else
+            {
+                for (uint64 i = Index; i < this->length; i++)
+                {
+                    this->literal[i] = this->literal[i + Length];
+                }
+
+                if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
+                {
+                    printf("string.Remove(): Memory allocation failed\nParams: Index: %lld, Length: %lld\n", Index, Length);
+                    exit(1);
+                }
+            }
+        }
+
+        return this->literal;
+    }
+
     uint64 string::ToUINT()
     {
         uint64 result;
