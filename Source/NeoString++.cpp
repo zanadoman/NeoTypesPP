@@ -660,7 +660,7 @@ namespace neo
     {
         uint64 lengthPrev;
 
-        if (this->length <= Index)
+        if (this->length < Index)
         {
             printf("string.Insert(): Index out of range\nParams: Index: %lld, Strings(length): %ld\n", Index, Strings.size());
             exit(1);
