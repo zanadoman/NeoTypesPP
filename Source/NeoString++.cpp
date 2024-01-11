@@ -1,4 +1,5 @@
 #include "NeoTypes++.hpp"
+#include <initializer_list>
 
 namespace neo
 {
@@ -407,6 +408,109 @@ namespace neo
                 memCopyTo(Strings.begin()[i]->literal, &this->literal[j], sizeof(char) * (Strings.begin()[i]->length - 1));
                 j += Strings.begin()[i]->length - 1;
             }
+        }
+
+        return this->literal;
+    }
+
+    const char* string::operator += (std::initializer_list<char> Characters)
+    {
+        if (Characters.size() != 0)
+        {
+            if ((this->literal = (char*)realloc(this->literal, sizeof(char) * (this->length += Characters.size()))) == NULL)
+            {
+                printf("string+=: Memory allocation failed\nParams: Characters(length): %ld\n", Characters.size());
+                exit(1);
+            }
+
+            memCopyTo(Characters.begin(), &this->literal[this->length - 1 - Characters.size()], sizeof(char) * Characters.size());
+            this->literal[this->length - 1] = '\0';
+        }
+
+        return this->literal;
+    }
+
+    const char* string::operator += (std::initializer_list<const char*> Literals)
+    {
+        uint64 lengthPrev, cache;
+
+        if (Literals.size() != 0)
+        {
+            for (uint64 i = 0; i < Literals.size(); i++)
+            {
+                if (Literals.begin()[i] == NULL)
+                {
+                    printf("string+=: Literals[%lld] must not be NULL\nParams: Literals(length): %ld\n", i, Literals.size());
+                    exit(1);
+                }
+                if (Literals.begin()[i] == this->literal)
+                {
+                    printf("string+=: Literals[%lld] must not be Self\nParams: Literals(length): %ld\n", i, Literals.size());
+                    exit(1);
+                }
+            }
+
+            lengthPrev = this->length;
+            for (uint64 i = 0; i < Literals.size(); i++)
+            {
+                this->length += strLength(Literals.begin()[i]) - 1;
+            }
+
+            if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
+            {
+                printf("string+=: Memory allocation failed\nParams: Literals(length): %ld\n", Literals.size());
+                exit(1);
+            }
+
+            for (uint64 i = 0, j = lengthPrev - 1; i < Literals.size(); i++)
+            {
+                memCopyTo(Literals.begin()[i], &this->literal[j], sizeof(char) * (cache = strLength(Literals.begin()[i]) - 1));
+                j += cache;
+            }
+            this->literal[this->length - 1] = '\0';
+        }
+
+        return this->literal;
+    }
+
+    const char* string::operator += (std::initializer_list<string*> Strings)
+    {
+        uint64 lengthPrev;
+
+        if (Strings.size() != 0)
+        {
+            for (uint64 i = 0; i < Strings.size(); i++)
+            {
+                if (Strings.begin()[i] == NULL)
+                {
+                    printf("string+=: Strings[%lld] must not be NULL\nParams: Strings(length): %ld\n", i, Strings.size());
+                    exit(1);
+                }
+                if (Strings.begin()[i] == this)
+                {
+                    printf("string+=: Strings[%lld] must not be Self\nParams: Strings(length): %ld\n", i, Strings.size());
+                    exit(1);
+                }
+            }
+
+            lengthPrev = this->length;
+            for (uint64 i = 0; i < Strings.size(); i++)
+            {
+                this->length += Strings.begin()[i]->length - 1;
+            }
+
+            if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
+            {
+                printf("string+=: Memory allocation failed\nParams: Strings(length): %ld\n", Strings.size());
+                exit(1);
+            }
+
+            for (uint64 i = 0, j = lengthPrev - 1; i < Strings.size(); i++)
+            {
+                memCopyTo(Strings.begin()[i]->literal, &this->literal[j], sizeof(char) * (Strings.begin()[i]->length - 1));
+                j += Strings.begin()[i]->length - 1;
+            }
+            this->literal[this->length - 1] = '\0';
         }
 
         return this->literal;
