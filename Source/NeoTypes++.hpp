@@ -78,17 +78,17 @@ namespace neo
             const char* operator () ();
             char* operator [] (uint64 Index);
 
-            const char* operator = (std::initializer_list<char> Characters);
-            const char* operator = (std::initializer_list<const char*> Literals);
-            const char* operator = (std::initializer_list<string*> Strings);
+            string operator = (std::initializer_list<char> Characters);
+            string operator = (std::initializer_list<const char*> Literals);
+            string operator = (std::initializer_list<string*> Strings);
 
-            const char* operator -= (std::initializer_list<char> Characters);
-            const char* operator -= (std::initializer_list<const char*> Literals);
-            const char* operator -= (std::initializer_list<string*> Strings);
+            string operator -= (std::initializer_list<char> Characters);
+            string operator -= (std::initializer_list<const char*> Literals);
+            string operator -= (std::initializer_list<string*> Strings);
 
-            const char* operator += (std::initializer_list<char> Characters);
-            const char* operator += (std::initializer_list<const char*> Literals);
-            const char* operator += (std::initializer_list<string*> Strings);
+            string operator += (std::initializer_list<char> Characters);
+            string operator += (std::initializer_list<const char*> Literals);
+            string operator += (std::initializer_list<string*> Strings);
 
             bool operator == (char Character);
             bool operator == (const char* Literal);
@@ -97,11 +97,11 @@ namespace neo
             bool operator != (const char* Literal);
             bool operator != (string* String);
 
-            const char* Insert(uint64 Index, std::initializer_list<char> Characters);
-            const char* Insert(uint64 Index, std::initializer_list<const char*> Literals);
-            const char* Insert(uint64 Index, std::initializer_list<string*> Strings);
+            string Insert(uint64 Index, std::initializer_list<char> Characters);
+            string Insert(uint64 Index, std::initializer_list<const char*> Literals);
+            string Insert(uint64 Index, std::initializer_list<string*> Strings);
 
-            const char* Remove(uint64 Index, uint64 Length);
+            string Remove(uint64 Index, uint64 Length);
 
             const char* Read();
             array<string*>* Split(char Separator);

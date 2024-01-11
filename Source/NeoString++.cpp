@@ -166,7 +166,7 @@ namespace neo
         return &this->literal[Index];
     }
 
-    const char* string::operator = (std::initializer_list<char> Characters)
+    string string::operator = (std::initializer_list<char> Characters)
     {
         if (Characters.size() == 0)
         {
@@ -189,10 +189,10 @@ namespace neo
             this->literal[this->length - 1] = '\0';
         }
 
-        return this->literal;
+        return *this;
     }
 
-    const char* string::operator = (std::initializer_list<const char*> Literals)
+    string string::operator = (std::initializer_list<const char*> Literals)
     {
         uint64 lengthPrev, cache;
 
@@ -242,10 +242,10 @@ namespace neo
             this->literal[this->length - 1] = '\0';
         }
 
-        return this->literal;
+        return *this;
     }
 
-    const char* string::operator = (std::initializer_list<string*> Strings)
+    string string::operator = (std::initializer_list<string*> Strings)
     {
         uint64 lengthPrev;
 
@@ -295,10 +295,10 @@ namespace neo
             this->literal[this->length - 1] = '\0';
         }
 
-        return this->literal;
+        return *this;
     }
 
-    const char* string::operator -= (std::initializer_list<char> Characters)
+    string string::operator -= (std::initializer_list<char> Characters)
     {
         if (Characters.size() != 0)
         {
@@ -316,10 +316,10 @@ namespace neo
             memCopyTo(Characters.begin(), this->literal, sizeof(char) * Characters.size());
         }
 
-        return this->literal;
+        return *this;
     }
 
-    const char* string::operator -= (std::initializer_list<const char*> Literals)
+    string string::operator -= (std::initializer_list<const char*> Literals)
     {
         uint64 lengthPrev, cache;
 
@@ -363,10 +363,10 @@ namespace neo
             }
         }
 
-        return this->literal;
+        return *this;
     }
 
-    const char* string::operator -= (std::initializer_list<string*> Strings)
+    string string::operator -= (std::initializer_list<string*> Strings)
     {
         uint64 lengthPrev;
 
@@ -410,10 +410,10 @@ namespace neo
             }
         }
 
-        return this->literal;
+        return *this;
     }
 
-    const char* string::operator += (std::initializer_list<char> Characters)
+    string string::operator += (std::initializer_list<char> Characters)
     {
         if (Characters.size() != 0)
         {
@@ -427,10 +427,10 @@ namespace neo
             this->literal[this->length - 1] = '\0';
         }
 
-        return this->literal;
+        return *this;
     }
 
-    const char* string::operator += (std::initializer_list<const char*> Literals)
+    string string::operator += (std::initializer_list<const char*> Literals)
     {
         uint64 lengthPrev, cache;
 
@@ -470,10 +470,10 @@ namespace neo
             this->literal[this->length - 1] = '\0';
         }
 
-        return this->literal;
+        return *this;
     }
 
-    const char* string::operator += (std::initializer_list<string*> Strings)
+    string string::operator += (std::initializer_list<string*> Strings)
     {
         uint64 lengthPrev;
 
@@ -513,7 +513,7 @@ namespace neo
             this->literal[this->length - 1] = '\0';
         }
 
-        return this->literal;
+        return *this;
     }
 
     bool string::operator == (char Character)
@@ -566,7 +566,7 @@ namespace neo
         return !(*this == String);
     }
 
-    const char* string::Insert(uint64 Index, std::initializer_list<char> Characters)
+    string string::Insert(uint64 Index, std::initializer_list<char> Characters)
     {
         if (this->length < Index)
         {
@@ -595,10 +595,10 @@ namespace neo
             memCopyTo(Characters.begin(), &this->literal[Index], sizeof(char) * Characters.size());
         }
 
-        return this->literal;
+        return *this;
     }
 
-    const char* string::Insert(uint64 Index, std::initializer_list<const char*> Literals)
+    string string::Insert(uint64 Index, std::initializer_list<const char*> Literals)
     {
         uint64 lengthPrev, cache;
 
@@ -653,10 +653,10 @@ namespace neo
             }
         }
 
-        return this->literal;
+        return *this;
     }
 
-    const char* string::Insert(uint64 Index, std::initializer_list<string*> Strings)
+    string string::Insert(uint64 Index, std::initializer_list<string*> Strings)
     {
         uint64 lengthPrev;
 
@@ -711,10 +711,10 @@ namespace neo
             }
         }
 
-        return this->literal;
+        return *this;
     }
 
-    const char* string::Remove(uint64 Index, uint64 Length)
+    string string::Remove(uint64 Index, uint64 Length)
     {
         if (this->length <= Index)
         {
@@ -758,7 +758,7 @@ namespace neo
             }
         }
 
-        return this->literal;
+        return *this;
     }
 
     uint64 string::ToUINT()
