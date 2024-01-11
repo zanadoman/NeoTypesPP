@@ -103,10 +103,10 @@ namespace neo
 
             string* Remove(uint64 Index, uint64 Length);
 
-            const char* Read();
+            string* Read();
             array<string*>* Split(char Separator);
-            const char* Reverse();
-            const char* Clear();
+            string* Reverse();
+            string* Clear();
 
             uint64 ToUINT();
             uint64 ToUINT(bool* Success);
