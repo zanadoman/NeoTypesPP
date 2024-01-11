@@ -551,6 +551,21 @@ namespace neo
         return memCompare(this->literal, String->literal, sizeof(char) * this->length);
     }
 
+    bool string::operator != (char Character)
+    {
+        return !(*this == Character);
+    }
+
+    bool string::operator != (const char* Literal)
+    {
+        return !(*this == Literal);
+    }
+
+    bool string::operator != (string* String)
+    {
+        return !(*this == String);
+    }
+
     uint64 string::ToUINT()
     {
         uint64 result;
