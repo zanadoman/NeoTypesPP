@@ -33,27 +33,27 @@ namespace neo
             uint64 Length();
             type* operator [] (uint64 Index);
 
-            uint64 operator = (std::initializer_list<type> Elements);
-            uint64 operator = (std::initializer_list<array<type>*> Arrays);
-            uint64 operator -= (std::initializer_list<type> Elements);
-            uint64 operator -= (std::initializer_list<array<type>*> Arrays);
-            uint64 operator += (std::initializer_list<type> Elements);
-            uint64 operator += (std::initializer_list<array<type>*> Arrays);
+            array<type>* operator = (std::initializer_list<type> Elements);
+            array<type>* operator = (std::initializer_list<array<type>*> Arrays);
+            array<type>* operator -= (std::initializer_list<type> Elements);
+            array<type>* operator -= (std::initializer_list<array<type>*> Arrays);
+            array<type>* operator += (std::initializer_list<type> Elements);
+            array<type>* operator += (std::initializer_list<array<type>*> Arrays);
             bool operator == (array<type>* Array);
             bool operator != (array<type>* Array);
 
-            uint64 Insert(uint64 Index, uint64 Length);
-            uint64 Insert(uint64 Index, std::initializer_list<type> Elements);
-            uint64 Insert(uint64 Index, std::initializer_list<array <type>*> Arrays);
+            array<type>* Insert(uint64 Index, uint64 Length);
+            array<type>* Insert(uint64 Index, std::initializer_list<type> Elements);
+            array<type>* Insert(uint64 Index, std::initializer_list<array <type>*> Arrays);
 
-            uint64 Remove(uint64 Index, uint64 Length);
+            array<type>* Remove(uint64 Index, uint64 Length);
 
             bool Contains(std::initializer_list<type> Elements);
             bool Contains(std::initializer_list<array <type>*> Arrays);
 
-            uint64 Reverse();
+            array<type>* Reverse();
 
-            uint64 Clear();
+            array<type>* Clear();
 
         private:
             std::allocator<type> allocator;
@@ -247,7 +247,7 @@ namespace neo
         return &this->elements[Index];
     }
 
-    template <typename type> uint64 array<type>::operator = (std::initializer_list<type> Elements)
+    template <typename type> array<type>* array<type>::operator = (std::initializer_list<type> Elements)
     {
         for (uint64 i = 0; i < this->length; i++)
         {
@@ -271,10 +271,10 @@ namespace neo
             memCopyTo(Elements.begin(), this->elements, sizeof(type) * this->length);
         }
 
-        return this->length;
+        return this;
     }
 
-    template <typename type> uint64 array<type>::operator = (std::initializer_list<array<type>*> Arrays)
+    template <typename type> array<type>* array<type>::operator = (std::initializer_list<array<type>*> Arrays)
     {
         uint64 lengthPrev;
 
@@ -325,10 +325,10 @@ namespace neo
             }
         }
 
-        return this->length;
+        return this;
     }
 
-    template <typename type> uint64 array<type>::operator -= (std::initializer_list<type> Elements)
+    template <typename type> array<type>* array<type>::operator -= (std::initializer_list<type> Elements)
     {
         if (Elements.size() != 0)
         {
@@ -346,10 +346,10 @@ namespace neo
             memCopyTo(Elements.begin(), this->elements, sizeof(type) * Elements.size());
         }
 
-        return this->length;
+        return this;
     }
 
-    template <typename type> uint64 array<type>::operator -= (std::initializer_list<array<type>*> Arrays)
+    template <typename type> array<type>* array<type>::operator -= (std::initializer_list<array<type>*> Arrays)
     {
         uint64 lengthPrev;
 
@@ -393,10 +393,10 @@ namespace neo
             }
         }
 
-        return this->length;
+        return this;
     }
 
-    template <typename type> uint64 array<type>::operator += (std::initializer_list<type> Elements)
+    template <typename type> array<type>* array<type>::operator += (std::initializer_list<type> Elements)
     {
         if (Elements.size() != 0)
         {
@@ -409,10 +409,10 @@ namespace neo
             memCopyTo(Elements.begin(), &this->elements[this->length - Elements.size()], sizeof(type) * Elements.size());
         }
 
-        return this->length;
+        return this;
     }
 
-    template <typename type> uint64 array<type>::operator += (std::initializer_list<array<type>*> Arrays)
+    template <typename type> array<type>* array<type>::operator += (std::initializer_list<array<type>*> Arrays)
     {
         uint64 lengthPrev;
 
@@ -451,7 +451,7 @@ namespace neo
             }
         }
 
-        return this->length;
+        return this;
     }
 
     template <typename type> bool array<type>::operator == (array<type>* Array)
@@ -474,7 +474,7 @@ namespace neo
         return !(*this == Array);
     }
 
-    template <typename type> uint64 array<type>::Insert(uint64 Index, uint64 Length)
+    template <typename type> array<type>* array<type>::Insert(uint64 Index, uint64 Length)
     {
         if (this->length < Index)
         {
@@ -501,10 +501,10 @@ namespace neo
             }
         }
 
-        return this->length;
+        return this;
     }
 
-    template <typename type> uint64 array<type>::Insert(uint64 Index, std::initializer_list<type> Elements)
+    template <typename type> array<type>* array<type>::Insert(uint64 Index, std::initializer_list<type> Elements)
     {
         if (this->length < Index)
         {
@@ -528,10 +528,10 @@ namespace neo
             memCopyTo(Elements.begin(), &this->elements[Index], sizeof(type) * Elements.size());
         }
 
-        return this->length;
+        return this;
     }
 
-    template <typename type> uint64 array<type>::Insert(uint64 Index, std::initializer_list<array<type>*> Arrays)
+    template <typename type> array<type>* array<type>::Insert(uint64 Index, std::initializer_list<array<type>*> Arrays)
     {
         uint64 lengthPrev;
 
@@ -581,10 +581,10 @@ namespace neo
             }
         }
 
-        return this->length;
+        return this;
     }
 
-    template <typename type> uint64 array<type>::Remove(uint64 Index, uint64 Length)
+    template <typename type> array<type>* array<type>::Remove(uint64 Index, uint64 Length)
     {
         if (this->length <= Index)
         {
@@ -624,7 +624,7 @@ namespace neo
             }
         }
 
-        return this->length;
+        return this;
     }
 
     template <typename type> bool array<type>::Contains(std::initializer_list<type> Elements)
@@ -686,7 +686,7 @@ namespace neo
         return false;
     }
 
-    template <typename type> uint64 array<type>::Reverse()
+    template <typename type> array<type>* array<type>::Reverse()
     {
         type tmp;
 
@@ -697,10 +697,10 @@ namespace neo
             this->elements[this->length - 1 - i] = tmp;
         }
 
-        return this->length;
+        return this;
     }
 
-    template <typename type> uint64 array<type>::Clear()
+    template <typename type> array<type>* array<type>::Clear()
     {
         for (uint64 i = 0; i < this->length; i++)
         {
@@ -711,6 +711,6 @@ namespace neo
         free(this->elements);
         this->elements = NULL;
 
-        return this->length;
+        return this;
     }
 }
