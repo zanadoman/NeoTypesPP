@@ -63,7 +63,6 @@ namespace neo
 
             uint64 length;
             type* elements;
-
     };
 
     //____________________________________________NeoString.hpp____________________________________________//
@@ -121,7 +120,6 @@ namespace neo
         private:
             uint64 length;
             char* literal;
-
     };
     uint64 strLength(const char* Literal);
 
