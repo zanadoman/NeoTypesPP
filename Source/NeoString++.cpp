@@ -1,4 +1,5 @@
 #include "NeoTypes++.hpp"
+#include <initializer_list>
 
 namespace neo
 {
@@ -563,6 +564,38 @@ namespace neo
     bool string::operator != (string* String)
     {
         return !(*this == String);
+    }
+
+    const char* string::Insert(uint64 Index, std::initializer_list<char> Characters)
+    {
+        if (this->length < Index)
+        {
+            printf("string.Insert(): Index out of range\nParams: Index: %lld, Characters(length): %ld\n", Index, Characters.size());
+            exit(1);
+        }
+        if (this->length == Index)
+        {
+            printf("string.Insert(): Illegal insertion after EOF\nParams: Index: %lld, Characters(length): %ld\n", Index, Characters.size());
+            exit(1);
+        }
+
+        if (Characters.size() != 0)
+        {
+            if ((this->literal = (char*)realloc(this->literal, sizeof(char) * (this->length += Characters.size()))) == NULL)
+            {
+                printf("string.Insert(): Memory allocation failed\nParams: Index: %lld, Characters(length): %ld\n", Index, Characters.size());
+                exit(1);
+            }
+
+            for (uint64 i = this->length - 1; Index + Characters.size() <= i; i--)
+            {
+                this->literal[i] = this->literal[i - Characters.size()];
+            }
+
+            memCopyTo(Characters.begin(), &this->literal[Index], sizeof(char) * Characters.size());
+        }
+
+        return this->literal;
     }
 
     uint64 string::ToUINT()
