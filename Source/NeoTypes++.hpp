@@ -2,9 +2,9 @@
 
 #include <cstdio>
 #include <cstdlib>
+#include <cmath>
 #include <memory>
 #include <initializer_list>
-#include <cmath>
 
 namespace neo
 {
@@ -18,6 +18,9 @@ namespace neo
     typedef signed int sint32;
     typedef unsigned long long uint64;
     typedef signed long long sint64;
+
+    template <typename type> class array;
+    class string;
 
     //_____________________________________________NeoArray.hpp____________________________________________//
 
