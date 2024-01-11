@@ -101,7 +101,8 @@ namespace neo
             const char* Insert(uint64 Index, std::initializer_list<const char*> Literals);
             const char* Insert(uint64 Index, std::initializer_list<string*> Strings);
 
-            const char* Remove(uint64 Index);
+            const char* Remove(uint64 Index, uint64 Length);
+
             const char* Read();
             array<string*>* Split(char Separator);
             const char* Reverse();
