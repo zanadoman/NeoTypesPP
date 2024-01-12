@@ -703,6 +703,13 @@ namespace neo
         return this;
     }
 
+    template <typename type> template <typename typeTMP> typename std::enable_if<std::is_same<typeTMP, string>::value, bool>::type array<type>::WriteFile(const char* Path)
+    {
+        printf("%s\n", Path);
+
+        return true;
+    }
+
     template <typename type> array<type>* array<type>::Clear()
     {
         for (uint64 i = 0; i < this->length; i++)
