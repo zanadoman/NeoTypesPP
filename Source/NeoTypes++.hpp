@@ -706,6 +706,7 @@ namespace neo
     template <typename type> typename std::enable_if<std::is_same<type, string>::value, bool>::type array<type>::WriteFile(const char* Path)
     {
         printf("%s\n", Path);
+        
         return true;
     }
 
