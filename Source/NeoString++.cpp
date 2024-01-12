@@ -352,7 +352,7 @@ namespace neo
                 exit(1);
             }
 
-            memCopyTo(Characters.begin(), &this->literal[this->length - Characters.size() - 1], sizeof(char) * Characters.size());
+            memCopyTo(Characters.begin(), &this->literal[this->length - 1 - Characters.size()], sizeof(char) * Characters.size());
             this->literal[this->length - 1] = '\0';
         }
 
