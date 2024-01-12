@@ -10,6 +10,7 @@ namespace neo
             printf("string(): Memory allocation failed\n");
             exit(1);
         }
+        
         this->literal[0] = '\0';
     }
 
