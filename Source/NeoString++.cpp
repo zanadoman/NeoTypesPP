@@ -329,7 +329,7 @@ namespace neo
 
             for (uint64 i = this->length - 1; this->length - lengthPrev <= i; i--)
             {
-                this->literal[i] = this->literal[i - (this->Length() - lengthPrev)];
+                this->literal[i] = this->literal[i - (this->length - lengthPrev)];
             }
 
             for (uint64 i = 0, j = 0; i < Strings.size(); i++)
