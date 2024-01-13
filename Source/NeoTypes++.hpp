@@ -56,7 +56,9 @@ namespace neo
 
             array<type>* Reverse();
 
-            template <typename typeTMP = type> typename std::enable_if<std::is_same<typeTMP, string>::value, array<const char*>*>::type WriteFile(const char* Path);
+            template <typename typeTMP = type> typename std::enable_if<std::is_same<typeTMP, const char*>::value, array<typeTMP>*>::type WriteFile(const char* Path);
+            template <typename typeTMP = type> typename std::enable_if<std::is_same<typeTMP, string>::value, array<typeTMP>*>::type WriteFile(const char* Path);
+            template <typename typeTMP = type> typename std::enable_if<std::is_same<typeTMP, string*>::value, array<typeTMP>*>::type WriteFile(const char* Path);
 
             array<type>* Clear();
 
@@ -707,11 +709,15 @@ namespace neo
         return this;
     }
 
-    template <typename type> template <typename typeTMP> typename std::enable_if<std::is_same<typeTMP, string>::value, array<const char*>*>::type array<type>::WriteFile(const char* Path)
+    template <typename type> template <typename typeTMP> typename std::enable_if<std::is_same<typeTMP, const char*>::value, array<typeTMP>*>::type array<type>::WriteFile(const char* Path)
     {
         FILE* file;
 
-        this->Clear();
+        if (Path == NULL)
+        {
+            printf("array.WriteFile(): Path must not be NULL\nParams: Path: %p\n", Path);
+            exit(1);
+        }
 
         if ((file = fopen(Path, "w")) == 0)
         {
@@ -720,7 +726,55 @@ namespace neo
 
         for (uint64 i = 0; i < this->length; i++)
         {
-            fprintf("%s\n", this->elements[i]);
+            fprintf(file, "%s\n", this->elements[i]);
+        }
+        fclose(file);
+
+        return this;
+    }
+
+    template <typename type> template <typename typeTMP> typename std::enable_if<std::is_same<typeTMP, string>::value, array<typeTMP>*>::type array<type>::WriteFile(const char* Path)
+    {
+        FILE* file;
+
+        if (Path == NULL)
+        {
+            printf("array.WriteFile(): Path must not be NULL\nParams: Path: %p\n", Path);
+            exit(1);
+        }
+
+        if ((file = fopen(Path, "w")) == 0)
+        {
+            return this;
+        }
+
+        for (uint64 i = 0; i < this->length; i++)
+        {
+            fprintf(file, "%s\n", this->elements[i]());
+        }
+        fclose(file);
+
+        return this;
+    }
+
+    template <typename type> template <typename typeTMP> typename std::enable_if<std::is_same<typeTMP, string*>::value, array<typeTMP>*>::type array<type>::WriteFile(const char* Path)
+    {
+        FILE* file;
+
+        if (Path == NULL)
+        {
+            printf("array.WriteFile(): Path must not be NULL\nParams: Path: %p\n", Path);
+            exit(1);
+        }
+
+        if ((file = fopen(Path, "w")) == 0)
+        {
+            return this;
+        }
+
+        for (uint64 i = 0; i < this->length; i++)
+        {
+            fprintf(file, "%s\n", (*this->elements[i])());
         }
         fclose(file);
 
