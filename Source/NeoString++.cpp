@@ -134,6 +134,40 @@ namespace neo
         }
     }
 
+    string::string(std::initializer_list<sint64> Numbers)
+    {
+        array<string*> cache;
+
+        for (uint64 i = 0; i < Numbers.size(); i++)
+        {
+            cache += {this->ToString(Numbers.begin()[i])};
+        }
+
+        this->length = 0;
+        for (uint64 i = 0; i < cache.Length(); i++)
+        {
+            this->length += (*cache[i])->length - 1;
+        }
+
+        if ((this->literal = (char*)malloc(sizeof(char) * ++this->length)) == NULL)
+        {
+            printf("string(): Memory allocation failed\nParams: Numbers(length): %ld\n", Numbers.size());
+            exit(1);
+        }
+
+        for (uint64 i = 0, j = 0; i < cache.Length(); i++)
+        {
+            memCopyTo((*cache[i])->literal, &this->literal[j], sizeof(char) * ((*cache[i])->length - 1));
+            j += (*cache[i])->length - 1;
+        }
+        this->literal[this->length - 1] = '\0';
+
+        for (uint64 i = 0; i < cache.Length(); i++)
+        {
+            delete *cache[i];
+        }
+    }
+
     string::~string()
     {
         free(this->literal);

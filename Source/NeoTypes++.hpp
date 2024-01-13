@@ -82,6 +82,7 @@ namespace neo
             string(std::initializer_list<const char*> Literals);
             string(std::initializer_list<string*> Strings);
             string(std::initializer_list<uint64> Numbers);
+            string(std::initializer_list<sint64> Numbers);
             ~string();
 
             uint64 Length();
