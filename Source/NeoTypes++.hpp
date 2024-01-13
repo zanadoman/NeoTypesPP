@@ -719,7 +719,7 @@ namespace neo
             exit(1);
         }
 
-        if ((file = fopen(Path, "w")) == 0)
+        if ((file = fopen(Path, "w")) == NULL)
         {
             return this;
         }
@@ -743,7 +743,7 @@ namespace neo
             exit(1);
         }
 
-        if ((file = fopen(Path, "w")) == 0)
+        if ((file = fopen(Path, "w")) == NULL)
         {
             return this;
         }
@@ -767,7 +767,7 @@ namespace neo
             exit(1);
         }
 
-        if ((file = fopen(Path, "w")) == 0)
+        if ((file = fopen(Path, "w")) == NULL)
         {
             return this;
         }
