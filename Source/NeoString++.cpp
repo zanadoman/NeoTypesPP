@@ -715,6 +715,19 @@ namespace neo
     {
         uint64 cache;
 
+        for (uint64 i = 0; i < Literals.size(); i++)
+        {
+            if (Literals.begin()[i] == NULL)
+            {
+                printf("string.Contains(): Literals[%lld] must not be NULL\nParams: Literals(length): %ld\n", i, Literals.size());
+                exit(1);
+            }
+            if (Literals.begin()[i] == this->literal)
+            {
+                return true;
+            }
+        }
+
         if (this->length < 2 || Literals.size() == 0)
         {
             return false;
@@ -724,7 +737,7 @@ namespace neo
         {
             for (uint64 j = 0; j < this->length - (cache = strLength(Literals.begin()[i]) - 1); j++)
             {
-                if (this->literal == Literals.begin()[i] || memCompare(&this->literal[j], Literals.begin()[i], sizeof(char) * cache))
+                if (memCompare(&this->literal[j], Literals.begin()[i], sizeof(char) * cache))
                 {
                     return true;
                 }
@@ -736,6 +749,19 @@ namespace neo
 
     bool string::Contains(std::initializer_list<string*> Strings)
     {
+        for (uint64 i = 0; i < Strings.size(); i++)
+        {
+            if (Strings.begin()[i] == NULL)
+            {
+                printf("string.Contains(): Strings[%lld] must not be NULL\nParams: Strings(length): %ld\n", i, Strings.size());
+                exit(1);
+            }
+            if (Strings.begin()[i] == this)
+            {
+                return true;
+            }
+        }
+
         if (this->length < 2 || Strings.size() == 0)
         {
             return false;
@@ -745,7 +771,7 @@ namespace neo
         {
             for (uint64 j = 0; j < this->length - (Strings.begin()[i]->length - 1); j++)
             {
-                if (this == Strings.begin()[i] || memCompare(&this->literal[j], Strings.begin()[i]->literal, sizeof(char) * (Strings.begin()[i]->length - 1)))
+                if (memCompare(&this->literal[j], Strings.begin()[i]->literal, sizeof(char) * (Strings.begin()[i]->length - 1)))
                 {
                     return true;
                 }
