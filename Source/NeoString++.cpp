@@ -755,6 +755,32 @@ namespace neo
         return false;
     }
 
+    string* string::Read()
+    {
+        char tmp;
+
+        if ((this->literal = (char*)realloc(this->literal, sizeof(char) * (this->length = 1))) == NULL)
+        {
+            printf("string.Read(): Memory allocation failed\n");
+            exit(1);
+        }
+        this->literal[0] = '\0';
+
+        while ((tmp = getchar()) != '\n')
+        {
+            if ((this->literal = (char*)realloc(this->literal, sizeof(char) * ++this->length)) == NULL)
+            {
+                printf("string.Read(): Memory allocation failed\n");
+                exit(1);
+            }
+
+            this->literal[this->length - 2] = tmp;
+            this->literal[this->length - 1] = '\0';
+        }
+
+        return this;
+    }
+
     uint64 string::ToUINT()
     {
         uint64 result;
