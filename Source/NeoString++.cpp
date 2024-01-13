@@ -745,7 +745,7 @@ namespace neo
 
         for (uint64 i = 0; i < Strings.size(); i++)
         {
-            for (uint64 j = 0; i < this->length - 1 - Strings.begin()[i]->length; i++)
+            for (uint64 j = 0; i < this->length - Strings.begin()[i]->length; i++)
             {
                 if (memCompare(this->literal + j, Strings.begin()[i]->literal, sizeof(char) * (Strings.begin()[i]->length - 1)))
                 {
