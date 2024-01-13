@@ -1072,6 +1072,34 @@ namespace neo
         return result;
     }
 
+    string* string::ToString(sint64 Number)
+    {
+        string* result;
+
+        uint64 i;
+
+        if ((result = new string) == NULL)
+        {
+            printf("string.ToString(): Memory allocation failed\nParams: Number: %lld\n", Number);
+            exit(1);
+        }
+
+        if (Number < 0)
+        {
+            *result += {'-'};
+            Number *= -1;
+        }
+
+        for (i = 1; 10 <= Number / i; i *= 10);
+        for (; 0 < i; i /= 10)
+        {
+            *result += {(char)(Number / i + '0')};
+            Number %= i;
+        }
+
+        return result;
+    }
+
     uint64 strLength(const char* Literal)
     {
         uint64 result;
