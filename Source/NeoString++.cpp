@@ -697,11 +697,11 @@ namespace neo
             return false;
         }
 
-        for (uint64 i = 0; i < this->length - 1; i++)
+        for (uint64 i = 0; i < Characters.size(); i++)
         {
-            for (uint64 j = 0; j < Characters.size(); j++)
+            for (uint64 j = 0; j < this->length - 1; j++)
             {
-                if (this->literal[i] == Characters.begin()[j])
+                if (this->literal[j] == Characters.begin()[i])
                 {
                     return true;
                 }
