@@ -130,7 +130,7 @@ namespace neo
 
         for (uint64 i = 0; i < cache.Length(); i++)
         {
-            delete cache[i];
+            delete *cache[i];
         }
     }
 
@@ -1062,17 +1062,10 @@ namespace neo
             exit(1);
         }
 
-        for (i = 1; i <= Number / i; i *= 10);
-        for (; 0 < 0; i /= 10)
+        for (i = 1; 10 <= Number / i; i *= 10);
+        for (; 0 < i; i /= 10)
         {
-            if ((result->literal = (char*)realloc(result->literal, sizeof(char) * ++result->length)) == NULL)
-            {
-                printf("string.ToString(): Memory allocation failed\nParams: Number: %lld\n", Number);
-                exit(1);
-            }
-            result->literal[result->length - 2] = Number / i + '0';
-            result->literal[result->length - 1] = '\0';
-
+            *result += {(char)(Number / i + '0')};
             Number %= i;
         }
 
