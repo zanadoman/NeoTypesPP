@@ -726,7 +726,7 @@ namespace neo
 
             for (uint64 j = 0; j < this->length - cache; j++)
             {
-                if (memCompare(this->literal + j, Literals.begin()[i], sizeof(char) * cache))
+                if (this->literal == Literals.begin()[i] || memCompare(this->literal + j, Literals.begin()[i], sizeof(char) * cache))
                 {
                     return true;
                 }
@@ -747,7 +747,7 @@ namespace neo
         {
             for (uint64 j = 0; i < this->length - Strings.begin()[i]->length; i++)
             {
-                if (memCompare(this->literal + j, Strings.begin()[i]->literal, sizeof(char) * (Strings.begin()[i]->length - 1)))
+                if (this == Strings.begin()[i] || memCompare(this->literal + j, Strings.begin()[i]->literal, sizeof(char) * (Strings.begin()[i]->length - 1)))
                 {
                     return true;
                 }
