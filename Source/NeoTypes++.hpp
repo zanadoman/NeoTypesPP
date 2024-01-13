@@ -56,7 +56,7 @@ namespace neo
 
             array<type>* Reverse();
 
-            template <typename typeTMP = type> typename std::enable_if<std::is_same<typeTMP, string>::value, bool>::type WriteFile(const char* Path);
+            template <typename typeTMP = type> typename std::enable_if<std::is_same<typeTMP, string>::value, array<const char*>*>::type WriteFile(const char* Path);
 
             array<type>* Clear();
 
@@ -707,11 +707,24 @@ namespace neo
         return this;
     }
 
-    template <typename type> template <typename typeTMP> typename std::enable_if<std::is_same<typeTMP, string>::value, bool>::type array<type>::WriteFile(const char* Path)
+    template <typename type> template <typename typeTMP> typename std::enable_if<std::is_same<typeTMP, string>::value, array<const char*>*>::type array<type>::WriteFile(const char* Path)
     {
-        printf("%s\n", Path);
+        FILE* file;
 
-        return true;
+        this->Clear();
+
+        if ((file = fopen(Path, "w")) == 0)
+        {
+            return this;
+        }
+
+        for (uint64 i = 0; i < this->length; i++)
+        {
+            fprintf("%s\n", this->elements[i]);
+        }
+        fclose(file);
+
+        return this;
     }
 
     template <typename type> array<type>* array<type>::Clear()
