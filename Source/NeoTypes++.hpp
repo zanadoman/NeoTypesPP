@@ -107,6 +107,10 @@ namespace neo
 
             string* Remove(uint64 Index, uint64 Length);
 
+            bool Contains(std::initializer_list<char> Characters);
+            bool Contains(std::initializer_list<const char*> Literals);
+            bool Contains(std::initializer_list<string*> Strings);
+
             string* Read();
             array<string*>* Split(char Separator);
             string* Reverse();

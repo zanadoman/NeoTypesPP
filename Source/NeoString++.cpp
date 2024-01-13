@@ -690,6 +690,73 @@ namespace neo
         return this;
     }
 
+    bool string::Contains(std::initializer_list<char> Characters)
+    {
+        if (this->length < 2 || Characters.size() == 0)
+        {
+            return false;
+        }
+
+        for (uint64 i = 0; i < this->length - 1; i++)
+        {
+            for (uint64 j = 0; j < Characters.size(); j++)
+            {
+                if (this->literal[i] == Characters.begin()[j])
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    bool string::Contains(std::initializer_list<const char*> Literals)
+    {
+        uint64 cache;
+
+        if (this->length < 2 || Literals.size() == 0)
+        {
+            return false;
+        }
+
+        for (uint64 i = 0; i < Literals.size(); i++)
+        {
+            cache = strLength(Literals.begin()[i]) - 1;
+
+            for (uint64 j = 0; j < this->length - 1 - cache; j++)
+            {
+                if (memCompare(this->literal + j, Literals.begin()[i], sizeof(char) * cache))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    bool string::Contains(std::initializer_list<string*> Strings)
+    {
+        if (this->length < 2 || Strings.size() == 0)
+        {
+            return false;
+        }
+
+        for (uint64 i = 0; i < Strings.size(); i++)
+        {
+            for (uint64 j = 0; i < this->length - 1 - Strings.begin()[i]->length; i++)
+            {
+                if (memCompare(this->literal + j, Strings.begin()[i]->literal, sizeof(char) * (Strings.begin()[i]->length - 1)))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     uint64 string::ToUINT()
     {
         uint64 result;
