@@ -724,7 +724,7 @@ namespace neo
         {
             cache = strLength(Literals.begin()[i]) - 1;
 
-            for (uint64 j = 0; j < this->length - 1 - cache; j++)
+            for (uint64 j = 0; j < this->length - cache; j++)
             {
                 if (memCompare(this->literal + j, Literals.begin()[i], sizeof(char) * cache))
                 {
