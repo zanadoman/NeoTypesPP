@@ -722,16 +722,14 @@ namespace neo
             exit(1);
         }
 
-        if ((file = fopen(Path, "w")) == NULL)
+        if ((file = fopen(Path, "w")) != NULL)
         {
-            return this;
+            for (uint64 i = 0; i < this->length; i++)
+            {
+                fprintf(file, "%s\n", this->elements[i]);
+            }
+            fclose(file);
         }
-
-        for (uint64 i = 0; i < this->length; i++)
-        {
-            fprintf(file, "%s\n", this->elements[i]);
-        }
-        fclose(file);
 
         return this;
     }
@@ -746,16 +744,14 @@ namespace neo
             exit(1);
         }
 
-        if ((file = fopen(Path, "w")) == NULL)
+        if ((file = fopen(Path, "w")) != NULL)
         {
-            return this;
+            for (uint64 i = 0; i < this->length; i++)
+            {
+                fprintf(file, "%s\n", this->elements[i]());
+            }
+            fclose(file);
         }
-
-        for (uint64 i = 0; i < this->length; i++)
-        {
-            fprintf(file, "%s\n", this->elements[i]());
-        }
-        fclose(file);
 
         return this;
     }
@@ -770,16 +766,14 @@ namespace neo
             exit(1);
         }
 
-        if ((file = fopen(Path, "w")) == NULL)
+        if ((file = fopen(Path, "w")) != NULL)
         {
-            return this;
+            for (uint64 i = 0; i < this->length; i++)
+            {
+                fprintf(file, "%s\n", (*this->elements[i])());
+            }
+            fclose(file);
         }
-
-        for (uint64 i = 0; i < this->length; i++)
-        {
-            fprintf(file, "%s\n", (*this->elements[i])());
-        }
-        fclose(file);
 
         return this;
     }
