@@ -1190,7 +1190,8 @@ namespace neo
         whole = trunc(Number);
         fraction = Number - whole;
 
-        for (i = 1; 10 <= whole / i; i *= 10)
+        for (i = 1; 10 <= whole / i; i *= 10);
+        for (; 0 < i; i /= 10)
         {
             *result += {(char)(whole / i + '0')};
             whole %= i;
