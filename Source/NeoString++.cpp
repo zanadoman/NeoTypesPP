@@ -168,6 +168,40 @@ namespace neo
         }
     }
 
+    string::string(std::initializer_list<double> Numbers)
+    {
+        array<string*> cache;
+
+        for (uint64 i = 0; i < Numbers.size(); i++)
+        {
+            cache += {this->ToString(Numbers.begin()[i])};
+        }
+
+        this->length = 0;
+        for (uint64 i = 0; i < cache.Length(); i++)
+        {
+            this->length += (*cache[i])->length - 1;
+        }
+
+        if ((this->literal = (char*)malloc(sizeof(char) * ++this->length)) == NULL)
+        {
+            printf("string(): Memory allocation failed\nParams: Numbers(length): %ld\n", Numbers.size());
+            exit(1);
+        }
+
+        for (uint64 i = 0, j = 0; i < cache.Length(); i++)
+        {
+            memCopyTo((*cache[i])->literal, &this->literal[j], sizeof(char) * ((*cache[i])->length - 1));
+            j += (*cache[i])->length - 1;
+        }
+        this->literal[this->length - 1] = '\0';
+
+        for (uint64 i = 0; i < cache.Length(); i++)
+        {
+            delete *cache[i];
+        }
+    }
+
     string::~string()
     {
         free(this->literal);
@@ -1129,6 +1163,50 @@ namespace neo
         {
             *result += {(char)(Number / i + '0')};
             Number %= i;
+        }
+
+        return result;
+    }
+
+    string* string::ToString(double Number)
+    {
+        string* result;
+
+        uint64 i, whole;
+        double fraction;
+
+        if ((result = new string) == NULL)
+        {
+            printf("string.ToString(): Memory allocation failed\nParams: Number: %lf\n", Number);
+            exit(1);
+        }
+
+        if (Number < 0)
+        {
+            *result += {'-'};
+            Number *= -1;
+        }
+
+        whole = trunc(Number);
+        fraction = Number - whole;
+
+        for (i = 1; 10 <= whole / i; i *= 10)
+        {
+            *result += {(char)(whole / i + '0')};
+            whole %= i;
+        }
+        if (0 < fraction)
+        {
+            *result += {'.'};
+
+            for (; 0 < fraction - trunc(fraction); fraction *= 10);
+
+            for (i = 1; 10 <= (uint64)round(fraction) / i; i *= 10);
+            for (; 0 < i; i /= 10)
+            {
+                *result += {(char)(fraction / i + '0')};
+                fraction = (uint64)round(fraction) % i;
+            }
         }
 
         return result;
