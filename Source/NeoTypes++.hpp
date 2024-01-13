@@ -68,8 +68,8 @@ namespace neo
         private:
             std::allocator<type> allocator;
 
-            uint64 length = 0;
-            type* elements = NULL;
+            uint64 length;
+            type* elements;
     };
 
     //____________________________________________NeoString.hpp____________________________________________//
@@ -129,8 +129,8 @@ namespace neo
             double ToDOUBLE(bool* Success);
 
         private:
-            uint64 length = 0;
-            char* literal = NULL;
+            uint64 length;
+            char* literal;
     };
     uint64 strLength(const char* Literal);
 
