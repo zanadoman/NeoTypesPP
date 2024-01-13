@@ -131,6 +131,10 @@ namespace neo
         private:
             uint64 length;
             char* literal;
+
+            char* ToString(uint64 Value);
+            char* ToString(sint64 Value);
+            char* ToString(double Value);
     };
     uint64 strLength(const char* Literal);
 
