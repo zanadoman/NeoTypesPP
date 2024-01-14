@@ -115,9 +115,15 @@ namespace neo
             bool operator == (char Character);
             bool operator == (const char* Literal);
             bool operator == (string* String);
+            bool operator == (uint64 Number);
+            bool operator == (sint64 Number);
+            bool operator == (double Number);
             bool operator != (char Character);
             bool operator != (const char* Literal);
             bool operator != (string* String);
+            bool operator != (uint64 Number);
+            bool operator != (sint64 Number);
+            bool operator != (double Number);
 
             string* Insert(uint64 Index, std::initializer_list<char> Characters);
             string* Insert(uint64 Index, std::initializer_list<const char*> Literals);
