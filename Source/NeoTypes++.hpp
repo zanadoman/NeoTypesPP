@@ -765,6 +765,14 @@ namespace neo
             printf("array.WriteFile(): Path must not be NULL\nParams: Path: %p\n", Path);
             exit(1);
         }
+        for (uint64 i = 0; i < this->length; i++)
+        {
+            if (this->elements[i]() == NULL)
+            {
+                printf("array.WriteFile(): Array[%lld]() must not be NULL\nParams: Path: %s\n", i, Path);
+                exit(1);
+            }
+        }
 
         if ((file = fopen(Path, "w")) != NULL)
         {
