@@ -351,8 +351,8 @@ namespace neo
         for (uint64 i = 0, j = 0; i < cache.Length(); i++)
         {
             memCopyTo((*cache[i])->literal, &this->literal[j], sizeof(char) * ((*cache[i])->length - 1));
-            delete *cache[i];
             j += (*cache[i])->length - 1;
+            delete *cache[i];
         }
 
         return this;
