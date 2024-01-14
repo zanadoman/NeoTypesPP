@@ -30,6 +30,7 @@ namespace neo
     {
         uint64 cache;
 
+        this->length = 0;
         for (uint64 i = 0; i < Literals.size(); i++)
         {
             if (Literals.begin()[i] == NULL)
@@ -42,11 +43,7 @@ namespace neo
                 printf("string(): Literals[%lld] must not be Self\nParams: Literals(length): %ld\n", i, Literals.size());
                 exit(1);
             }
-        }
 
-        this->length = 0;
-        for (uint64 i = 0; i < Literals.size(); i++)
-        {
             this->length += strLength(Literals.begin()[i]) - 1;
         }
 
