@@ -1339,6 +1339,39 @@ namespace neo
         return false;
     }
 
+    bool string::Contains(std::initializer_list<uint64> Numbers)
+    {
+        bool result;
+
+        array<string*> cache(Numbers.size());
+
+        if (this->length < 2 || cache.Length() == 0)
+        {
+            return false;
+        }
+
+        for (uint64 i = 0; i < Numbers.size(); i++)
+        {
+            *cache[i] = this->ToString(Numbers.begin()[i]);
+        }
+
+        result = false;
+        for (uint64 i = 0; i < cache.Length(); i++)
+        {
+            for (uint64 j = 0; j < this->length - ((*cache[i])->length - 1); j++)
+            {
+                if (result == false && memCompare(&this->literal[j], (*cache[i])->literal, sizeof(char) * ((*cache[i])->length - 1)))
+                {
+                    result = true;
+                }
+
+                delete *cache[i];
+            }
+        }
+
+        return result;
+    }
+
     string* string::Read()
     {
         char tmp;
