@@ -729,6 +729,70 @@ namespace neo
         return this;
     }
 
+    string* string::operator += (std::initializer_list<sint64> Numbers)
+    {
+        array<string*> cache(Numbers.size());
+        uint64 lengthPrev;
+
+        if (cache.Length() != 0)
+        {
+            lengthPrev = this->length;
+            for (uint64 i = 0; i < cache.Length(); i++)
+            {
+                *cache[i] = this->ToString(Numbers.begin()[i]);
+                this->length += (*cache[i])->length - 1;
+            }
+
+            if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
+            {
+                printf("string+=: Memory allocation failed\nParams: Numbers(length): %ld\n", Numbers.size());
+                exit(1);
+            }
+
+            for (uint64 i = 0, j = lengthPrev - 1; i < cache.Length(); i++)
+            {
+                memCopyTo((*cache[i])->literal, &this->literal[j], sizeof(char) * ((*cache[i])->length - 1));
+                j += (*cache[i])->length - 1;
+                delete *cache[i];
+            }
+            this->literal[this->length - 1] = '\0';
+        }
+
+        return this;
+    }
+
+    string* string::operator += (std::initializer_list<double> Numbers)
+    {
+        array<string*> cache(Numbers.size());
+        uint64 lengthPrev;
+
+        if (cache.Length() != 0)
+        {
+            lengthPrev = this->length;
+            for (uint64 i = 0; i < cache.Length(); i++)
+            {
+                *cache[i] = this->ToString(Numbers.begin()[i]);
+                this->length += (*cache[i])->length - 1;
+            }
+
+            if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
+            {
+                printf("string+=: Memory allocation failed\nParams: Numbers(length): %ld\n", Numbers.size());
+                exit(1);
+            }
+
+            for (uint64 i = 0, j = lengthPrev - 1; i < cache.Length(); i++)
+            {
+                memCopyTo((*cache[i])->literal, &this->literal[j], sizeof(char) * ((*cache[i])->length - 1));
+                j += (*cache[i])->length - 1;
+                delete *cache[i];
+            }
+            this->literal[this->length - 1] = '\0';
+        }
+
+        return this;
+    }
+
     bool string::operator == (char Character)
     {
         return (this->length == 2 && this->literal[0] == Character);
