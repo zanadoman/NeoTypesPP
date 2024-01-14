@@ -830,7 +830,7 @@ namespace neo
 
     bool string::Contains(std::initializer_list<char> Characters)
     {
-        if (this->length < 2 || Characters.size() == 0)
+        if (this->length < 2)
         {
             return false;
         }
