@@ -93,14 +93,24 @@ namespace neo
             string* operator = (std::initializer_list<char> Characters);
             string* operator = (std::initializer_list<const char*> Literals);
             string* operator = (std::initializer_list<string*> Strings);
+            string* operator = (std::initializer_list<uint64> Numbers);
+            string* operator = (std::initializer_list<sint64> Numbers);
+            string* operator = (std::initializer_list<double> Numbers);
 
             string* operator -= (std::initializer_list<char> Characters);
             string* operator -= (std::initializer_list<const char*> Literals);
             string* operator -= (std::initializer_list<string*> Strings);
+            string* operator -= (std::initializer_list<uint64> Numbers);
+            string* operator -= (std::initializer_list<sint64> Numbers);
+            string* operator -= (std::initializer_list<double> Numbers);
 
             string* operator += (std::initializer_list<char> Characters);
             string* operator += (std::initializer_list<const char*> Literals);
             string* operator += (std::initializer_list<string*> Strings);
+            string* operator += (std::initializer_list<uint64> Numbers);
+            string* operator += (std::initializer_list<sint64> Numbers);
+            string* operator += (std::initializer_list<double> Numbers);
+
 
             bool operator == (char Character);
             bool operator == (const char* Literal);
