@@ -820,6 +820,11 @@ namespace neo
         return this;
     }
 
+    template <typename type> template <typename typeTMP> typename std::enable_if<std::is_same<typeTMP, string>::value, array<typeTMP>*>::type array<type>::ReadFile(const char* Path)
+    {
+        return this;
+    }
+
     template <typename type> array<type>* array<type>::Clear()
     {
         for (uint64 i = 0; i < this->length; i++)
