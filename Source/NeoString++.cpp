@@ -521,6 +521,7 @@ namespace neo
             {
                 memCopyTo((*cache[i])->literal, &this->literal[j], sizeof(char) * ((*cache[i])->length - 1));
                 j += (*cache[i])->length - 1;
+                delete *cache[i];
             }
         }
 
