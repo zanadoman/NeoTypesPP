@@ -1473,17 +1473,15 @@ namespace neo
     {
         array<string>* result;
 
-        FILE* file;
-
         result = new array<string>(1);
 
         for (uint64 i = 0; i < this->length - 1; i++)
         {
             if (this->literal[i] != Separator)
             {
-                *(*result)[result->Length()] += {this->literal[i]};
+                *(*result)[result->Length() - 1] += {this->literal[i]};
             }
-            else if (1 < (*(*result)[i]).length)
+            else if (1 < (*(*result)[result->Length() - 1]).length)
             {
                 result->Insert(result->Length(), 1);
             }
@@ -1491,6 +1489,7 @@ namespace neo
 
         if (1 == (*(*result)[result->Length() - 1]).length)
         {
+            printf("extra remove\n");
             result->Remove(result->Length() - 1, 1);
         }
 
