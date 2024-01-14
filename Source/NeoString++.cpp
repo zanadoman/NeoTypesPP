@@ -1469,6 +1469,11 @@ namespace neo
         return this;
     }
 
+    array<string>* string::Split(char Separator)
+    {
+
+    }
+
     string* string::Reverse()
     {
         char tmp;

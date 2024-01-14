@@ -141,7 +141,7 @@ namespace neo
             bool Contains(std::initializer_list<double> Numbers);
 
             string* Read();
-            array<string*>* Split(char Separator);
+            array<string>* Split(char Separator);
             string* Reverse();
             string* Clear();
 
