@@ -903,6 +903,21 @@ namespace neo
         return !(*this == String);
     }
 
+    bool string::operator != (uint64 Number)
+    {
+        return !(*this == Number);
+    }
+
+    bool string::operator != (sint64 Number)
+    {
+        return !(*this == Number);
+    }
+
+    bool string::operator != (double Number)
+    {
+        return !(*this == Number);
+    }
+
     string* string::Insert(uint64 Index, std::initializer_list<char> Characters)
     {
         if (this->length < Index)
