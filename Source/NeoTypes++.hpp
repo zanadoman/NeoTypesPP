@@ -834,7 +834,7 @@ namespace neo
 
         if ((file = fopen(Path, "r")) != NULL)
         {
-            this->Insert(0, 1);
+            this->Insert(this->length, 1);
 
             while (true)
             {
@@ -880,8 +880,8 @@ namespace neo
 
         if ((file = fopen(Path, "r")) != NULL)
         {
-            this->Insert(0, 1);
-            this->elements[0] = new string;
+            this->Insert(this->length, 1);
+            this->elements[this->length - 1] = new string;
 
             while(true)
             {
