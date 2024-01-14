@@ -136,11 +136,11 @@ namespace neo
 
     string::string(std::initializer_list<sint64> Numbers)
     {
-        array<string*> cache;
+        array<string*> cache(Numbers.size());
 
         for (uint64 i = 0; i < Numbers.size(); i++)
         {
-            cache += {this->ToString(Numbers.begin()[i])};
+            *cache[i] = this->ToString(Numbers.begin()[i]);
         }
 
         this->length = 0;
@@ -170,11 +170,11 @@ namespace neo
 
     string::string(std::initializer_list<double> Numbers)
     {
-        array<string*> cache;
+        array<string*> cache(Numbers.size());
 
         for (uint64 i = 0; i < Numbers.size(); i++)
         {
-            cache += {this->ToString(Numbers.begin()[i])};
+            *cache[i] = this->ToString(Numbers.begin()[i]);
         }
 
         this->length = 0;
