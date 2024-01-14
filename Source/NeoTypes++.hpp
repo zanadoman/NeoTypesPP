@@ -128,6 +128,9 @@ namespace neo
             string* Insert(uint64 Index, std::initializer_list<char> Characters);
             string* Insert(uint64 Index, std::initializer_list<const char*> Literals);
             string* Insert(uint64 Index, std::initializer_list<string*> Strings);
+            string* Insert(uint64 Index, std::initializer_list<uint64> Numbers);
+            string* Insert(uint64 Index, std::initializer_list<sint64> Numbers);
+            string* Insert(uint64 Index, std::initializer_list<double> Numbers);
 
             string* Remove(uint64 Index, uint64 Length);
 
