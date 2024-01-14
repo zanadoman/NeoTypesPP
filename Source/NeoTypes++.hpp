@@ -59,7 +59,6 @@ namespace neo
             template <typename typeTMP = type> typename std::enable_if<std::is_same<typeTMP, const char*>::value, array<typeTMP>*>::type WriteFile(const char* Path);
             template <typename typeTMP = type> typename std::enable_if<std::is_same<typeTMP, string>::value, array<typeTMP>*>::type WriteFile(const char* Path);
             template <typename typeTMP = type> typename std::enable_if<std::is_same<typeTMP, string*>::value, array<typeTMP>*>::type WriteFile(const char* Path);
-            template <typename typeTMP = type> typename std::enable_if<std::is_same<typeTMP, const char*>::value, array<typeTMP>*>::type ReadFile(const char* Path);
             template <typename typeTMP = type> typename std::enable_if<std::is_same<typeTMP, string>::value, array<typeTMP>*>::type ReadFile(const char* Path);
             template <typename typeTMP = type> typename std::enable_if<std::is_same<typeTMP, string*>::value, array<typeTMP>*>::type ReadFile(const char* Path);
 
@@ -857,6 +856,54 @@ namespace neo
                 else
                 {
                     this->Insert(this->length, 1);
+                }
+            }
+
+            fclose(file);
+        }
+
+        return this;
+    }
+
+    template <typename type> template <typename typeTMP> typename std::enable_if<std::is_same<typeTMP, string*>::value, array<typeTMP>*>::type array<type>::ReadFile(const char* Path)
+    {
+        FILE* file;
+        char tmp;
+
+        if (Path == NULL)
+        {
+            printf("array.ReadFile(): Path must not be NULL\nParams: Path: %p\n", Path);
+            exit(1);
+        }
+
+        this->Clear();
+
+        if ((file = fopen(Path, "r")) != NULL)
+        {
+            this->Insert(0, 1);
+            this->elements[0] = new string;
+
+            while(true)
+            {
+                tmp = fgetc(file);
+
+                if (feof(file))
+                {
+                    if (this->elements[this->length - 1]->Length() == 1)
+                    {
+                        this->Remove(this->length - 1, 1);
+                    }
+                    break;
+                }
+
+                if (tmp != '\n')
+                {
+                    *this->elements[this->length - 1] += {tmp};
+                }
+                else
+                {
+                    this->Insert(this->length, 1);
+                    this->elements[this->length - 1] = new string;
                 }
             }
 
