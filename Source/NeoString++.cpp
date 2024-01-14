@@ -104,7 +104,7 @@ namespace neo
     {
         array<string*> cache(Numbers.size());
 
-        for (uint64 i = 0; i < Numbers.size(); i++)
+        for (uint64 i = 0; i < cache.Length(); i++)
         {
             *cache[i] = this->ToString(Numbers.begin()[i]);
         }
@@ -138,7 +138,7 @@ namespace neo
     {
         array<string*> cache(Numbers.size());
 
-        for (uint64 i = 0; i < Numbers.size(); i++)
+        for (uint64 i = 0; i < cache.Length(); i++)
         {
             *cache[i] = this->ToString(Numbers.begin()[i]);
         }
@@ -172,7 +172,7 @@ namespace neo
     {
         array<string*> cache(Numbers.size());
 
-        for (uint64 i = 0; i < Numbers.size(); i++)
+        for (uint64 i = 0; i < cache.Length(); i++)
         {
             *cache[i] = this->ToString(Numbers.begin()[i]);
         }
@@ -325,6 +325,19 @@ namespace neo
             j += Strings.begin()[i]->length - 1;
         }
         this->literal[this->length - 1] = '\0';
+
+        return this;
+    }
+
+    string* string::operator = (std::initializer_list<uint64> Numbers)
+    {
+        array<string*> cache(Numbers.size());
+        uint64 lengthPrev;
+
+        for (uint64 i = 0; i < cache.Length(); i++)
+        {
+
+        }
 
         return this;
     }
