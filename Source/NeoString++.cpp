@@ -1489,7 +1489,6 @@ namespace neo
 
         if (1 == (*(*result)[result->Length() - 1]).length)
         {
-            printf("extra remove\n");
             result->Remove(result->Length() - 1, 1);
         }
 
