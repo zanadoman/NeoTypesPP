@@ -1293,7 +1293,7 @@ namespace neo
 
         for (uint64 i = 0; i < Literals.size(); i++)
         {
-            for (uint64 j = 0; j < this->length - (cache = strLength(Literals.begin()[i]) - 1); j++)
+            for (uint64 j = 0; (cache = strLength(Literals.begin()[i])) <= this->length && j < this->length - --cache; j++)
             {
                 if (memCompare(&this->literal[j], Literals.begin()[i], sizeof(char) * cache))
                 {
@@ -1327,7 +1327,7 @@ namespace neo
 
         for (uint64 i = 0; i < Strings.size(); i++)
         {
-            for (uint64 j = 0; j < this->length - (Strings.begin()[i]->length - 1); j++)
+            for (uint64 j = 0; Strings.begin()[i]->length <= this->length && j < this->length - (Strings.begin()[i]->length - 1); j++)
             {
                 if (memCompare(&this->literal[j], Strings.begin()[i]->literal, sizeof(char) * (Strings.begin()[i]->length - 1)))
                 {
@@ -1358,15 +1358,15 @@ namespace neo
         result = false;
         for (uint64 i = 0; i < cache.Length(); i++)
         {
-            for (uint64 j = 0; j < this->length - ((*cache[i])->length - 1); j++)
+            for (uint64 j = 0; (*cache[i])->length <= this->length && j < this->length - ((*cache[i])->length - 1); j++)
             {
                 if (result == false && memCompare(&this->literal[j], (*cache[i])->literal, sizeof(char) * ((*cache[i])->length - 1)))
                 {
                     result = true;
                 }
-
-                delete *cache[i];
             }
+
+            delete *cache[i];
         }
 
         return result;
@@ -1391,15 +1391,15 @@ namespace neo
         result = false;
         for (uint64 i = 0; i < cache.Length(); i++)
         {
-            for (uint64 j = 0; j < this->length - ((*cache[i])->length - 1); j++)
+            for (uint64 j = 0; (*cache[i])->length <= this->length && j < this->length - ((*cache[i])->length - 1); j++)
             {
                 if (result == false && memCompare(&this->literal[j], (*cache[i])->literal, sizeof(char) * ((*cache[i])->length - 1)))
                 {
                     result = true;
                 }
-
-                delete *cache[i];
             }
+
+            delete *cache[i];
         }
 
         return result;
@@ -1424,15 +1424,15 @@ namespace neo
         result = false;
         for (uint64 i = 0; i < cache.Length(); i++)
         {
-            for (uint64 j = 0; j < this->length - ((*cache[i])->length - 1); j++)
+            for (uint64 j = 0; (*cache[i])->length <= this->length && j < this->length - ((*cache[i])->length - 1); j++)
             {
                 if (result == false && memCompare(&this->literal[j], (*cache[i])->literal, sizeof(char) * ((*cache[i])->length - 1)))
                 {
                     result = true;
                 }
-
-                delete *cache[i];
             }
+
+            delete *cache[i];
         }
 
         return result;
