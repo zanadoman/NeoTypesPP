@@ -259,6 +259,8 @@ namespace neo
     {
         uint64 lengthPrev;
 
+        lengthPrev = this->length;
+        this->length = 0;
         for (uint64 i = 0; i < Strings.size(); i++)
         {
             if (Strings.begin()[i] == NULL)
@@ -271,12 +273,7 @@ namespace neo
                 printf("string=: Strings[%lld] must not be Self\nParams: Strings(length): %ld\n", i, Strings.size());
                 exit(1);
             }
-        }
 
-        lengthPrev = this->length;
-        this->length = 0;
-        for (uint64 i = 0; i < Strings.size(); i++)
-        {
             this->length += Strings.begin()[i]->length - 1;
         }
 
