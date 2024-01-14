@@ -104,14 +104,10 @@ namespace neo
     {
         array<string*> cache(Numbers.size());
 
-        for (uint64 i = 0; i < cache.Length(); i++)
-        {
-            *cache[i] = this->ToString(Numbers.begin()[i]);
-        }
-
         this->length = 0;
         for (uint64 i = 0; i < cache.Length(); i++)
         {
+            *cache[i] = this->ToString(Numbers.begin()[i]);
             this->length += (*cache[i])->length - 1;
         }
 
