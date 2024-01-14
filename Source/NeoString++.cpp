@@ -828,6 +828,66 @@ namespace neo
         return memCompare(this->literal, String->literal, sizeof(char) * this->length);
     }
 
+    bool string::operator == (uint64 Number)
+    {
+        bool result;
+
+        string* tmp;
+
+        tmp = this->ToString(Number);
+
+        if (this->length != tmp->length)
+        {
+            delete tmp;
+            return false;
+        }
+
+        result = memCompare(this->literal, tmp->literal, sizeof(char) * this->length);
+        delete tmp;
+
+        return result;
+    }
+
+    bool string::operator == (sint64 Number)
+    {
+        bool result;
+
+        string* tmp;
+
+        tmp = this->ToString(Number);
+
+        if (this->length != tmp->length)
+        {
+            delete tmp;
+            return false;
+        }
+
+        result = memCompare(this->literal, tmp->literal, sizeof(char) * this->length);
+        delete tmp;
+
+        return result;
+    }
+
+    bool string::operator == (double Number)
+    {
+        bool result;
+
+        string* tmp;
+
+        tmp = this->ToString(Number);
+
+        if (this->length != tmp->length)
+        {
+            delete tmp;
+            return false;
+        }
+
+        result = memCompare(this->literal, tmp->literal, sizeof(char) * this->length);
+        delete tmp;
+
+        return result;
+    }
+
     bool string::operator != (char Character)
     {
         return !(*this == Character);
