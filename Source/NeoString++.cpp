@@ -22,7 +22,7 @@ namespace neo
             exit(1);
         }
 
-        memCopyTo(Characters.begin(), this->literal, Characters.size());
+        memCopyTo(Characters.begin(), this->literal, sizeof(char) * Characters.size());
         this->literal[this->length - 1] = '\0';
     }
 
@@ -241,7 +241,7 @@ namespace neo
             exit(1);
         }
 
-        memCopyTo(Characters.begin(), this->literal, Characters.size());
+        memCopyTo(Characters.begin(), this->literal, sizeof(char) * Characters.size());
         this->literal[this->length - 1] = '\0';
 
         return this;
