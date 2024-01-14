@@ -831,16 +831,8 @@ namespace neo
             exit(1);
         }
 
-        for (uint64 i = 0; i < this->length; i++)
-        {
-            this->allocator.destroy(&this->elements[i]);
-        }
-        if ((this->elements = (type*)realloc(this->elements, sizeof(type) * (this->length = 1))) == NULL)
-        {
-            printf("array.ReadFile(): Memory allocation failed\nParams: Path: %s\n", Path);
-            exit(1);
-        }
-        this->allocator.construct(&this->elements[0]);
+        this->Clear();
+        this->Insert(0, 1);
 
         if ((file = fopen(Path, "r")) != NULL)
         {
