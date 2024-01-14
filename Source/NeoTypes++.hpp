@@ -137,6 +137,9 @@ namespace neo
             bool Contains(std::initializer_list<char> Characters);
             bool Contains(std::initializer_list<const char*> Literals);
             bool Contains(std::initializer_list<string*> Strings);
+            bool Contains(std::initializer_list<uint64> Numbers);
+            bool Contains(std::initializer_list<sint64> Numbers);
+            bool Contains(std::initializer_list<double> Numbers);
 
             string* Read();
             array<string*>* Split(char Separator);
