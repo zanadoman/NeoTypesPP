@@ -130,14 +130,10 @@ namespace neo
     {
         array<string*> cache(Numbers.size());
 
-        for (uint64 i = 0; i < cache.Length(); i++)
-        {
-            *cache[i] = this->ToString(Numbers.begin()[i]);
-        }
-
         this->length = 0;
         for (uint64 i = 0; i < cache.Length(); i++)
         {
+            *cache[i] = this->ToString(Numbers.begin()[i]);
             this->length += (*cache[i])->length - 1;
         }
 
@@ -151,27 +147,19 @@ namespace neo
         {
             memCopyTo((*cache[i])->literal, &this->literal[j], sizeof(char) * ((*cache[i])->length - 1));
             j += (*cache[i])->length - 1;
-        }
-        this->literal[this->length - 1] = '\0';
-
-        for (uint64 i = 0; i < cache.Length(); i++)
-        {
             delete *cache[i];
         }
+        this->literal[this->length - 1] = '\0';
     }
 
     string::string(std::initializer_list<double> Numbers)
     {
         array<string*> cache(Numbers.size());
 
-        for (uint64 i = 0; i < cache.Length(); i++)
-        {
-            *cache[i] = this->ToString(Numbers.begin()[i]);
-        }
-
         this->length = 0;
         for (uint64 i = 0; i < cache.Length(); i++)
         {
+            *cache[i] = this->ToString(Numbers.begin()[i]);
             this->length += (*cache[i])->length - 1;
         }
 
@@ -185,13 +173,9 @@ namespace neo
         {
             memCopyTo((*cache[i])->literal, &this->literal[j], sizeof(char) * ((*cache[i])->length - 1));
             j += (*cache[i])->length - 1;
-        }
-        this->literal[this->length - 1] = '\0';
-
-        for (uint64 i = 0; i < cache.Length(); i++)
-        {
             delete *cache[i];
         }
+        this->literal[this->length - 1] = '\0';
     }
 
     string::~string()
@@ -322,6 +306,66 @@ namespace neo
     }
 
     string* string::operator = (std::initializer_list<uint64> Numbers)
+    {
+        array<string*> cache(Numbers.size());
+        uint64 lengthPrev;
+
+        lengthPrev = this->length;
+        this->length = 0;
+        for (uint64 i = 0; i < cache.Length(); i++)
+        {
+            *cache[i] = this->ToString(Numbers.begin()[i]);
+            this->length += (*cache[i])->length - 1;
+        }
+
+        if ((this->length += 1) != lengthPrev && (this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
+        {
+            printf("string=: Memory allocation failed\nParams: Numbers(length): %ld\n", Numbers.size());
+            exit(1);
+        }
+
+        for (uint64 i = 0, j = 0; i < cache.Length(); i++)
+        {
+            memCopyTo((*cache[i])->literal, &this->literal[j], sizeof(char) * ((*cache[i])->length - 1));
+            j += (*cache[i])->length - 1;
+            delete *cache[i];
+        }
+        this->literal[this->length - 1] = '\0';
+
+        return this;
+    }
+
+    string* string::operator = (std::initializer_list<sint64> Numbers)
+    {
+        array<string*> cache(Numbers.size());
+        uint64 lengthPrev;
+
+        lengthPrev = this->length;
+        this->length = 0;
+        for (uint64 i = 0; i < cache.Length(); i++)
+        {
+            *cache[i] = this->ToString(Numbers.begin()[i]);
+            this->length += (*cache[i])->length - 1;
+        }
+
+        if ((this->length += 1) != lengthPrev && (this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
+        {
+            printf("string=: Memory allocation failed\nParams: Numbers(length): %ld\n", Numbers.size());
+            exit(1);
+        }
+
+        for (uint64 i = 0, j = 0; i < cache.Length(); i++)
+        {
+            memCopyTo((*cache[i])->literal, &this->literal[j], sizeof(char) * ((*cache[i])->length - 1));
+            j += (*cache[i])->length - 1;
+            delete *cache[i];
+        }
+        this->literal[this->length - 1] = '\0';
+
+        return this;
+    }
+
+    string* string::operator = (std::initializer_list<double> Numbers)
     {
         array<string*> cache(Numbers.size());
         uint64 lengthPrev;
