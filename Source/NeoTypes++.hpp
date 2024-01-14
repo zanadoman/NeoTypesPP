@@ -891,6 +891,7 @@ namespace neo
                 {
                     if (this->elements[this->length - 1]->Length() == 1)
                     {
+                        delete this->elements[this->length - 1];
                         this->Remove(this->length - 1, 1);
                     }
                     break;
