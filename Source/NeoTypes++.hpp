@@ -111,7 +111,6 @@ namespace neo
             string* operator += (std::initializer_list<sint64> Numbers);
             string* operator += (std::initializer_list<double> Numbers);
 
-
             bool operator == (char Character);
             bool operator == (const char* Literal);
             bool operator == (string* String);
