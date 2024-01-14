@@ -1464,6 +1464,20 @@ namespace neo
         return this;
     }
 
+    string* string::Reverse()
+    {
+        char tmp;
+
+        for (uint64 i = 0; i < (this->length - 1) / 2; i++)
+        {
+            tmp = this->literal[i];
+            this->literal[i] = this->literal[this->length - 2 - i];
+            this->literal[this->length - 2 - i] = tmp;
+        }
+
+        return this;
+    }
+
     uint64 string::ToUINT()
     {
         uint64 result;
