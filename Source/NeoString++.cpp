@@ -1228,6 +1228,11 @@ namespace neo
         {
             if ((this->length -= Length) == 1)
             {
+                if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
+                {
+                    printf("string.Remove(): Memory allocation failed\nParams: Index: %lld, Length: %lld\n", Index, Length);
+                    exit(1);
+                }
                 this->literal[0] = '\0';
             }
             else
