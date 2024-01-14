@@ -522,10 +522,6 @@ namespace neo
             for (uint64 i = this->length - 1; Index + Length <= i; i--)
             {
                 this->elements[i] = this->elements[i - Length];
-            }
-
-            for (uint64 i = Index; i < Index + Length; i++)
-            {
                 this->allocator.construct(&this->elements[i]);
             }
         }
