@@ -3,7 +3,6 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cmath>
-#include <memory>
 #include <initializer_list>
 
 namespace neo
@@ -65,8 +64,6 @@ namespace neo
             array<type>* Clear();
 
         private:
-            std::allocator<type> allocator;
-
             uint64 length;
             type* elements;
     };
@@ -194,7 +191,7 @@ namespace neo
 
             for (uint64 i = 0; i < this->Length(); i++)
             {
-                this->allocator.construct(&this->elements[i]);
+                new (&this->elements[i]) type();
             }
         }
     }
@@ -261,7 +258,7 @@ namespace neo
     {
         for (uint64 i = 0; i < this->length; i++)
         {
-            this->allocator.destroy(&this->elements[i]);
+            this->elements[i].~type();
         }
 
         free(this->elements);
@@ -287,7 +284,7 @@ namespace neo
     {
         for (uint64 i = 0; i < this->length; i++)
         {
-            this->allocator.destroy(&this->elements[i]);
+            this->elements[i].~type();
         }
 
         if (Elements.size() == 0)
@@ -316,7 +313,7 @@ namespace neo
 
         for (uint64 i = 0; i < this->length; i++)
         {
-            this->allocator.destroy(&this->elements[i]);
+            this->elements[i].~type();
         }
 
         if (Arrays.size() == 0)
@@ -524,7 +521,7 @@ namespace neo
 
             for (uint64 i = Index; i < Index + Length; i++)
             {
-                this->allocator.construct(&this->elements[i]);
+                new (&this->elements[i]) type();
             }
         }
 
@@ -625,7 +622,7 @@ namespace neo
         {
             for (uint64 i = Index; i < Index + Length; i++)
             {
-                this->allocator.destroy(&this->elements[i]);
+                this->elements[i].~type();
             }
 
             if ((this->length -= Length) == 0)
@@ -918,7 +915,7 @@ namespace neo
     {
         for (uint64 i = 0; i < this->length; i++)
         {
-            this->allocator.destroy(&this->elements[i]);
+            this->elements[i].~type();
         }
 
         this->length = 0;
