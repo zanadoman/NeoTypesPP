@@ -106,7 +106,7 @@ namespace neo
 
         for (uint64 i = 0; i < Numbers.size(); i++)
         {
-            *cache[i] = {this->ToString(Numbers.begin()[i])};
+            *cache[i] = this->ToString(Numbers.begin()[i]);
         }
 
         this->length = 0;
