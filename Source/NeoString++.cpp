@@ -1471,7 +1471,30 @@ namespace neo
 
     array<string>* string::Split(char Separator)
     {
+        array<string>* result;
 
+        FILE* file;
+
+        result = new array<string>(1);
+
+        for (uint64 i = 0; i < this->length - 1; i++)
+        {
+            if (this->literal[i] != Separator)
+            {
+                *(*result)[result->Length()] += {this->literal[i]};
+            }
+            else if (1 < (*(*result)[i]).length)
+            {
+                result->Insert(result->Length(), 1);
+            }
+        }
+
+        if (1 == (*(*result)[result->Length() - 1]).length)
+        {
+            result->Remove(result->Length() - 1, 1);
+        }
+
+        return result;
     }
 
     string* string::Reverse()
