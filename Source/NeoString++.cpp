@@ -1350,7 +1350,7 @@ namespace neo
             return false;
         }
 
-        for (uint64 i = 0; i < Numbers.size(); i++)
+        for (uint64 i = 0; i < cache.Length(); i++)
         {
             *cache[i] = this->ToString(Numbers.begin()[i]);
         }
