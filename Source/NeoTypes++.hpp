@@ -572,6 +572,7 @@ namespace neo
 
         if (Arrays.size() != 0)
         {
+            lengthPrev = this->length;
             for (uint64 i = 0; i < Arrays.size(); i++)
             {
                 if (Arrays.begin()[i] == NULL)
@@ -584,11 +585,7 @@ namespace neo
                     printf("array.Insert(): Array must not be Self\nParams: Index: %lld, Arrays(type, length): %ld, %ld\n", Index, sizeof(type), Arrays.size());
                     exit(1);
                 }
-            }
 
-            lengthPrev = this->length;
-            for (uint64 i = 0; i < Arrays.size(); i++)
-            {
                 this->length += Arrays.begin()[i]->length;
             }
 
