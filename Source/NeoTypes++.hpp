@@ -228,6 +228,7 @@ namespace neo
         }
         else
         {
+            this->length = 0;
             for (uint64 i = 0; i < Arrays.size(); i++)
             {
                 if (Arrays.begin()[i] == NULL)
@@ -240,11 +241,7 @@ namespace neo
                     printf("array(): Arrays[%lld] must not be Self\nParams: Arrays(type, length): %ld, %ld\n", i, sizeof(type), Arrays.size());
                     exit(1);
                 }
-            }
 
-            this->length = 0;
-            for (uint64 i = 0; i < Arrays.size(); i++)
-            {
                 this->length += Arrays.begin()[i]->length;
             }
 
