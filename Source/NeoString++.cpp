@@ -1205,7 +1205,7 @@ namespace neo
             for (i = 1; 10 <= (uint64)round(fraction) / i; i *= 10);
             for (; 0 < i; i /= 10)
             {
-                *result += {(char)(fraction / i + '0')};
+                *result += {(char)((uint64)round(fraction) / i + '0')};
                 fraction = (uint64)round(fraction) % i;
             }
         }
