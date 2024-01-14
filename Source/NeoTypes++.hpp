@@ -854,7 +854,7 @@ namespace neo
                 {
                     this->elements[this->length - 1] += {tmp};
                 }
-                else if (1 < this->elements[this->length - 1].Length())
+                else
                 {
                     this->Insert(this->length, 1);
                 }
