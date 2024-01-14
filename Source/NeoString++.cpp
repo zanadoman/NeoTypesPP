@@ -505,6 +505,23 @@ namespace neo
                 *cache[i] = this->ToString(Numbers.begin()[i]);
                 this->length += (*cache[i])->length - 1;
             }
+
+            if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
+            {
+                printf("string-=: Memory allocation failed\nParams: Numbers(length): %ld\n", Numbers.size());
+                exit(1);
+            }
+
+            for (uint64 i = this->length - 1; this->length - lengthPrev <= i; i--)
+            {
+                this->literal[i] = this->literal[i - (this->length - lengthPrev)];
+            }
+
+            for (uint64 i = 0, j = 0; i < cache.Length(); i++)
+            {
+                memCopyTo((*cache[i])->literal, &this->literal[j], sizeof(char) * ((*cache[i])->length - 1));
+                j += (*cache[i])->length - 1;
+            }
         }
 
         return this;
