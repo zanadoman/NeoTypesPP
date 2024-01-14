@@ -832,10 +832,11 @@ namespace neo
         }
 
         this->Clear();
-        this->Insert(0, 1);
 
         if ((file = fopen(Path, "r")) != NULL)
         {
+            this->Insert(0, 1);
+
             while (true)
             {
                 tmp = fgetc(file);
@@ -858,9 +859,9 @@ namespace neo
                     this->Insert(this->length, 1);
                 }
             }
-        }
 
-        fclose(file);
+            fclose(file);
+        }
 
         return this;
     }
