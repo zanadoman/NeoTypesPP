@@ -187,7 +187,7 @@ namespace neo
         return this->literal;
     }
 
-    char* string::operator [] (uint64 Index)
+    char& string::operator [] (uint64 Index)
     {
         if (this->length <= Index)
         {
@@ -200,7 +200,7 @@ namespace neo
             exit(1);
         }
 
-        return &this->literal[Index];
+        return this->literal[Index];
     }
 
     string* string::operator = (std::initializer_list<char> Characters)

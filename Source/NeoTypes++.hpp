@@ -85,7 +85,7 @@ namespace neo
 
             uint64 Length();
             const char* operator () ();
-            char* operator [] (uint64 Index);
+            char& operator [] (uint64 Index);
 
             string* operator = (std::initializer_list<char> Characters);
             string* operator = (std::initializer_list<const char*> Literals);
