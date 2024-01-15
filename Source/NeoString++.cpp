@@ -101,8 +101,8 @@ namespace neo
         this->length = 0;
         for (uint64 i = 0; i < cache.Length(); i++)
         {
-            *cache[i] = this->ToString(Numbers.begin()[i]);
-            this->length += (*cache[i])->length - 1;
+            cache[i] = this->ToString(Numbers.begin()[i]);
+            this->length += cache[i]->length - 1;
         }
 
         if ((this->literal = (char*)malloc(sizeof(char) * ++this->length)) == NULL)
@@ -113,9 +113,9 @@ namespace neo
 
         for (uint64 i = 0, j = 0; i < cache.Length(); i++)
         {
-            memCopyTo((*cache[i])->literal, &this->literal[j], sizeof(char) * ((*cache[i])->length - 1));
-            j += (*cache[i])->length - 1;
-            delete *cache[i];
+            memCopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
+            j += cache[i]->length - 1;
+            delete cache[i];
         }
         this->literal[this->length - 1] = '\0';
     }
@@ -127,8 +127,8 @@ namespace neo
         this->length = 0;
         for (uint64 i = 0; i < cache.Length(); i++)
         {
-            *cache[i] = this->ToString(Numbers.begin()[i]);
-            this->length += (*cache[i])->length - 1;
+            cache[i] = this->ToString(Numbers.begin()[i]);
+            this->length += cache[i]->length - 1;
         }
 
         if ((this->literal = (char*)malloc(sizeof(char) * ++this->length)) == NULL)
@@ -139,9 +139,9 @@ namespace neo
 
         for (uint64 i = 0, j = 0; i < cache.Length(); i++)
         {
-            memCopyTo((*cache[i])->literal, &this->literal[j], sizeof(char) * ((*cache[i])->length - 1));
-            j += (*cache[i])->length - 1;
-            delete *cache[i];
+            memCopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
+            j += cache[i]->length - 1;
+            delete cache[i];
         }
         this->literal[this->length - 1] = '\0';
     }
@@ -153,8 +153,8 @@ namespace neo
         this->length = 0;
         for (uint64 i = 0; i < cache.Length(); i++)
         {
-            *cache[i] = this->ToString(Numbers.begin()[i]);
-            this->length += (*cache[i])->length - 1;
+            cache[i] = this->ToString(Numbers.begin()[i]);
+            this->length += cache[i]->length - 1;
         }
 
         if ((this->literal = (char*)malloc(sizeof(char) * ++this->length)) == NULL)
@@ -165,9 +165,9 @@ namespace neo
 
         for (uint64 i = 0, j = 0; i < cache.Length(); i++)
         {
-            memCopyTo((*cache[i])->literal, &this->literal[j], sizeof(char) * ((*cache[i])->length - 1));
-            j += (*cache[i])->length - 1;
-            delete *cache[i];
+            memCopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
+            j += cache[i]->length - 1;
+            delete cache[i];
         }
         this->literal[this->length - 1] = '\0';
     }
@@ -302,8 +302,8 @@ namespace neo
         this->length = 0;
         for (uint64 i = 0; i < cache.Length(); i++)
         {
-            *cache[i] = this->ToString(Numbers.begin()[i]);
-            this->length += (*cache[i])->length - 1;
+            cache[i] = this->ToString(Numbers.begin()[i]);
+            this->length += cache[i]->length - 1;
         }
 
         if ((this->length += 1) != lengthPrev && (this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
@@ -314,9 +314,9 @@ namespace neo
 
         for (uint64 i = 0, j = 0; i < cache.Length(); i++)
         {
-            memCopyTo((*cache[i])->literal, &this->literal[j], sizeof(char) * ((*cache[i])->length - 1));
-            j += (*cache[i])->length - 1;
-            delete *cache[i];
+            memCopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
+            j += cache[i]->length - 1;
+            delete cache[i];
         }
         this->literal[this->length - 1] = '\0';
 
@@ -332,8 +332,8 @@ namespace neo
         this->length = 0;
         for (uint64 i = 0; i < cache.Length(); i++)
         {
-            *cache[i] = this->ToString(Numbers.begin()[i]);
-            this->length += (*cache[i])->length - 1;
+            cache[i] = this->ToString(Numbers.begin()[i]);
+            this->length += cache[i]->length - 1;
         }
 
         if ((this->length += 1) != lengthPrev && (this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
@@ -344,9 +344,9 @@ namespace neo
 
         for (uint64 i = 0, j = 0; i < cache.Length(); i++)
         {
-            memCopyTo((*cache[i])->literal, &this->literal[j], sizeof(char) * ((*cache[i])->length - 1));
-            j += (*cache[i])->length - 1;
-            delete *cache[i];
+            memCopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
+            j += cache[i]->length - 1;
+            delete cache[i];
         }
         this->literal[this->length - 1] = '\0';
 
@@ -362,8 +362,8 @@ namespace neo
         this->length = 0;
         for (uint64 i = 0; i < cache.Length(); i++)
         {
-            *cache[i] = this->ToString(Numbers.begin()[i]);
-            this->length += (*cache[i])->length - 1;
+            cache[i] = this->ToString(Numbers.begin()[i]);
+            this->length += cache[i]->length - 1;
         }
 
         if ((this->length += 1) != lengthPrev && (this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
@@ -374,9 +374,9 @@ namespace neo
 
         for (uint64 i = 0, j = 0; i < cache.Length(); i++)
         {
-            memCopyTo((*cache[i])->literal, &this->literal[j], sizeof(char) * ((*cache[i])->length - 1));
-            j += (*cache[i])->length - 1;
-            delete *cache[i];
+            memCopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
+            j += cache[i]->length - 1;
+            delete cache[i];
         }
         this->literal[this->length - 1] = '\0';
 
@@ -502,8 +502,8 @@ namespace neo
             lengthPrev = this->length;
             for (uint64 i = 0; i < cache.Length(); i++)
             {
-                *cache[i] = this->ToString(Numbers.begin()[i]);
-                this->length += (*cache[i])->length - 1;
+                cache[i] = this->ToString(Numbers.begin()[i]);
+                this->length += cache[i]->length - 1;
             }
 
             if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
@@ -519,9 +519,9 @@ namespace neo
 
             for (uint64 i = 0, j = 0; i < cache.Length(); i++)
             {
-                memCopyTo((*cache[i])->literal, &this->literal[j], sizeof(char) * ((*cache[i])->length - 1));
-                j += (*cache[i])->length - 1;
-                delete *cache[i];
+                memCopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
+                j += cache[i]->length - 1;
+                delete cache[i];
             }
         }
 
@@ -538,8 +538,8 @@ namespace neo
             lengthPrev = this->length;
             for (uint64 i = 0; i < cache.Length(); i++)
             {
-                *cache[i] = this->ToString(Numbers.begin()[i]);
-                this->length += (*cache[i])->length - 1;
+                cache[i] = this->ToString(Numbers.begin()[i]);
+                this->length += cache[i]->length - 1;
             }
 
             if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
@@ -555,9 +555,9 @@ namespace neo
 
             for (uint64 i = 0, j = 0; i < cache.Length(); i++)
             {
-                memCopyTo((*cache[i])->literal, &this->literal[j], sizeof(char) * ((*cache[i])->length - 1));
-                j += (*cache[i])->length - 1;
-                delete *cache[i];
+                memCopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
+                j += cache[i]->length - 1;
+                delete cache[i];
             }
         }
 
@@ -574,8 +574,8 @@ namespace neo
             lengthPrev = this->length;
             for (uint64 i = 0; i < cache.Length(); i++)
             {
-                *cache[i] = this->ToString(Numbers.begin()[i]);
-                this->length += (*cache[i])->length - 1;
+                cache[i] = this->ToString(Numbers.begin()[i]);
+                this->length += cache[i]->length - 1;
             }
 
             if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
@@ -591,9 +591,9 @@ namespace neo
 
             for (uint64 i = 0, j = 0; i < cache.Length(); i++)
             {
-                memCopyTo((*cache[i])->literal, &this->literal[j], sizeof(char) * ((*cache[i])->length - 1));
-                j += (*cache[i])->length - 1;
-                delete *cache[i];
+                memCopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
+                j += cache[i]->length - 1;
+                delete cache[i];
             }
         }
 
@@ -707,8 +707,8 @@ namespace neo
             lengthPrev = this->length;
             for (uint64 i = 0; i < cache.Length(); i++)
             {
-                *cache[i] = this->ToString(Numbers.begin()[i]);
-                this->length += (*cache[i])->length - 1;
+                cache[i] = this->ToString(Numbers.begin()[i]);
+                this->length += cache[i]->length - 1;
             }
 
             if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
@@ -719,9 +719,9 @@ namespace neo
 
             for (uint64 i = 0, j = lengthPrev - 1; i < cache.Length(); i++)
             {
-                memCopyTo((*cache[i])->literal, &this->literal[j], sizeof(char) * ((*cache[i])->length - 1));
-                j += (*cache[i])->length - 1;
-                delete *cache[i];
+                memCopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
+                j += cache[i]->length - 1;
+                delete cache[i];
             }
             this->literal[this->length - 1] = '\0';
         }
@@ -739,8 +739,8 @@ namespace neo
             lengthPrev = this->length;
             for (uint64 i = 0; i < cache.Length(); i++)
             {
-                *cache[i] = this->ToString(Numbers.begin()[i]);
-                this->length += (*cache[i])->length - 1;
+                cache[i] = this->ToString(Numbers.begin()[i]);
+                this->length += cache[i]->length - 1;
             }
 
             if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
@@ -751,9 +751,9 @@ namespace neo
 
             for (uint64 i = 0, j = lengthPrev - 1; i < cache.Length(); i++)
             {
-                memCopyTo((*cache[i])->literal, &this->literal[j], sizeof(char) * ((*cache[i])->length - 1));
-                j += (*cache[i])->length - 1;
-                delete *cache[i];
+                memCopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
+                j += cache[i]->length - 1;
+                delete cache[i];
             }
             this->literal[this->length - 1] = '\0';
         }
@@ -771,8 +771,8 @@ namespace neo
             lengthPrev = this->length;
             for (uint64 i = 0; i < cache.Length(); i++)
             {
-                *cache[i] = this->ToString(Numbers.begin()[i]);
-                this->length += (*cache[i])->length - 1;
+                cache[i] = this->ToString(Numbers.begin()[i]);
+                this->length += cache[i]->length - 1;
             }
 
             if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
@@ -783,9 +783,9 @@ namespace neo
 
             for (uint64 i = 0, j = lengthPrev - 1; i < cache.Length(); i++)
             {
-                memCopyTo((*cache[i])->literal, &this->literal[j], sizeof(char) * ((*cache[i])->length - 1));
-                j += (*cache[i])->length - 1;
-                delete *cache[i];
+                memCopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
+                j += cache[i]->length - 1;
+                delete cache[i];
             }
             this->literal[this->length - 1] = '\0';
         }
@@ -1081,8 +1081,8 @@ namespace neo
             lengthPrev = this->length;
             for (uint64 i = 0; i < cache.Length(); i++)
             {
-                *cache[i] = this->ToString(Numbers.begin()[i]);
-                this->length += (*cache[i])->length - 1;
+                cache[i] = this->ToString(Numbers.begin()[i]);
+                this->length += cache[i]->length - 1;
             }
 
             if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
@@ -1098,9 +1098,9 @@ namespace neo
 
             for (uint64 i = 0, j = Index; i < cache.Length(); i++)
             {
-                memCopyTo((*cache[i])->literal, &this->literal[j], sizeof(char) * ((*cache[i])->length - 1));
-                j += (*cache[i])->length - 1;
-                delete *cache[i];
+                memCopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
+                j += cache[i]->length - 1;
+                delete cache[i];
             }
         }
 
@@ -1128,8 +1128,8 @@ namespace neo
             lengthPrev = this->length;
             for (uint64 i = 0; i < cache.Length(); i++)
             {
-                *cache[i] = this->ToString(Numbers.begin()[i]);
-                this->length += (*cache[i])->length - 1;
+                cache[i] = this->ToString(Numbers.begin()[i]);
+                this->length += cache[i]->length - 1;
             }
 
             if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
@@ -1145,9 +1145,9 @@ namespace neo
 
             for (uint64 i = 0, j = Index; i < cache.Length(); i++)
             {
-                memCopyTo((*cache[i])->literal, &this->literal[j], sizeof(char) * ((*cache[i])->length - 1));
-                j += (*cache[i])->length - 1;
-                delete *cache[i];
+                memCopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
+                j += cache[i]->length - 1;
+                delete cache[i];
             }
         }
 
@@ -1175,8 +1175,8 @@ namespace neo
             lengthPrev = this->length;
             for (uint64 i = 0; i < cache.Length(); i++)
             {
-                *cache[i] = this->ToString(Numbers.begin()[i]);
-                this->length += (*cache[i])->length - 1;
+                cache[i] = this->ToString(Numbers.begin()[i]);
+                this->length += cache[i]->length - 1;
             }
 
             if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
@@ -1192,9 +1192,9 @@ namespace neo
 
             for (uint64 i = 0, j = Index; i < cache.Length(); i++)
             {
-                memCopyTo((*cache[i])->literal, &this->literal[j], sizeof(char) * ((*cache[i])->length - 1));
-                j += (*cache[i])->length - 1;
-                delete *cache[i];
+                memCopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
+                j += cache[i]->length - 1;
+                delete cache[i];
             }
         }
 
@@ -1357,21 +1357,21 @@ namespace neo
 
         for (uint64 i = 0; i < cache.Length(); i++)
         {
-            *cache[i] = this->ToString(Numbers.begin()[i]);
+            cache[i] = this->ToString(Numbers.begin()[i]);
         }
 
         result = false;
         for (uint64 i = 0; i < cache.Length(); i++)
         {
-            for (uint64 j = 0; (*cache[i])->length <= this->length && j < this->length - ((*cache[i])->length - 1); j++)
+            for (uint64 j = 0; cache[i]->length <= this->length && j < this->length - (cache[i]->length - 1); j++)
             {
-                if (result == false && memCompare(&this->literal[j], (*cache[i])->literal, sizeof(char) * ((*cache[i])->length - 1)))
+                if (result == false && memCompare(&this->literal[j], cache[i]->literal, sizeof(char) * (cache[i]->length - 1)))
                 {
                     result = true;
                 }
             }
 
-            delete *cache[i];
+            delete cache[i];
         }
 
         return result;
@@ -1390,21 +1390,21 @@ namespace neo
 
         for (uint64 i = 0; i < cache.Length(); i++)
         {
-            *cache[i] = this->ToString(Numbers.begin()[i]);
+            cache[i] = this->ToString(Numbers.begin()[i]);
         }
 
         result = false;
         for (uint64 i = 0; i < cache.Length(); i++)
         {
-            for (uint64 j = 0; (*cache[i])->length <= this->length && j < this->length - ((*cache[i])->length - 1); j++)
+            for (uint64 j = 0; cache[i]->length <= this->length && j < this->length - (cache[i]->length - 1); j++)
             {
-                if (result == false && memCompare(&this->literal[j], (*cache[i])->literal, sizeof(char) * ((*cache[i])->length - 1)))
+                if (result == false && memCompare(&this->literal[j], cache[i]->literal, sizeof(char) * (cache[i]->length - 1)))
                 {
                     result = true;
                 }
             }
 
-            delete *cache[i];
+            delete cache[i];
         }
 
         return result;
@@ -1423,21 +1423,21 @@ namespace neo
 
         for (uint64 i = 0; i < cache.Length(); i++)
         {
-            *cache[i] = this->ToString(Numbers.begin()[i]);
+            cache[i] = this->ToString(Numbers.begin()[i]);
         }
 
         result = false;
         for (uint64 i = 0; i < cache.Length(); i++)
         {
-            for (uint64 j = 0; (*cache[i])->length <= this->length && j < this->length - ((*cache[i])->length - 1); j++)
+            for (uint64 j = 0; cache[i]->length <= this->length && j < this->length - (cache[i]->length - 1); j++)
             {
-                if (result == false && memCompare(&this->literal[j], (*cache[i])->literal, sizeof(char) * ((*cache[i])->length - 1)))
+                if (result == false && memCompare(&this->literal[j], cache[i]->literal, sizeof(char) * (cache[i]->length - 1)))
                 {
                     result = true;
                 }
             }
 
-            delete *cache[i];
+            delete cache[i];
         }
 
         return result;
@@ -1479,15 +1479,15 @@ namespace neo
         {
             if (this->literal[i] != Separator)
             {
-                *(*result)[result->Length() - 1] += {this->literal[i]};
+                (*result)[result->Length() - 1] += {this->literal[i]};
             }
-            else if (1 < (*(*result)[result->Length() - 1]).length)
+            else if (1 < (*result)[result->Length() - 1].length)
             {
                 result->Insert(result->Length(), 1);
             }
         }
 
-        if (1 == (*(*result)[result->Length() - 1]).length)
+        if (1 == (*result)[result->Length() - 1].length)
         {
             result->Remove(result->Length() - 1, 1);
         }

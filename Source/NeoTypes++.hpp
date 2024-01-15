@@ -3,6 +3,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cmath>
+#include <memory>
 #include <initializer_list>
 
 namespace neo
@@ -33,7 +34,7 @@ namespace neo
             ~array();
 
             uint64 Length();
-            type* operator [] (uint64 Index);
+            type& operator [] (uint64 Index);
 
             array<type>* operator = (std::initializer_list<type> Elements);
             array<type>* operator = (std::initializer_list<array<type>*> Arrays);
@@ -269,7 +270,7 @@ namespace neo
         return this->length;
     }
 
-    template <typename type> type* array<type>::operator [] (uint64 Index)
+    template <typename type> type& array<type>::operator [] (uint64 Index)
     {
         if (this->length <= Index)
         {
@@ -277,7 +278,7 @@ namespace neo
             exit(1);
         }
 
-        return &this->elements[Index];
+        return this->elements[Index];
     }
 
     template <typename type> array<type>* array<type>::operator = (std::initializer_list<type> Elements)
