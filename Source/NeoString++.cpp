@@ -1225,27 +1225,15 @@ namespace neo
 
         if (Length != 0)
         {
-            if ((this->length -= Length) == 1)
+            for (uint64 i = Index; i < this->length; i++)
             {
-                if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
-                {
-                    printf("string.Remove(): Memory allocation failed\nParams: Index: %lld, Length: %lld\n", Index, Length);
-                    exit(1);
-                }
-                this->literal[0] = '\0';
+                this->literal[i] = this->literal[i + Length];
             }
-            else
-            {
-                for (uint64 i = Index; i < this->length; i++)
-                {
-                    this->literal[i] = this->literal[i + Length];
-                }
 
-                if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
-                {
-                    printf("string.Remove(): Memory allocation failed\nParams: Index: %lld, Length: %lld\n", Index, Length);
-                    exit(1);
-                }
+            if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
+            {
+                printf("string.Remove(): Memory allocation failed\nParams: Index: %lld, Length: %lld\n", Index, Length);
+                exit(1);
             }
         }
 
