@@ -101,8 +101,7 @@ namespace neo
             return NULL;
         }
 
-        result = malloc(Size);
-        if (result == NULL)
+        if ((result = malloc(Size)) == NULL)
         {
             printf("memLoad(): Memory allocation failed\nParams: FilePath: %s, Size: %lld\n", FilePath, Size);
             exit(1);
