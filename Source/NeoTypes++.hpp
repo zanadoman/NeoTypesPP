@@ -680,6 +680,10 @@ namespace neo
                 printf("array.Contains(): Arrays[%lld] must not be NULL\nParams: Arrays(type, length): %ld, %ld\n", i, sizeof(type), Arrays.size());
                 exit(1);
             }
+            if (Arrays.begin()[i] == this)
+            {
+                return true;
+            }
         }
 
         if (this->length == 0 || Arrays.size() == 0)
