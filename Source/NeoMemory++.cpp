@@ -130,10 +130,6 @@ namespace neo
             printf("memLoadTo(): NULL Destination with non-zero Size\nParams: FilePath: %s, Destination: %p, Size: %lld\n", FilePath, Destination, Size);
             exit(1);
         }
-        if (Size == 0)
-        {
-            return 0;
-        }
 
         if ((file = fopen(FilePath, "r")) == NULL)
         {
@@ -162,10 +158,6 @@ namespace neo
         {
             printf("memSave(): NULL FilePath with non-zero Size\nParams: Source: %p, Size: %lld, FilePath: %s\n", Source, Size, FilePath);
             exit(1);
-        }
-        if (Size == 0)
-        {
-            return 0;
         }
 
         if ((file = fopen(FilePath, "w")) == NULL)
