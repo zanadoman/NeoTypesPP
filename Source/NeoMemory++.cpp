@@ -135,8 +135,7 @@ namespace neo
             return 0;
         }
 
-        file = fopen(FilePath, "r");
-        if (file == NULL)
+        if ((file = fopen(FilePath, "r")) == NULL)
         {
             return 1;
         }
