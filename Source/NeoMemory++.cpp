@@ -154,7 +154,7 @@ namespace neo
             printf("memSave(): NULL Source with non-zero Size\nParams: Source: %p, Size: %lld, FilePath: %s\n", Source, Size, FilePath);
             exit(1);
         }
-        if (FilePath == NULL && Size != 0)
+        if (FilePath == NULL)
         {
             printf("memSave(): NULL FilePath with non-zero Size\nParams: Source: %p, Size: %lld, FilePath: %s\n", Source, Size, FilePath);
             exit(1);
