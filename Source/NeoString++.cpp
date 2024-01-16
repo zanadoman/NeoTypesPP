@@ -1225,6 +1225,8 @@ namespace neo
 
         if (Length != 0)
         {
+            this->length -= Length;
+
             for (uint64 i = Index; i < this->length; i++)
             {
                 this->literal[i] = this->literal[i + Length];
