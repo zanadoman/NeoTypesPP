@@ -678,6 +678,11 @@ namespace neo
                 printf("array.Contains(): Arrays[%lld] must not be NULL\nParams: Arrays(type, length): %ld, %ld\n", i, sizeof(type), Arrays.size());
                 exit(1);
             }
+            if (Arrays.begin()[i] == this)
+            {
+                printf("array.Contains(): Arrays[%lld] must not be Self\nParams: Arrays(type, length): %ld, %ld\n", i, sizeof(type), Arrays.size());
+                exit(1);
+            }
         }
 
         if (this->length == 0 || Arrays.size() == 0)
@@ -689,11 +694,6 @@ namespace neo
         {
             for (uint64 j = 0; j < Arrays.size(); j++)
             {
-                if (this == Arrays.begin()[j])
-                {
-                    return true;
-                }
-
                 for (uint64 k = 0; k < Arrays.begin()[j]->length; k++)
                 {
                     if (this->elements[i] == Arrays.begin()[j]->elements[k])
