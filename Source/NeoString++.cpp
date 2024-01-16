@@ -1244,7 +1244,7 @@ namespace neo
 
     bool string::Contains(std::initializer_list<char> Characters)
     {
-        if (this->length < 2 || Characters.size() == 0)
+        if (this->length <= 1 || Characters.size() == 0)
         {
             return false;
         }
@@ -1280,7 +1280,7 @@ namespace neo
             }
         }
 
-        if (this->length < 2 || Literals.size() == 0)
+        if (this->length <= 1 || Literals.size() == 0)
         {
             return false;
         }
@@ -1314,7 +1314,7 @@ namespace neo
             }
         }
 
-        if (this->length < 2 || Strings.size() == 0)
+        if (this->length <= 1 || Strings.size() == 0)
         {
             return false;
         }
@@ -1339,7 +1339,7 @@ namespace neo
 
         array<string*> cache(Numbers.size());
 
-        if (this->length < 2 || cache.Length() == 0)
+        if (this->length <= 1 || cache.Length() == 0)
         {
             return false;
         }
@@ -1372,7 +1372,7 @@ namespace neo
 
         array<string*> cache(Numbers.size());
 
-        if (this->length < 2 || cache.Length() == 0)
+        if (this->length <= 1 || cache.Length() == 0)
         {
             return false;
         }
@@ -1405,7 +1405,7 @@ namespace neo
 
         array<string*> cache(Numbers.size());
 
-        if (this->length < 2 || cache.Length() == 0)
+        if (this->length <= 1 || cache.Length() == 0)
         {
             return false;
         }
