@@ -140,7 +140,6 @@ namespace neo
             string* Read();
             array<string>* Split(char Separator);
             string* Reverse();
-            string* Clear();
 
             uint64 ToUINT();
             uint64 ToUINT(bool* Success);
