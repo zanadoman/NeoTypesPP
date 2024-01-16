@@ -66,6 +66,7 @@ namespace neo
         private:
             uint64 length;
             type* elements;
+
     };
 
     //____________________________________________NeoString.hpp____________________________________________//
@@ -155,6 +156,7 @@ namespace neo
             string* ToString(uint64 Value);
             string* ToString(sint64 Value);
             string* ToString(double Value);
+            
     };
     uint64 strLength(const char* Literal);
 
