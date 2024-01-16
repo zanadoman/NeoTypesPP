@@ -521,7 +521,7 @@ namespace neo
 
             for (uint64 i = Index; i < Index + Length; i++)
             {
-                new (&this->elements[i]) type();
+                new (&this->elements[i]) type;
             }
         }
 
