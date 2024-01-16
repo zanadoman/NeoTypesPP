@@ -49,8 +49,7 @@ namespace neo
             return NULL;
         }
 
-        result = malloc(Size);
-        if (result == NULL)
+        if ((result = malloc(Size)) == NULL)
         {
             printf("memCopy(): Memory allocation failed\nParams: Source: %p, Size: %lld\n", Source, Size);
             exit(1);
