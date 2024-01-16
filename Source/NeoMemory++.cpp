@@ -74,6 +74,10 @@ namespace neo
             printf("memCopyTo(): NULL Destination with non-zero Size\nParams: Source: %p, Destination: %p, Size: %lld\n", Source, Destination, Size);
             exit(1);
         }
+        if (Size == 0)
+        {
+            return 0;
+        }
 
         for (i = 0; i < Size / sizeof(uint64); i++)
         {
