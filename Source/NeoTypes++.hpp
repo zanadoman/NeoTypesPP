@@ -3,7 +3,6 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cmath>
-#include <memory>
 #include <initializer_list>
 
 namespace neo
