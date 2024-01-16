@@ -91,7 +91,7 @@ namespace neo
     {
         void* result;
 
-        if (FilePath == NULL && Size != 0)
+        if (FilePath == NULL)
         {
             printf("memLoad(): NULL FilePath with non-zero Size\nParams: FilePath: %s, Size: %lld\n", FilePath, Size);
             exit(1);
@@ -120,7 +120,7 @@ namespace neo
     {
         FILE* file;
 
-        if (FilePath == NULL && Size != 0)
+        if (FilePath == NULL)
         {
             printf("memLoadTo(): NULL FilePath with non-zero Size\nParams: FilePath: %s, Destination: %p, Size: %lld\n", FilePath, Destination, Size);
             exit(1);
