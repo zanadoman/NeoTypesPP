@@ -5,6 +5,17 @@ namespace neo
     bool memCompare(const void* Source1, const void* Source2, uint64 Size)
     {
         uint64 i;
+
+        if (Source1 == NULL && Size != 0)
+        {
+            printf("memCompare(): NULL Source1 with non-zero Size\nParams: Source1: %p, Source2: %p, Size: %lld\n", Source1, Source2, Size);
+            exit(1);
+        }
+        if (Source2 == NULL && Size != 0)
+        {
+            printf("memCompare(): NULL Source2 with non-zero Size\nParams: Source1: %p, Source2: %p, Size: %lld\n", Source1, Source2, Size);
+            exit(1);
+        }
         
         for (i = 0; i < Size / sizeof(uint64); i++)
         {
