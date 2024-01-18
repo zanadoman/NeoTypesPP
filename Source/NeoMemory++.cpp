@@ -35,6 +35,38 @@ namespace neo
         return true;
     }
 
+    uint8 memSwap(void* Source1, void* Source2, uint64 Size)
+    {
+        uint64 tmp64, i;
+        uint8 tmp8;
+
+        if (Source1 == NULL && Size != 0)
+        {
+            printf("memSwap(): NULL Source1 with non-zero Size\nParams: Source1: %p, Source2: %p, Size: %lld\n", Source1, Source2, Size);
+            exit(1);
+        }
+        if (Source2 == NULL && Size != 0)
+        {
+            printf("memSwap(): NULL Source2 with non-zero Size\nParams: Source1: %p, Source2: %p, Size: %lld\n", Source1, Source2, Size);
+            exit(1);
+        }
+
+        for (i = 0; i < Size / sizeof(uint64); i++)
+        {
+            tmp64 = ((uint64*)Source1)[i];
+            ((uint64*)Source1)[i] = ((uint64*)Source2)[i];
+            ((uint64*)Source2)[i] = tmp64;
+        }
+        for (i *= sizeof(uint64); i < Size; i++)
+        {
+            tmp8 = ((uint8*)Source1)[i];
+            ((uint8*)Source1)[i] = ((uint8*)Source2)[i];
+            ((uint8*)Source2)[i] = tmp8;
+        }
+
+        return 0;
+    }
+
     void* memCopy(const void* Source, uint64 Size)
     {
         void* result;
