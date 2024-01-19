@@ -6,7 +6,7 @@ namespace neo
     {
         if ((this->literal = (char*)malloc(sizeof(char) * (this->length = 1))) == NULL)
         {
-            printf("string(): Memory allocation failed\n");
+            printf("neo::string(): Memory allocation failed\n");
             exit(1);
         }
 
@@ -17,7 +17,7 @@ namespace neo
     {
         if ((this->literal = (char*)malloc(sizeof(char) * (this->length = Characters.size() + 1))) == NULL)
         {
-            printf("string(): Memory allocation failed\nParams: Characters(length): %ld\n", Characters.size());
+            printf("neo::string(): Memory allocation failed\nParams: Characters(length): %ld\n", Characters.size());
             exit(1);
         }
 
@@ -34,12 +34,12 @@ namespace neo
         {
             if (Literals.begin()[i] == NULL)
             {
-                printf("string(): Literals[%lld] must not be NULL\nParams: Literals(length): %ld\n", i, Literals.size());
+                printf("neo::string(): Literals[%lld] must not be NULL\nParams: Literals(length): %ld\n", i, Literals.size());
                 exit(1);
             }
             if (Literals.begin()[i] == this->literal)
             {
-                printf("string(): Literals[%lld] must not be Self\nParams: Literals(length): %ld\n", i, Literals.size());
+                printf("neo::string(): Literals[%lld] must not be Self\nParams: Literals(length): %ld\n", i, Literals.size());
                 exit(1);
             }
 
@@ -48,7 +48,7 @@ namespace neo
 
         if ((this->literal = (char*)malloc(sizeof(char) * ++this->length)) == NULL)
         {
-            printf("string(): Memory allocation failed\nParams: Literals(length): %ld\n", Literals.size());
+            printf("neo::string(): Memory allocation failed\nParams: Literals(length): %ld\n", Literals.size());
             exit(1);
         }
 
@@ -67,12 +67,12 @@ namespace neo
         {
             if (Strings.begin()[i] == NULL)
             {
-                printf("string(): Strings[%lld] must not be NULL\nParams: Strings(length): %ld\n", i, Strings.size());
+                printf("neo::string(): Strings[%lld] must not be NULL\nParams: Strings(length): %ld\n", i, Strings.size());
                 exit(1);
             }
             if (Strings.begin()[i] == this)
             {
-                printf("string(): Strings[%lld] must not be Self\nParams: Strings(length): %ld\n", i, Strings.size());
+                printf("neo::string(): Strings[%lld] must not be Self\nParams: Strings(length): %ld\n", i, Strings.size());
                 exit(1);
             }
 
@@ -81,7 +81,7 @@ namespace neo
 
         if ((this->literal = (char*)malloc(sizeof(char) * ++this->length)) == NULL)
         {
-            printf("string(): Memory allocation failed\nParams: Strings(length): %ld\n", Strings.size());
+            printf("neo::string(): Memory allocation failed\nParams: Strings(length): %ld\n", Strings.size());
             exit(1);
         }
 
@@ -106,7 +106,7 @@ namespace neo
 
         if ((this->literal = (char*)malloc(sizeof(char) * ++this->length)) == NULL)
         {
-            printf("string(): Memory allocation failed\nParams: Numbers(length): %ld\n", Numbers.size());
+            printf("neo::string(): Memory allocation failed\nParams: Numbers(length): %ld\n", Numbers.size());
             exit(1);
         }
 
@@ -132,7 +132,7 @@ namespace neo
 
         if ((this->literal = (char*)malloc(sizeof(char) * ++this->length)) == NULL)
         {
-            printf("string(): Memory allocation failed\nParams: Numbers(length): %ld\n", Numbers.size());
+            printf("neo::string(): Memory allocation failed\nParams: Numbers(length): %ld\n", Numbers.size());
             exit(1);
         }
 
@@ -158,7 +158,7 @@ namespace neo
 
         if ((this->literal = (char*)malloc(sizeof(char) * ++this->length)) == NULL)
         {
-            printf("string(): Memory allocation failed\nParams: Numbers(length): %ld\n", Numbers.size());
+            printf("neo::string(): Memory allocation failed\nParams: Numbers(length): %ld\n", Numbers.size());
             exit(1);
         }
 
@@ -190,12 +190,12 @@ namespace neo
     {
         if (this->length <= Index)
         {
-            printf("string[]: Index out of range\nParams: Index: %lld\n", Index);
+            printf("neo::string[]: Index out of range\nParams: Index: %lld\n", Index);
             exit(1);
         }
         if (this->length - 1 == Index)
         {
-            printf("string[]: Illegal access to EOF\nParams: Index: %lld\n", Index);
+            printf("neo::string[]: Illegal access to EOF\nParams: Index: %lld\n", Index);
             exit(1);
         }
 
@@ -206,7 +206,7 @@ namespace neo
     {
         if (this->length != Characters.size() + 1 && (this->literal = (char*)realloc(this->literal, sizeof(char) * (this->length = Characters.size() + 1))) == NULL)
         {
-            printf("string=: Memory allocation failed\nParams: Characters(length): %ld\n", Characters.size());
+            printf("neo::string=: Memory allocation failed\nParams: Characters(length): %ld\n", Characters.size());
             exit(1);
         }
 
@@ -226,12 +226,12 @@ namespace neo
         {
             if (Literals.begin()[i] == NULL)
             {
-                printf("string=: Literals[%lld] must not be NULL\nParams: Literals(length): %ld\n", i, Literals.size());
+                printf("neo::string=: Literals[%lld] must not be NULL\nParams: Literals(length): %ld\n", i, Literals.size());
                 exit(1);
             }
             if (Literals.begin()[i] == this->literal)
             {
-                printf("string=: Literals[%lld] must not be Self\nParams: Literals(length): %ld\n", i, Literals.size());
+                printf("neo::string=: Literals[%lld] must not be Self\nParams: Literals(length): %ld\n", i, Literals.size());
                 exit(1);
             }
 
@@ -240,7 +240,7 @@ namespace neo
 
         if ((this->length += 1) != lengthPrev && (this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
         {
-            printf("string=: Memory allocation failed\nParams: Literals(length): %ld\n", Literals.size());
+            printf("neo::string=: Memory allocation failed\nParams: Literals(length): %ld\n", Literals.size());
             exit(1);
         }
 
@@ -264,12 +264,12 @@ namespace neo
         {
             if (Strings.begin()[i] == NULL)
             {
-                printf("string=: Strings[%lld] must not be NULL\nParams: Strings(length): %ld\n", i, Strings.size());
+                printf("neo::string=: Strings[%lld] must not be NULL\nParams: Strings(length): %ld\n", i, Strings.size());
                 exit(1);
             }
             if (Strings.begin()[i] == this)
             {
-                printf("string=: Strings[%lld] must not be Self\nParams: Strings(length): %ld\n", i, Strings.size());
+                printf("neo::string=: Strings[%lld] must not be Self\nParams: Strings(length): %ld\n", i, Strings.size());
                 exit(1);
             }
 
@@ -278,7 +278,7 @@ namespace neo
 
         if ((this->length += 1) != lengthPrev && (this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
         {
-            printf("string=: Memory allocation failed\nParams: Strings(length): %ld\n", Strings.size());
+            printf("neo::string=: Memory allocation failed\nParams: Strings(length): %ld\n", Strings.size());
             exit(1);
         }
 
@@ -307,7 +307,7 @@ namespace neo
 
         if ((this->length += 1) != lengthPrev && (this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
         {
-            printf("string=: Memory allocation failed\nParams: Numbers(length): %ld\n", Numbers.size());
+            printf("neo::string=: Memory allocation failed\nParams: Numbers(length): %ld\n", Numbers.size());
             exit(1);
         }
 
@@ -337,7 +337,7 @@ namespace neo
 
         if ((this->length += 1) != lengthPrev && (this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
         {
-            printf("string=: Memory allocation failed\nParams: Numbers(length): %ld\n", Numbers.size());
+            printf("neo::string=: Memory allocation failed\nParams: Numbers(length): %ld\n", Numbers.size());
             exit(1);
         }
 
@@ -367,7 +367,7 @@ namespace neo
 
         if ((this->length += 1) != lengthPrev && (this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
         {
-            printf("string=: Memory allocation failed\nParams: Numbers(length): %ld\n", Numbers.size());
+            printf("neo::string=: Memory allocation failed\nParams: Numbers(length): %ld\n", Numbers.size());
             exit(1);
         }
 
@@ -388,7 +388,7 @@ namespace neo
         {
             if ((this->literal = (char*)realloc(this->literal, sizeof(char) * (this->length += Characters.size()))) == NULL)
             {
-                printf("string-=: Memory allocation failed\nParams: Characters(length): %ld\n", Characters.size());
+                printf("neo::string-=: Memory allocation failed\nParams: Characters(length): %ld\n", Characters.size());
                 exit(1);
             }
 
@@ -414,12 +414,12 @@ namespace neo
             {
                 if (Literals.begin()[i] == NULL)
                 {
-                    printf("string-=: Literals[%lld] must not be NULL\nParams: Literals(length): %ld\n", i, Literals.size());
+                    printf("neo::string-=: Literals[%lld] must not be NULL\nParams: Literals(length): %ld\n", i, Literals.size());
                     exit(1);
                 }
                 if (Literals.begin()[i] == this->literal)
                 {
-                    printf("string-=: Literals[%lld] must not be Self\nParams: Literals(length): %ld\n", i, Literals.size());
+                    printf("neo::string-=: Literals[%lld] must not be Self\nParams: Literals(length): %ld\n", i, Literals.size());
                     exit(1);
                 }
 
@@ -428,7 +428,7 @@ namespace neo
 
             if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
             {
-                printf("string-=: Memory allocation failed\nParams: Literals(length): %ld\n", Literals.size());
+                printf("neo::string-=: Memory allocation failed\nParams: Literals(length): %ld\n", Literals.size());
                 exit(1);
             }
 
@@ -458,12 +458,12 @@ namespace neo
             {
                 if (Strings.begin()[i] == NULL)
                 {
-                    printf("string-=: Strings[%lld] must not be NULL\nParams: Strings(length): %ld\n", i, Strings.size());
+                    printf("neo::string-=: Strings[%lld] must not be NULL\nParams: Strings(length): %ld\n", i, Strings.size());
                     exit(1);
                 }
                 if (Strings.begin()[i] == this)
                 {
-                    printf("string-=: Strings[%lld] must not be Self\nParams: Strings(length): %ld\n", i, Strings.size());
+                    printf("neo::string-=: Strings[%lld] must not be Self\nParams: Strings(length): %ld\n", i, Strings.size());
                     exit(1);
                 }
 
@@ -472,7 +472,7 @@ namespace neo
 
             if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
             {
-                printf("string-=: Memory allocation failed\nParams: Strings(length): %ld\n", Strings.size());
+                printf("neo::string-=: Memory allocation failed\nParams: Strings(length): %ld\n", Strings.size());
                 exit(1);
             }
 
@@ -507,7 +507,7 @@ namespace neo
 
             if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
             {
-                printf("string-=: Memory allocation failed\nParams: Numbers(length): %ld\n", Numbers.size());
+                printf("neo::string-=: Memory allocation failed\nParams: Numbers(length): %ld\n", Numbers.size());
                 exit(1);
             }
 
@@ -543,7 +543,7 @@ namespace neo
 
             if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
             {
-                printf("string-=: Memory allocation failed\nParams: Numbers(length): %ld\n", Numbers.size());
+                printf("neo::string-=: Memory allocation failed\nParams: Numbers(length): %ld\n", Numbers.size());
                 exit(1);
             }
 
@@ -579,7 +579,7 @@ namespace neo
 
             if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
             {
-                printf("string-=: Memory allocation failed\nParams: Numbers(length): %ld\n", Numbers.size());
+                printf("neo::string-=: Memory allocation failed\nParams: Numbers(length): %ld\n", Numbers.size());
                 exit(1);
             }
 
@@ -605,7 +605,7 @@ namespace neo
         {
             if ((this->literal = (char*)realloc(this->literal, sizeof(char) * (this->length += Characters.size()))) == NULL)
             {
-                printf("string+=: Memory allocation failed\nParams: Characters(length): %ld\n", Characters.size());
+                printf("neo::string+=: Memory allocation failed\nParams: Characters(length): %ld\n", Characters.size());
                 exit(1);
             }
 
@@ -627,12 +627,12 @@ namespace neo
             {
                 if (Literals.begin()[i] == NULL)
                 {
-                    printf("string+=: Literals[%lld] must not be NULL\nParams: Literals(length): %ld\n", i, Literals.size());
+                    printf("neo::string+=: Literals[%lld] must not be NULL\nParams: Literals(length): %ld\n", i, Literals.size());
                     exit(1);
                 }
                 if (Literals.begin()[i] == this->literal)
                 {
-                    printf("string+=: Literals[%lld] must not be Self\nParams: Literals(length): %ld\n", i, Literals.size());
+                    printf("neo::string+=: Literals[%lld] must not be Self\nParams: Literals(length): %ld\n", i, Literals.size());
                     exit(1);
                 }
 
@@ -641,7 +641,7 @@ namespace neo
 
             if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
             {
-                printf("string+=: Memory allocation failed\nParams: Literals(length): %ld\n", Literals.size());
+                printf("neo::string+=: Memory allocation failed\nParams: Literals(length): %ld\n", Literals.size());
                 exit(1);
             }
 
@@ -667,12 +667,12 @@ namespace neo
             {
                 if (Strings.begin()[i] == NULL)
                 {
-                    printf("string+=: Strings[%lld] must not be NULL\nParams: Strings(length): %ld\n", i, Strings.size());
+                    printf("neo::string+=: Strings[%lld] must not be NULL\nParams: Strings(length): %ld\n", i, Strings.size());
                     exit(1);
                 }
                 if (Strings.begin()[i] == this)
                 {
-                    printf("string+=: Strings[%lld] must not be Self\nParams: Strings(length): %ld\n", i, Strings.size());
+                    printf("neo::string+=: Strings[%lld] must not be Self\nParams: Strings(length): %ld\n", i, Strings.size());
                     exit(1);
                 }
 
@@ -681,7 +681,7 @@ namespace neo
 
             if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
             {
-                printf("string+=: Memory allocation failed\nParams: Strings(length): %ld\n", Strings.size());
+                printf("neo::string+=: Memory allocation failed\nParams: Strings(length): %ld\n", Strings.size());
                 exit(1);
             }
 
@@ -712,7 +712,7 @@ namespace neo
 
             if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
             {
-                printf("string+=: Memory allocation failed\nParams: Numbers(length): %ld\n", Numbers.size());
+                printf("neo::string+=: Memory allocation failed\nParams: Numbers(length): %ld\n", Numbers.size());
                 exit(1);
             }
 
@@ -744,7 +744,7 @@ namespace neo
 
             if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
             {
-                printf("string+=: Memory allocation failed\nParams: Numbers(length): %ld\n", Numbers.size());
+                printf("neo::string+=: Memory allocation failed\nParams: Numbers(length): %ld\n", Numbers.size());
                 exit(1);
             }
 
@@ -776,7 +776,7 @@ namespace neo
 
             if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
             {
-                printf("string+=: Memory allocation failed\nParams: Numbers(length): %ld\n", Numbers.size());
+                printf("neo::string+=: Memory allocation failed\nParams: Numbers(length): %ld\n", Numbers.size());
                 exit(1);
             }
 
@@ -921,12 +921,12 @@ namespace neo
     {
         if (this->length < Index)
         {
-            printf("string.Insert(): Index out of range\nParams: Index: %lld, Characters(length): %ld\n", Index, Characters.size());
+            printf("neo::string.Insert(): Index out of range\nParams: Index: %lld, Characters(length): %ld\n", Index, Characters.size());
             exit(1);
         }
         if (this->length == Index)
         {
-            printf("string.Insert(): Illegal insertion after EOF\nParams: Index: %lld, Characters(length): %ld\n", Index, Characters.size());
+            printf("neo::string.Insert(): Illegal insertion after EOF\nParams: Index: %lld, Characters(length): %ld\n", Index, Characters.size());
             exit(1);
         }
 
@@ -934,7 +934,7 @@ namespace neo
         {
             if ((this->literal = (char*)realloc(this->literal, sizeof(char) * (this->length += Characters.size()))) == NULL)
             {
-                printf("string.Insert(): Memory allocation failed\nParams: Index: %lld, Characters(length): %ld\n", Index, Characters.size());
+                printf("neo::string.Insert(): Memory allocation failed\nParams: Index: %lld, Characters(length): %ld\n", Index, Characters.size());
                 exit(1);
             }
 
@@ -955,12 +955,12 @@ namespace neo
 
         if (this->length < Index)
         {
-            printf("string.Insert(): Index out of range\nParams: Index: %lld, Literals(length): %ld\n", Index, Literals.size());
+            printf("neo::string.Insert(): Index out of range\nParams: Index: %lld, Literals(length): %ld\n", Index, Literals.size());
             exit(1);
         }
         if (this->length == Index)
         {
-            printf("string.Insert(): Illegal insertion after EOF\nParams: Index: %lld, Literals(length): %ld\n", Index, Literals.size());
+            printf("neo::string.Insert(): Illegal insertion after EOF\nParams: Index: %lld, Literals(length): %ld\n", Index, Literals.size());
             exit(1);
         }
 
@@ -971,12 +971,12 @@ namespace neo
             {
                 if (Literals.begin()[i] == NULL)
                 {
-                    printf("string.Insert(): Literals[%lld] must not be NULL\nParams: Literals(length): %ld\n", i, Literals.size());
+                    printf("neo::string.Insert(): Literals[%lld] must not be NULL\nParams: Literals(length): %ld\n", i, Literals.size());
                     exit(1);
                 }
                 if (Literals.begin()[i] == this->literal)
                 {
-                    printf("string.Insert(): Literals[%lld] must not be Self\nParams: Literals(length): %ld\n", i, Literals.size());
+                    printf("neo::string.Insert(): Literals[%lld] must not be Self\nParams: Literals(length): %ld\n", i, Literals.size());
                     exit(1);
                 }
 
@@ -985,7 +985,7 @@ namespace neo
 
             if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
             {
-                printf("string.Insert(): Memory allocation failed\nParams: Index: %lld, Literals(length): %ld\n", Index, Literals.size());
+                printf("neo::string.Insert(): Memory allocation failed\nParams: Index: %lld, Literals(length): %ld\n", Index, Literals.size());
                 exit(1);
             }
 
@@ -1010,12 +1010,12 @@ namespace neo
 
         if (this->length < Index)
         {
-            printf("string.Insert(): Index out of range\nParams: Index: %lld, Strings(length): %ld\n", Index, Strings.size());
+            printf("neo::string.Insert(): Index out of range\nParams: Index: %lld, Strings(length): %ld\n", Index, Strings.size());
             exit(1);
         }
         if (this->length == Index)
         {
-            printf("string.Insert(): Illegal insertion after EOF\nParams: Index: %lld, Strings(length): %ld\n", Index, Strings.size());
+            printf("neo::string.Insert(): Illegal insertion after EOF\nParams: Index: %lld, Strings(length): %ld\n", Index, Strings.size());
             exit(1);
         }
 
@@ -1026,12 +1026,12 @@ namespace neo
             {
                 if (Strings.begin()[i] == NULL)
                 {
-                    printf("string.Insert(): Strings[%lld] must not be NULL\nParams: Strings(length): %ld\n", i, Strings.size());
+                    printf("neo::string.Insert(): Strings[%lld] must not be NULL\nParams: Strings(length): %ld\n", i, Strings.size());
                     exit(1);
                 }
                 if (Strings.begin()[i] == this)
                 {
-                    printf("string.Insert(): Strings[%lld] must not be Self\nParams: Strings(length): %ld\n", i, Strings.size());
+                    printf("neo::string.Insert(): Strings[%lld] must not be Self\nParams: Strings(length): %ld\n", i, Strings.size());
                     exit(1);
                 }
 
@@ -1040,7 +1040,7 @@ namespace neo
 
             if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
             {
-                printf("string.Insert(): Memory allocation failed\nParams: Index: %lld, Strings(length): %ld\n", Index, Strings.size());
+                printf("neo::string.Insert(): Memory allocation failed\nParams: Index: %lld, Strings(length): %ld\n", Index, Strings.size());
                 exit(1);
             }
 
@@ -1066,12 +1066,12 @@ namespace neo
 
         if (this->length < Index)
         {
-            printf("string.Insert(): Index out of range\nParams: Index: %lld, Numbers(length): %ld\n", Index, Numbers.size());
+            printf("neo::string.Insert(): Index out of range\nParams: Index: %lld, Numbers(length): %ld\n", Index, Numbers.size());
             exit(1);
         }
         if (this->length == Index)
         {
-            printf("string.Insert(): Illegal insertion after EOF\nParams: Index: %lld, Numbers(length): %ld\n", Index, Numbers.size());
+            printf("neo::string.Insert(): Illegal insertion after EOF\nParams: Index: %lld, Numbers(length): %ld\n", Index, Numbers.size());
             exit(1);
         }
 
@@ -1086,7 +1086,7 @@ namespace neo
 
             if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
             {
-                printf("string.Insert(): Memory allocation failed\nParams: Index: %lld, Numbers(length): %ld\n", Index, Numbers.size());
+                printf("neo::string.Insert(): Memory allocation failed\nParams: Index: %lld, Numbers(length): %ld\n", Index, Numbers.size());
                 exit(1);
             }
 
@@ -1113,12 +1113,12 @@ namespace neo
 
         if (this->length < Index)
         {
-            printf("string.Insert(): Index out of range\nParams: Index: %lld, Numbers(length): %ld\n", Index, Numbers.size());
+            printf("neo::string.Insert(): Index out of range\nParams: Index: %lld, Numbers(length): %ld\n", Index, Numbers.size());
             exit(1);
         }
         if (this->length == Index)
         {
-            printf("string.Insert(): Illegal insertion after EOF\nParams: Index: %lld, Numbers(length): %ld\n", Index, Numbers.size());
+            printf("neo::string.Insert(): Illegal insertion after EOF\nParams: Index: %lld, Numbers(length): %ld\n", Index, Numbers.size());
             exit(1);
         }
 
@@ -1133,7 +1133,7 @@ namespace neo
 
             if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
             {
-                printf("string.Insert(): Memory allocation failed\nParams: Index: %lld, Numbers(length): %ld\n", Index, Numbers.size());
+                printf("neo::string.Insert(): Memory allocation failed\nParams: Index: %lld, Numbers(length): %ld\n", Index, Numbers.size());
                 exit(1);
             }
 
@@ -1160,12 +1160,12 @@ namespace neo
 
         if (this->length < Index)
         {
-            printf("string.Insert(): Index out of range\nParams: Index: %lld, Numbers(length): %ld\n", Index, Numbers.size());
+            printf("neo::string.Insert(): Index out of range\nParams: Index: %lld, Numbers(length): %ld\n", Index, Numbers.size());
             exit(1);
         }
         if (this->length == Index)
         {
-            printf("string.Insert(): Illegal insertion after EOF\nParams: Index: %lld, Numbers(length): %ld\n", Index, Numbers.size());
+            printf("neo::string.Insert(): Illegal insertion after EOF\nParams: Index: %lld, Numbers(length): %ld\n", Index, Numbers.size());
             exit(1);
         }
 
@@ -1180,7 +1180,7 @@ namespace neo
 
             if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
             {
-                printf("string.Insert(): Memory allocation failed\nParams: Index: %lld, Numbers(length): %ld\n", Index, Numbers.size());
+                printf("neo::string.Insert(): Memory allocation failed\nParams: Index: %lld, Numbers(length): %ld\n", Index, Numbers.size());
                 exit(1);
             }
 
@@ -1204,22 +1204,22 @@ namespace neo
     {
         if (this->length <= Index)
         {
-            printf("string.Remove(): Index out of range\nParams: Index: %lld, Length: %lld\n", Index, Length);
+            printf("neo::string.Remove(): Index out of range\nParams: Index: %lld, Length: %lld\n", Index, Length);
             exit(1);
         }
         if (this->length - 1 == Index)
         {
-            printf("string.Remove(): Illegal removal of EOF\nParams: Index: %lld, Length: %lld\n", Index, Length);
+            printf("neo::string.Remove(): Illegal removal of EOF\nParams: Index: %lld, Length: %lld\n", Index, Length);
             exit(1);
         }
         if (this->length < Index + Length)
         {
-            printf("string.Remove(): Length out of range\nParams: Index: %lld, Length: %lld\n", Index, Length);
+            printf("neo::string.Remove(): Length out of range\nParams: Index: %lld, Length: %lld\n", Index, Length);
             exit(1);
         }
         if (this->length - 1 < Index + Length)
         {
-            printf("string.Remove(): Illegal removal of EOF\nParams: Index: %lld, Length: %lld\n", Index, Length);
+            printf("neo::string.Remove(): Illegal removal of EOF\nParams: Index: %lld, Length: %lld\n", Index, Length);
             exit(1);
         }
 
@@ -1234,7 +1234,7 @@ namespace neo
 
             if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
             {
-                printf("string.Remove(): Memory allocation failed\nParams: Index: %lld, Length: %lld\n", Index, Length);
+                printf("neo::string.Remove(): Memory allocation failed\nParams: Index: %lld, Length: %lld\n", Index, Length);
                 exit(1);
             }
         }
@@ -1271,7 +1271,7 @@ namespace neo
         {
             if (Literals.begin()[i] == NULL)
             {
-                printf("string.Contains(): Literals[%lld] must not be NULL\nParams: Literals(length): %ld\n", i, Literals.size());
+                printf("neo::string.Contains(): Literals[%lld] must not be NULL\nParams: Literals(length): %ld\n", i, Literals.size());
                 exit(1);
             }
             if (Literals.begin()[i] == this->literal)
@@ -1305,7 +1305,7 @@ namespace neo
         {
             if (Strings.begin()[i] == NULL)
             {
-                printf("string.Contains(): Strings[%lld] must not be NULL\nParams: Strings(length): %ld\n", i, Strings.size());
+                printf("neo::string.Contains(): Strings[%lld] must not be NULL\nParams: Strings(length): %ld\n", i, Strings.size());
                 exit(1);
             }
             if (Strings.begin()[i] == this)
@@ -1438,7 +1438,7 @@ namespace neo
 
         if ((this->literal = (char*)realloc(this->literal, sizeof(char) * (this->length = 1))) == NULL)
         {
-            printf("string.Read(): Memory allocation failed\n");
+            printf("neo::string.Read(): Memory allocation failed\n");
             exit(1);
         }
         this->literal[0] = '\0';
@@ -1447,7 +1447,7 @@ namespace neo
         {
             if ((this->literal = (char*)realloc(this->literal, sizeof(char) * ++this->length)) == NULL)
             {
-                printf("string.Read(): Memory allocation failed\n");
+                printf("neo::string.Read(): Memory allocation failed\n");
                 exit(1);
             }
 
@@ -1518,7 +1518,7 @@ namespace neo
 
         if (Success == NULL)
         {
-            printf("string.ToUINT(): Success must not be NULL\nParams: Success: %p\n", Success);
+            printf("neo::string.ToUINT(): Success must not be NULL\nParams: Success: %p\n", Success);
             exit(1);
         }
 
@@ -1568,7 +1568,7 @@ namespace neo
 
         if (Success == NULL)
         {
-            printf("string.ToSINT(): Success must not be NULL\nParams: Success: %p\n", Success);
+            printf("neo::string.ToSINT(): Success must not be NULL\nParams: Success: %p\n", Success);
             exit(1);
         }
 
@@ -1651,7 +1651,7 @@ namespace neo
 
         if (Success == NULL)
         {
-            printf("string.ToDOUBLE(): Success must not be NULL\nParams: Success: %p\n", Success);
+            printf("neo::string.ToDOUBLE(): Success must not be NULL\nParams: Success: %p\n", Success);
             exit(1);
         }
 
@@ -1715,7 +1715,7 @@ namespace neo
 
         if ((result = new string) == NULL)
         {
-            printf("string.ToString(): Memory allocation failed\nParams: Number: %lld\n", Number);
+            printf("neo::string.ToString(): Memory allocation failed\nParams: Number: %lld\n", Number);
             exit(1);
         }
 
@@ -1737,7 +1737,7 @@ namespace neo
 
         if ((result = new string) == NULL)
         {
-            printf("string.ToString(): Memory allocation failed\nParams: Number: %lld\n", Number);
+            printf("neo::string.ToString(): Memory allocation failed\nParams: Number: %lld\n", Number);
             exit(1);
         }
 
@@ -1766,7 +1766,7 @@ namespace neo
 
         if ((result = new string) == NULL)
         {
-            printf("string.ToString(): Memory allocation failed\nParams: Number: %lf\n", Number);
+            printf("neo::string.ToString(): Memory allocation failed\nParams: Number: %lf\n", Number);
             exit(1);
         }
 
@@ -1808,7 +1808,7 @@ namespace neo
 
         if (Literal == NULL)
         {
-            printf("strLength(): Literal must not be NULL\nParams: Literal: %p\n", Literal);
+            printf("neo::strLength(): Literal must not be NULL\nParams: Literal: %p\n", Literal);
             exit(1);
         }
 
