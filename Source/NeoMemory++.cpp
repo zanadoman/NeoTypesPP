@@ -125,7 +125,7 @@ namespace neo
 
         if (FilePath == NULL)
         {
-            printf("neo::memLoad(): NULL FilePath with non-zero Size\nParams: FilePath: %s, Size: %lld\n", FilePath, Size);
+            printf("neo::memLoad(): NULL FilePath with non-zero Size\nParams: FilePath: %p, Size: %lld\n", FilePath, Size);
             exit(1);
         }
         if (Size == 0)
@@ -154,7 +154,7 @@ namespace neo
 
         if (FilePath == NULL)
         {
-            printf("neo::memLoadTo(): NULL FilePath with non-zero Size\nParams: FilePath: %s, Destination: %p, Size: %lld\n", FilePath, Destination, Size);
+            printf("neo::memLoadTo(): NULL FilePath with non-zero Size\nParams: FilePath: %p, Destination: %p, Size: %lld\n", FilePath, Destination, Size);
             exit(1);
         }
         if (Destination == NULL && Size != 0)
