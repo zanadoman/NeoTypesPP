@@ -1,3 +1,3 @@
 #!/bin/sh
 
-g++ -Wall -Wextra -O3 -o test.out $(find . -name '*.cpp') -m64 -std=gnu++23 -lm && time ./test.out
+g++ -m64 -std=gnu++23 -O3 -Werror -Wall -Wextra -o test.out $(find . -name '*.cpp') -lm && time ./test.out
