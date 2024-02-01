@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 g++ -m64 -std=gnu++23 -O3 -c Source/*.cpp
 ar rcs "Linux (x86_64)/libNeoTypes++.a" *.o
