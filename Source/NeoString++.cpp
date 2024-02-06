@@ -1458,30 +1458,75 @@ namespace neo
         return this;
     }
 
-    array<string>* string::Split(char Separator)
+    uint64 string::Split(char Separator, array<string>* Result)
     {
-        array<string>* result;
+        if (Result == NULL)
+        {
+            printf("neo::string.Split(): Result must not be NULL\nParams: Result: %p\n", Result);
+            exit(1);
+        }
+        if (Result->Length() != 0)
+        {
+            printf("neo::string.Split(): Result must be empty\nParams: Result: %p\n", Result);
+            exit(1);
+        }
 
-        result = new array<string>(1);
+        Result->Insert(0, 1);
 
         for (uint64 i = 0; i < this->length - 1; i++)
         {
             if (this->literal[i] != Separator)
             {
-                (*result)[result->Length() - 1] += {this->literal[i]};
+                (*Result)[Result->Length() - 1] += {this->literal[i]};
             }
-            else if (1 < (*result)[result->Length() - 1].length)
+            else if (1 < (*Result)[Result->Length() - 1].length)
             {
-                result->Insert(result->Length(), 1);
+                Result->Insert(Result->Length(), 1);
             }
         }
 
-        if (1 == (*result)[result->Length() - 1].length)
+        if (1 == (*Result)[Result->Length() - 1].length)
         {
-            result->Remove(result->Length() - 1, 1);
+            Result->Remove(Result->Length() - 1, 1);
         }
 
-        return result;
+        return Result->Length();
+    }
+
+    uint64 string::Split(char Separator, array<string*>* Result)
+    {
+        if (Result == NULL)
+        {
+            printf("neo::string.Split(): Result must not be NULL\nParams: Result: %p\n", Result);
+            exit(1);
+        }
+        if (Result->Length() != 0)
+        {
+            printf("neo::string.Split(): Result must be empty\nParams: Result: %p\n", Result);
+            exit(1);
+        }
+
+        *Result += {new string()};
+
+        for (uint64 i = 0; i < this->length - 1; i++)
+        {
+            if (this->literal[i] != Separator)
+            {
+                *(*Result)[Result->Length() - 1] += {this->literal[i]};
+            }
+            else if (1 < (*Result)[Result->Length() - 1]->length)
+            {
+                *Result += {new string()};
+            }
+        }
+
+        if (1 == (*Result)[Result->Length() - 1]->length)
+        {
+            delete (*Result)[Result->Length() - 1];
+            Result->Remove(Result->Length() - 1, 1);
+        }
+
+        return Result->Length();
     }
 
     string* string::Reverse()
