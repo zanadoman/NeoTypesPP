@@ -202,7 +202,7 @@ namespace neo
         return this->literal[Index];
     }
 
-    string* string::operator = (std::initializer_list<char> Characters)
+    string& string::operator = (std::initializer_list<char> Characters)
     {
         if (this->length != Characters.size() + 1 && (this->literal = (char*)realloc(this->literal, sizeof(char) * (this->length = Characters.size() + 1))) == NULL)
         {
@@ -213,10 +213,10 @@ namespace neo
         memCopyTo(Characters.begin(), this->literal, sizeof(char) * Characters.size());
         this->literal[this->length - 1] = '\0';
 
-        return this;
+        return *this;
     }
 
-    string* string::operator = (std::initializer_list<const char*> Literals)
+    string& string::operator = (std::initializer_list<const char*> Literals)
     {
         uint64 lengthPrev, cache;
 
@@ -251,10 +251,10 @@ namespace neo
         }
         this->literal[this->length - 1] = '\0';
 
-        return this;
+        return *this;
     }
 
-    string* string::operator = (std::initializer_list<string*> Strings)
+    string& string::operator = (std::initializer_list<string*> Strings)
     {
         uint64 lengthPrev;
 
@@ -289,10 +289,10 @@ namespace neo
         }
         this->literal[this->length - 1] = '\0';
 
-        return this;
+        return *this;
     }
 
-    string* string::operator = (std::initializer_list<uint64> Numbers)
+    string& string::operator = (std::initializer_list<uint64> Numbers)
     {
         array<string*> cache(Numbers.size());
         uint64 lengthPrev;
@@ -319,10 +319,10 @@ namespace neo
         }
         this->literal[this->length - 1] = '\0';
 
-        return this;
+        return *this;
     }
 
-    string* string::operator = (std::initializer_list<sint64> Numbers)
+    string& string::operator = (std::initializer_list<sint64> Numbers)
     {
         array<string*> cache(Numbers.size());
         uint64 lengthPrev;
@@ -349,10 +349,10 @@ namespace neo
         }
         this->literal[this->length - 1] = '\0';
 
-        return this;
+        return *this;
     }
 
-    string* string::operator = (std::initializer_list<double> Numbers)
+    string& string::operator = (std::initializer_list<double> Numbers)
     {
         array<string*> cache(Numbers.size());
         uint64 lengthPrev;
@@ -379,10 +379,10 @@ namespace neo
         }
         this->literal[this->length - 1] = '\0';
 
-        return this;
+        return *this;
     }
 
-    string* string::operator -= (std::initializer_list<char> Characters)
+    string& string::operator -= (std::initializer_list<char> Characters)
     {
         if (Characters.size() != 0)
         {
@@ -400,10 +400,10 @@ namespace neo
             memCopyTo(Characters.begin(), this->literal, sizeof(char) * Characters.size());
         }
 
-        return this;
+        return *this;
     }
 
-    string* string::operator -= (std::initializer_list<const char*> Literals)
+    string& string::operator -= (std::initializer_list<const char*> Literals)
     {
         uint64 lengthPrev, cache;
 
@@ -444,10 +444,10 @@ namespace neo
             }
         }
 
-        return this;
+        return *this;
     }
 
-    string* string::operator -= (std::initializer_list<string*> Strings)
+    string& string::operator -= (std::initializer_list<string*> Strings)
     {
         uint64 lengthPrev;
 
@@ -488,10 +488,10 @@ namespace neo
             }
         }
 
-        return this;
+        return *this;
     }
 
-    string* string::operator -= (std::initializer_list<uint64> Numbers)
+    string& string::operator -= (std::initializer_list<uint64> Numbers)
     {
         array<string*> cache(Numbers.size());
         uint64 lengthPrev;
@@ -524,10 +524,10 @@ namespace neo
             }
         }
 
-        return this;
+        return *this;
     }
 
-    string* string::operator -= (std::initializer_list<sint64> Numbers)
+    string& string::operator -= (std::initializer_list<sint64> Numbers)
     {
         array<string*> cache(Numbers.size());
         uint64 lengthPrev;
@@ -560,10 +560,10 @@ namespace neo
             }
         }
 
-        return this;
+        return *this;
     }
 
-    string* string::operator -= (std::initializer_list<double> Numbers)
+    string& string::operator -= (std::initializer_list<double> Numbers)
     {
         array<string*> cache(Numbers.size());
         uint64 lengthPrev;
@@ -596,10 +596,10 @@ namespace neo
             }
         }
 
-        return this;
+        return *this;
     }
 
-    string* string::operator += (std::initializer_list<char> Characters)
+    string& string::operator += (std::initializer_list<char> Characters)
     {
         if (Characters.size() != 0)
         {
@@ -613,10 +613,10 @@ namespace neo
             this->literal[this->length - 1] = '\0';
         }
 
-        return this;
+        return *this;
     }
 
-    string* string::operator += (std::initializer_list<const char*> Literals)
+    string& string::operator += (std::initializer_list<const char*> Literals)
     {
         uint64 lengthPrev, cache;
 
@@ -653,10 +653,10 @@ namespace neo
             this->literal[this->length - 1] = '\0';
         }
 
-        return this;
+        return *this;
     }
 
-    string* string::operator += (std::initializer_list<string*> Strings)
+    string& string::operator += (std::initializer_list<string*> Strings)
     {
         uint64 lengthPrev;
 
@@ -693,10 +693,10 @@ namespace neo
             this->literal[this->length - 1] = '\0';
         }
 
-        return this;
+        return *this;
     }
 
-    string* string::operator += (std::initializer_list<uint64> Numbers)
+    string& string::operator += (std::initializer_list<uint64> Numbers)
     {
         array<string*> cache(Numbers.size());
         uint64 lengthPrev;
@@ -725,10 +725,10 @@ namespace neo
             this->literal[this->length - 1] = '\0';
         }
 
-        return this;
+        return *this;
     }
 
-    string* string::operator += (std::initializer_list<sint64> Numbers)
+    string& string::operator += (std::initializer_list<sint64> Numbers)
     {
         array<string*> cache(Numbers.size());
         uint64 lengthPrev;
@@ -757,10 +757,10 @@ namespace neo
             this->literal[this->length - 1] = '\0';
         }
 
-        return this;
+        return *this;
     }
 
-    string* string::operator += (std::initializer_list<double> Numbers)
+    string& string::operator += (std::initializer_list<double> Numbers)
     {
         array<string*> cache(Numbers.size());
         uint64 lengthPrev;
@@ -789,7 +789,7 @@ namespace neo
             this->literal[this->length - 1] = '\0';
         }
 
-        return this;
+        return *this;
     }
 
     bool string::operator == (char Character)
@@ -917,7 +917,7 @@ namespace neo
         return !(*this == Number);
     }
 
-    string* string::Insert(uint64 Index, std::initializer_list<char> Characters)
+    string& string::Insert(uint64 Index, std::initializer_list<char> Characters)
     {
         if (this->length < Index)
         {
@@ -946,10 +946,10 @@ namespace neo
             memCopyTo(Characters.begin(), &this->literal[Index], sizeof(char) * Characters.size());
         }
 
-        return this;
+        return *this;
     }
 
-    string* string::Insert(uint64 Index, std::initializer_list<const char*> Literals)
+    string& string::Insert(uint64 Index, std::initializer_list<const char*> Literals)
     {
         uint64 lengthPrev, cache;
 
@@ -1001,10 +1001,10 @@ namespace neo
             }
         }
 
-        return this;
+        return *this;
     }
 
-    string* string::Insert(uint64 Index, std::initializer_list<string*> Strings)
+    string& string::Insert(uint64 Index, std::initializer_list<string*> Strings)
     {
         uint64 lengthPrev;
 
@@ -1056,10 +1056,10 @@ namespace neo
             }
         }
 
-        return this;
+        return *this;
     }
 
-    string* string::Insert(uint64 Index, std::initializer_list<uint64> Numbers)
+    string& string::Insert(uint64 Index, std::initializer_list<uint64> Numbers)
     {
         array<string*> cache(Numbers.size());
         uint64 lengthPrev;
@@ -1103,10 +1103,10 @@ namespace neo
             }
         }
 
-        return this;
+        return *this;
     }
 
-    string* string::Insert(uint64 Index, std::initializer_list<sint64> Numbers)
+    string& string::Insert(uint64 Index, std::initializer_list<sint64> Numbers)
     {
         array<string*> cache(Numbers.size());
         uint64 lengthPrev;
@@ -1150,10 +1150,10 @@ namespace neo
             }
         }
 
-        return this;
+        return *this;
     }
 
-    string* string::Insert(uint64 Index, std::initializer_list<double> Numbers)
+    string& string::Insert(uint64 Index, std::initializer_list<double> Numbers)
     {
         array<string*> cache(Numbers.size());
         uint64 lengthPrev;
@@ -1197,10 +1197,10 @@ namespace neo
             }
         }
 
-        return this;
+        return *this;
     }
 
-    string* string::Remove(uint64 Index, uint64 Length)
+    string& string::Remove(uint64 Index, uint64 Length)
     {
         if (this->length <= Index)
         {
@@ -1239,7 +1239,7 @@ namespace neo
             }
         }
 
-        return this;
+        return *this;
     }
 
     bool string::Contains(std::initializer_list<char> Characters)
@@ -1432,7 +1432,7 @@ namespace neo
         return result;
     }
 
-    string* string::Read()
+    string& string::Read()
     {
         char tmp;
 
@@ -1455,7 +1455,7 @@ namespace neo
             this->literal[this->length - 1] = '\0';
         }
 
-        return this;
+        return *this;
     }
 
     uint64 string::Split(char Separator, array<string>* Result)
@@ -1529,7 +1529,7 @@ namespace neo
         return Result->Length();
     }
 
-    string* string::Reverse()
+    string& string::Reverse()
     {
         char tmp;
 
@@ -1540,7 +1540,7 @@ namespace neo
             this->literal[this->length - 2 - i] = tmp;
         }
 
-        return this;
+        return *this;
     }
 
     uint64 string::ToUINT()
