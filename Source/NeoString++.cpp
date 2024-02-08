@@ -1,4 +1,5 @@
 #include "NeoTypes++.hpp"
+#include <cmath>
 
 namespace neo
 {
