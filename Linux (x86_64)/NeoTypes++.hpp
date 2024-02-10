@@ -177,6 +177,7 @@ namespace neo
             static void* Load(const char* FilePath, uint64 Size);
             static uint8 LoadTo(const char* FilePath, void* Destination, uint64 Size);
             static uint8 Save(const void* Source, uint64 Size, const char* FilePath);
+
     };
 
     //______________________________________STD_INITIALIZER_LIST.hpp_______________________________________//
