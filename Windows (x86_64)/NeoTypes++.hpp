@@ -153,6 +153,8 @@ namespace neo
             double ToDOUBLE();
             double ToDOUBLE(bool* Success);
 
+            static uint64 LiteralLength(const char* Literal);
+
         private:
             uint64 length;
             char* literal;
@@ -162,7 +164,6 @@ namespace neo
             string* ToString(double Value);
             
     };
-    uint64 strLength(const char* Literal);
 
     //____________________________________________NeoMemory.hpp____________________________________________//
 

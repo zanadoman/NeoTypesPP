@@ -44,7 +44,7 @@ namespace neo
                 exit(1);
             }
 
-            this->length += strLength(Literals.begin()[i]) - 1;
+            this->length += string::LiteralLength(Literals.begin()[i]) - 1;
         }
 
         if ((this->literal = (char*)malloc(sizeof(char) * ++this->length)) == NULL)
@@ -55,7 +55,7 @@ namespace neo
 
         for (uint64 i = 0, j = 0; i < Literals.size(); i++)
         {
-            memory::CopyTo(Literals.begin()[i], &this->literal[j], sizeof(char) * (cache = strLength(Literals.begin()[i]) - 1));
+            memory::CopyTo(Literals.begin()[i], &this->literal[j], sizeof(char) * (cache = string::LiteralLength(Literals.begin()[i]) - 1));
             j += cache;
         }
         this->literal[this->length - 1] = '\0';
@@ -236,7 +236,7 @@ namespace neo
                 exit(1);
             }
 
-            this->length += strLength(Literals.begin()[i]) - 1;
+            this->length += string::LiteralLength(Literals.begin()[i]) - 1;
         }
 
         if ((this->length += 1) != lengthPrev && (this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
@@ -247,7 +247,7 @@ namespace neo
 
         for (uint64 i = 0, j = 0; i < Literals.size(); i++)
         {
-            memory::CopyTo(Literals.begin()[i], &this->literal[j], sizeof(char) * (cache = strLength(Literals.begin()[i]) - 1));
+            memory::CopyTo(Literals.begin()[i], &this->literal[j], sizeof(char) * (cache = string::LiteralLength(Literals.begin()[i]) - 1));
             j += cache;
         }
         this->literal[this->length - 1] = '\0';
@@ -424,7 +424,7 @@ namespace neo
                     exit(1);
                 }
 
-                this->length += strLength(Literals.begin()[i]) - 1;
+                this->length += string::LiteralLength(Literals.begin()[i]) - 1;
             }
 
             if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
@@ -440,7 +440,7 @@ namespace neo
 
             for (uint64 i = 0, j = 0; i < Literals.size(); i++)
             {
-                memory::CopyTo(Literals.begin()[i], &this->literal[j], sizeof(char) * (cache = strLength(Literals.begin()[i]) - 1));
+                memory::CopyTo(Literals.begin()[i], &this->literal[j], sizeof(char) * (cache = string::LiteralLength(Literals.begin()[i]) - 1));
                 j += cache;
             }
         }
@@ -637,7 +637,7 @@ namespace neo
                     exit(1);
                 }
 
-                this->length += strLength(Literals.begin()[i]) - 1;
+                this->length += string::LiteralLength(Literals.begin()[i]) - 1;
             }
 
             if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
@@ -648,7 +648,7 @@ namespace neo
 
             for (uint64 i = 0, j = lengthPrev - 1; i < Literals.size(); i++)
             {
-                memory::CopyTo(Literals.begin()[i], &this->literal[j], sizeof(char) * (cache = strLength(Literals.begin()[i]) - 1));
+                memory::CopyTo(Literals.begin()[i], &this->literal[j], sizeof(char) * (cache = string::LiteralLength(Literals.begin()[i]) - 1));
                 j += cache;
             }
             this->literal[this->length - 1] = '\0';
@@ -800,7 +800,7 @@ namespace neo
 
     bool string::operator == (const char* Literal)
     {
-        if (Literal == NULL || this->length != strLength(Literal))
+        if (Literal == NULL || this->length != string::LiteralLength(Literal))
         {
             return false;
         }
@@ -981,7 +981,7 @@ namespace neo
                     exit(1);
                 }
 
-                this->length += strLength(Literals.begin()[i]) - 1;
+                this->length += string::LiteralLength(Literals.begin()[i]) - 1;
             }
 
             if ((this->literal = (char*)realloc(this->literal, sizeof(char) * this->length)) == NULL)
@@ -997,7 +997,7 @@ namespace neo
 
             for (uint64 i = 0, j = Index; i < Literals.size(); i++)
             {
-                memory::CopyTo(Literals.begin()[i], &this->literal[j], sizeof(char) * (cache = strLength(Literals.begin()[i]) - 1));
+                memory::CopyTo(Literals.begin()[i], &this->literal[j], sizeof(char) * (cache = string::LiteralLength(Literals.begin()[i]) - 1));
                 j += cache;
             }
         }
@@ -1288,7 +1288,7 @@ namespace neo
 
         for (uint64 i = 0; i < Literals.size(); i++)
         {
-            for (uint64 j = 0; (cache = strLength(Literals.begin()[i])) <= this->length && j < this->length - --cache; j++)
+            for (uint64 j = 0; (cache = string::LiteralLength(Literals.begin()[i])) <= this->length && j < this->length - --cache; j++)
             {
                 if (memory::Compare(&this->literal[j], Literals.begin()[i], sizeof(char) * cache))
                 {
@@ -1848,13 +1848,13 @@ namespace neo
         return result;
     }
 
-    uint64 strLength(const char* Literal)
+    uint64 string::LiteralLength(const char* Literal)
     {
         uint64 result;
 
         if (Literal == NULL)
         {
-            printf("neo::strLength(): Literal must not be NULL\nParams: Literal: %p\n", Literal);
+            printf("neo::string::LiteralLength(): Literal must not be NULL\nParams: Literal: %p\n", Literal);
             exit(1);
         }
 

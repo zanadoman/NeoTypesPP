@@ -8,12 +8,12 @@ namespace neo
 
         if (Source1 == NULL && Size != 0)
         {
-            printf("neo::memCompare(): NULL Source1 with non-zero Size\nParams: Source1: %p, Source2: %p, Size: %lld\n", Source1, Source2, Size);
+            printf("neo::memory::Compare(): NULL Source1 with non-zero Size\nParams: Source1: %p, Source2: %p, Size: %lld\n", Source1, Source2, Size);
             exit(1);
         }
         if (Source2 == NULL && Size != 0)
         {
-            printf("neo::memCompare(): NULL Source2 with non-zero Size\nParams: Source1: %p, Source2: %p, Size: %lld\n", Source1, Source2, Size);
+            printf("neo::memory::Compare(): NULL Source2 with non-zero Size\nParams: Source1: %p, Source2: %p, Size: %lld\n", Source1, Source2, Size);
             exit(1);
         }
         
@@ -42,12 +42,12 @@ namespace neo
 
         if (Source1 == NULL && Size != 0)
         {
-            printf("neo::memSwap(): NULL Source1 with non-zero Size\nParams: Source1: %p, Source2: %p, Size: %lld\n", Source1, Source2, Size);
+            printf("neo::memory::Swap(): NULL Source1 with non-zero Size\nParams: Source1: %p, Source2: %p, Size: %lld\n", Source1, Source2, Size);
             exit(1);
         }
         if (Source2 == NULL && Size != 0)
         {
-            printf("neo::memSwap(): NULL Source2 with non-zero Size\nParams: Source1: %p, Source2: %p, Size: %lld\n", Source1, Source2, Size);
+            printf("neo::memory::Swap(): NULL Source2 with non-zero Size\nParams: Source1: %p, Source2: %p, Size: %lld\n", Source1, Source2, Size);
             exit(1);
         }
 
@@ -73,7 +73,7 @@ namespace neo
 
         if (Source == NULL && Size != 0)
         {
-            printf("neo::memCopy(): NULL Source with non-zero Size\nParams: Source: %p, Size: %lld\n", Source, Size);
+            printf("neo::memory::Copy(): NULL Source with non-zero Size\nParams: Source: %p, Size: %lld\n", Source, Size);
             exit(1);
         }
         if (Size == 0)
@@ -83,7 +83,7 @@ namespace neo
 
         if ((result = malloc(Size)) == NULL)
         {
-            printf("neo::memCopy(): Memory allocation failed\nParams: Source: %p, Size: %lld\n", Source, Size);
+            printf("neo::memory::Copy(): Memory allocation failed\nParams: Source: %p, Size: %lld\n", Source, Size);
             exit(1);
         }
 
@@ -98,12 +98,12 @@ namespace neo
 
         if (Source == NULL && Size != 0)
         {
-            printf("neo::memCopyTo(): NULL Source with non-zero Size\nParams: Source: %p, Destination: %p, Size: %lld\n", Source, Destination, Size);
+            printf("neo::memory::CopyTo(): NULL Source with non-zero Size\nParams: Source: %p, Destination: %p, Size: %lld\n", Source, Destination, Size);
             exit(1);
         }
         if (Destination == NULL && Size != 0)
         {
-            printf("neo::memCopyTo(): NULL Destination with non-zero Size\nParams: Source: %p, Destination: %p, Size: %lld\n", Source, Destination, Size);
+            printf("neo::memory::CopyTo(): NULL Destination with non-zero Size\nParams: Source: %p, Destination: %p, Size: %lld\n", Source, Destination, Size);
             exit(1);
         }
 
@@ -125,7 +125,7 @@ namespace neo
 
         if (FilePath == NULL)
         {
-            printf("neo::memLoad(): NULL FilePath with non-zero Size\nParams: FilePath: %p, Size: %lld\n", FilePath, Size);
+            printf("neo::memory::Load(): NULL FilePath with non-zero Size\nParams: FilePath: %p, Size: %lld\n", FilePath, Size);
             exit(1);
         }
         if (Size == 0)
@@ -135,7 +135,7 @@ namespace neo
 
         if ((result = malloc(Size)) == NULL)
         {
-            printf("neo::memLoad(): Memory allocation failed\nParams: FilePath: %s, Size: %lld\n", FilePath, Size);
+            printf("neo::memory::Load(): Memory allocation failed\nParams: FilePath: %s, Size: %lld\n", FilePath, Size);
             exit(1);
         }
 
@@ -154,12 +154,12 @@ namespace neo
 
         if (FilePath == NULL)
         {
-            printf("neo::memLoadTo(): NULL FilePath with non-zero Size\nParams: FilePath: %p, Destination: %p, Size: %lld\n", FilePath, Destination, Size);
+            printf("neo::memory::LoadTo(): NULL FilePath with non-zero Size\nParams: FilePath: %p, Destination: %p, Size: %lld\n", FilePath, Destination, Size);
             exit(1);
         }
         if (Destination == NULL && Size != 0)
         {
-            printf("neo::memLoadTo(): NULL Destination with non-zero Size\nParams: FilePath: %s, Destination: %p, Size: %lld\n", FilePath, Destination, Size);
+            printf("neo::memory::LoadTo(): NULL Destination with non-zero Size\nParams: FilePath: %s, Destination: %p, Size: %lld\n", FilePath, Destination, Size);
             exit(1);
         }
 
@@ -183,12 +183,12 @@ namespace neo
 
         if (Source == NULL && Size != 0)
         {
-            printf("neo::memSave(): NULL Source with non-zero Size\nParams: Source: %p, Size: %lld, FilePath: %s\n", Source, Size, FilePath);
+            printf("neo::memory::Save(): NULL Source with non-zero Size\nParams: Source: %p, Size: %lld, FilePath: %s\n", Source, Size, FilePath);
             exit(1);
         }
         if (FilePath == NULL)
         {
-            printf("neo::memSave(): NULL FilePath with non-zero Size\nParams: Source: %p, Size: %lld, FilePath: %s\n", Source, Size, FilePath);
+            printf("neo::memory::Save(): NULL FilePath with non-zero Size\nParams: Source: %p, Size: %lld, FilePath: %s\n", Source, Size, FilePath);
             exit(1);
         }
 
