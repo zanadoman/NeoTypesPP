@@ -22,7 +22,7 @@ namespace neo
             exit(1);
         }
 
-        memCopyTo(Characters.begin(), this->literal, sizeof(char) * Characters.size());
+        memory::CopyTo(Characters.begin(), this->literal, sizeof(char) * Characters.size());
         this->literal[this->length - 1] = '\0';
     }
 
@@ -55,7 +55,7 @@ namespace neo
 
         for (uint64 i = 0, j = 0; i < Literals.size(); i++)
         {
-            memCopyTo(Literals.begin()[i], &this->literal[j], sizeof(char) * (cache = strLength(Literals.begin()[i]) - 1));
+            memory::CopyTo(Literals.begin()[i], &this->literal[j], sizeof(char) * (cache = strLength(Literals.begin()[i]) - 1));
             j += cache;
         }
         this->literal[this->length - 1] = '\0';
@@ -88,7 +88,7 @@ namespace neo
 
         for (uint64 i = 0, j = 0; i < Strings.size(); i++)
         {
-            memCopyTo(Strings.begin()[i]->literal, &this->literal[j], sizeof(char) * (Strings.begin()[i]->length - 1));
+            memory::CopyTo(Strings.begin()[i]->literal, &this->literal[j], sizeof(char) * (Strings.begin()[i]->length - 1));
             j += Strings.begin()[i]->length - 1;
         }
         this->literal[this->length - 1] = '\0';
@@ -113,7 +113,7 @@ namespace neo
 
         for (uint64 i = 0, j = 0; i < cache.Length(); i++)
         {
-            memCopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
+            memory::CopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
             j += cache[i]->length - 1;
             delete cache[i];
         }
@@ -139,7 +139,7 @@ namespace neo
 
         for (uint64 i = 0, j = 0; i < cache.Length(); i++)
         {
-            memCopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
+            memory::CopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
             j += cache[i]->length - 1;
             delete cache[i];
         }
@@ -165,7 +165,7 @@ namespace neo
 
         for (uint64 i = 0, j = 0; i < cache.Length(); i++)
         {
-            memCopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
+            memory::CopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
             j += cache[i]->length - 1;
             delete cache[i];
         }
@@ -211,7 +211,7 @@ namespace neo
             exit(1);
         }
 
-        memCopyTo(Characters.begin(), this->literal, sizeof(char) * Characters.size());
+        memory::CopyTo(Characters.begin(), this->literal, sizeof(char) * Characters.size());
         this->literal[this->length - 1] = '\0';
 
         return *this;
@@ -247,7 +247,7 @@ namespace neo
 
         for (uint64 i = 0, j = 0; i < Literals.size(); i++)
         {
-            memCopyTo(Literals.begin()[i], &this->literal[j], sizeof(char) * (cache = strLength(Literals.begin()[i]) - 1));
+            memory::CopyTo(Literals.begin()[i], &this->literal[j], sizeof(char) * (cache = strLength(Literals.begin()[i]) - 1));
             j += cache;
         }
         this->literal[this->length - 1] = '\0';
@@ -285,7 +285,7 @@ namespace neo
 
         for (uint64 i = 0, j = 0; i < Strings.size(); i++)
         {
-            memCopyTo(Strings.begin()[i]->literal, &this->literal[j], sizeof(char) * (Strings.begin()[i]->length - 1));
+            memory::CopyTo(Strings.begin()[i]->literal, &this->literal[j], sizeof(char) * (Strings.begin()[i]->length - 1));
             j += Strings.begin()[i]->length - 1;
         }
         this->literal[this->length - 1] = '\0';
@@ -314,7 +314,7 @@ namespace neo
 
         for (uint64 i = 0, j = 0; i < cache.Length(); i++)
         {
-            memCopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
+            memory::CopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
             j += cache[i]->length - 1;
             delete cache[i];
         }
@@ -344,7 +344,7 @@ namespace neo
 
         for (uint64 i = 0, j = 0; i < cache.Length(); i++)
         {
-            memCopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
+            memory::CopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
             j += cache[i]->length - 1;
             delete cache[i];
         }
@@ -374,7 +374,7 @@ namespace neo
 
         for (uint64 i = 0, j = 0; i < cache.Length(); i++)
         {
-            memCopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
+            memory::CopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
             j += cache[i]->length - 1;
             delete cache[i];
         }
@@ -398,7 +398,7 @@ namespace neo
                 this->literal[i] = this->literal[i - Characters.size()];
             }
 
-            memCopyTo(Characters.begin(), this->literal, sizeof(char) * Characters.size());
+            memory::CopyTo(Characters.begin(), this->literal, sizeof(char) * Characters.size());
         }
 
         return *this;
@@ -440,7 +440,7 @@ namespace neo
 
             for (uint64 i = 0, j = 0; i < Literals.size(); i++)
             {
-                memCopyTo(Literals.begin()[i], &this->literal[j], sizeof(char) * (cache = strLength(Literals.begin()[i]) - 1));
+                memory::CopyTo(Literals.begin()[i], &this->literal[j], sizeof(char) * (cache = strLength(Literals.begin()[i]) - 1));
                 j += cache;
             }
         }
@@ -484,7 +484,7 @@ namespace neo
 
             for (uint64 i = 0, j = 0; i < Strings.size(); i++)
             {
-                memCopyTo(Strings.begin()[i]->literal, &this->literal[j], sizeof(char) * (Strings.begin()[i]->length - 1));
+                memory::CopyTo(Strings.begin()[i]->literal, &this->literal[j], sizeof(char) * (Strings.begin()[i]->length - 1));
                 j += Strings.begin()[i]->length - 1;
             }
         }
@@ -519,7 +519,7 @@ namespace neo
 
             for (uint64 i = 0, j = 0; i < cache.Length(); i++)
             {
-                memCopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
+                memory::CopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
                 j += cache[i]->length - 1;
                 delete cache[i];
             }
@@ -555,7 +555,7 @@ namespace neo
 
             for (uint64 i = 0, j = 0; i < cache.Length(); i++)
             {
-                memCopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
+                memory::CopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
                 j += cache[i]->length - 1;
                 delete cache[i];
             }
@@ -591,7 +591,7 @@ namespace neo
 
             for (uint64 i = 0, j = 0; i < cache.Length(); i++)
             {
-                memCopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
+                memory::CopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
                 j += cache[i]->length - 1;
                 delete cache[i];
             }
@@ -610,7 +610,7 @@ namespace neo
                 exit(1);
             }
 
-            memCopyTo(Characters.begin(), &this->literal[this->length - 1 - Characters.size()], sizeof(char) * Characters.size());
+            memory::CopyTo(Characters.begin(), &this->literal[this->length - 1 - Characters.size()], sizeof(char) * Characters.size());
             this->literal[this->length - 1] = '\0';
         }
 
@@ -648,7 +648,7 @@ namespace neo
 
             for (uint64 i = 0, j = lengthPrev - 1; i < Literals.size(); i++)
             {
-                memCopyTo(Literals.begin()[i], &this->literal[j], sizeof(char) * (cache = strLength(Literals.begin()[i]) - 1));
+                memory::CopyTo(Literals.begin()[i], &this->literal[j], sizeof(char) * (cache = strLength(Literals.begin()[i]) - 1));
                 j += cache;
             }
             this->literal[this->length - 1] = '\0';
@@ -688,7 +688,7 @@ namespace neo
 
             for (uint64 i = 0, j = lengthPrev - 1; i < Strings.size(); i++)
             {
-                memCopyTo(Strings.begin()[i]->literal, &this->literal[j], sizeof(char) * (Strings.begin()[i]->length - 1));
+                memory::CopyTo(Strings.begin()[i]->literal, &this->literal[j], sizeof(char) * (Strings.begin()[i]->length - 1));
                 j += Strings.begin()[i]->length - 1;
             }
             this->literal[this->length - 1] = '\0';
@@ -719,7 +719,7 @@ namespace neo
 
             for (uint64 i = 0, j = lengthPrev - 1; i < cache.Length(); i++)
             {
-                memCopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
+                memory::CopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
                 j += cache[i]->length - 1;
                 delete cache[i];
             }
@@ -751,7 +751,7 @@ namespace neo
 
             for (uint64 i = 0, j = lengthPrev - 1; i < cache.Length(); i++)
             {
-                memCopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
+                memory::CopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
                 j += cache[i]->length - 1;
                 delete cache[i];
             }
@@ -783,7 +783,7 @@ namespace neo
 
             for (uint64 i = 0, j = lengthPrev - 1; i < cache.Length(); i++)
             {
-                memCopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
+                memory::CopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
                 j += cache[i]->length - 1;
                 delete cache[i];
             }
@@ -810,7 +810,7 @@ namespace neo
             return true;
         }
 
-        return memCompare(this->literal, Literal, sizeof(char) * this->length);
+        return memory::Compare(this->literal, Literal, sizeof(char) * this->length);
     }
 
     bool string::operator == (string* String)
@@ -825,7 +825,7 @@ namespace neo
             return true;
         }
 
-        return memCompare(this->literal, String->literal, sizeof(char) * this->length);
+        return memory::Compare(this->literal, String->literal, sizeof(char) * this->length);
     }
 
     bool string::operator == (uint64 Number)
@@ -842,7 +842,7 @@ namespace neo
             return false;
         }
 
-        result = memCompare(this->literal, tmp->literal, sizeof(char) * this->length);
+        result = memory::Compare(this->literal, tmp->literal, sizeof(char) * this->length);
         delete tmp;
 
         return result;
@@ -862,7 +862,7 @@ namespace neo
             return false;
         }
 
-        result = memCompare(this->literal, tmp->literal, sizeof(char) * this->length);
+        result = memory::Compare(this->literal, tmp->literal, sizeof(char) * this->length);
         delete tmp;
 
         return result;
@@ -882,7 +882,7 @@ namespace neo
             return false;
         }
 
-        result = memCompare(this->literal, tmp->literal, sizeof(char) * this->length);
+        result = memory::Compare(this->literal, tmp->literal, sizeof(char) * this->length);
         delete tmp;
 
         return result;
@@ -944,7 +944,7 @@ namespace neo
                 this->literal[i] = this->literal[i - Characters.size()];
             }
 
-            memCopyTo(Characters.begin(), &this->literal[Index], sizeof(char) * Characters.size());
+            memory::CopyTo(Characters.begin(), &this->literal[Index], sizeof(char) * Characters.size());
         }
 
         return *this;
@@ -997,7 +997,7 @@ namespace neo
 
             for (uint64 i = 0, j = Index; i < Literals.size(); i++)
             {
-                memCopyTo(Literals.begin()[i], &this->literal[j], sizeof(char) * (cache = strLength(Literals.begin()[i]) - 1));
+                memory::CopyTo(Literals.begin()[i], &this->literal[j], sizeof(char) * (cache = strLength(Literals.begin()[i]) - 1));
                 j += cache;
             }
         }
@@ -1052,7 +1052,7 @@ namespace neo
 
             for (uint64 i = 0, j = Index; i < Strings.size(); i++)
             {
-                memCopyTo(Strings.begin()[i]->literal, &this->literal[j], sizeof(char) * (Strings.begin()[i]->length - 1));
+                memory::CopyTo(Strings.begin()[i]->literal, &this->literal[j], sizeof(char) * (Strings.begin()[i]->length - 1));
                 j += Strings.begin()[i]->length - 1;
             }
         }
@@ -1098,7 +1098,7 @@ namespace neo
 
             for (uint64 i = 0, j = Index; i < cache.Length(); i++)
             {
-                memCopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
+                memory::CopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
                 j += cache[i]->length - 1;
                 delete cache[i];
             }
@@ -1145,7 +1145,7 @@ namespace neo
 
             for (uint64 i = 0, j = Index; i < cache.Length(); i++)
             {
-                memCopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
+                memory::CopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
                 j += cache[i]->length - 1;
                 delete cache[i];
             }
@@ -1192,7 +1192,7 @@ namespace neo
 
             for (uint64 i = 0, j = Index; i < cache.Length(); i++)
             {
-                memCopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
+                memory::CopyTo(cache[i]->literal, &this->literal[j], sizeof(char) * (cache[i]->length - 1));
                 j += cache[i]->length - 1;
                 delete cache[i];
             }
@@ -1290,7 +1290,7 @@ namespace neo
         {
             for (uint64 j = 0; (cache = strLength(Literals.begin()[i])) <= this->length && j < this->length - --cache; j++)
             {
-                if (memCompare(&this->literal[j], Literals.begin()[i], sizeof(char) * cache))
+                if (memory::Compare(&this->literal[j], Literals.begin()[i], sizeof(char) * cache))
                 {
                     return true;
                 }
@@ -1324,7 +1324,7 @@ namespace neo
         {
             for (uint64 j = 0; Strings.begin()[i]->length <= this->length && j < this->length - (Strings.begin()[i]->length - 1); j++)
             {
-                if (memCompare(&this->literal[j], Strings.begin()[i]->literal, sizeof(char) * (Strings.begin()[i]->length - 1)))
+                if (memory::Compare(&this->literal[j], Strings.begin()[i]->literal, sizeof(char) * (Strings.begin()[i]->length - 1)))
                 {
                     return true;
                 }
@@ -1355,7 +1355,7 @@ namespace neo
         {
             for (uint64 j = 0; cache[i]->length <= this->length && j < this->length - (cache[i]->length - 1); j++)
             {
-                if (result == false && memCompare(&this->literal[j], cache[i]->literal, sizeof(char) * (cache[i]->length - 1)))
+                if (result == false && memory::Compare(&this->literal[j], cache[i]->literal, sizeof(char) * (cache[i]->length - 1)))
                 {
                     result = true;
                 }
@@ -1388,7 +1388,7 @@ namespace neo
         {
             for (uint64 j = 0; cache[i]->length <= this->length && j < this->length - (cache[i]->length - 1); j++)
             {
-                if (result == false && memCompare(&this->literal[j], cache[i]->literal, sizeof(char) * (cache[i]->length - 1)))
+                if (result == false && memory::Compare(&this->literal[j], cache[i]->literal, sizeof(char) * (cache[i]->length - 1)))
                 {
                     result = true;
                 }
@@ -1421,7 +1421,7 @@ namespace neo
         {
             for (uint64 j = 0; cache[i]->length <= this->length && j < this->length - (cache[i]->length - 1); j++)
             {
-                if (result == false && memCompare(&this->literal[j], cache[i]->literal, sizeof(char) * (cache[i]->length - 1)))
+                if (result == false && memory::Compare(&this->literal[j], cache[i]->literal, sizeof(char) * (cache[i]->length - 1)))
                 {
                     result = true;
                 }

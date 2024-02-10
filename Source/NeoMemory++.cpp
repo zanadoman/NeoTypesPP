@@ -2,7 +2,7 @@
 
 namespace neo
 {
-    bool memCompare(const void* Source1, const void* Source2, uint64 Size)
+    bool memory::Compare(const void* Source1, const void* Source2, uint64 Size)
     {
         uint64 i;
 
@@ -35,7 +35,7 @@ namespace neo
         return true;
     }
 
-    uint8 memSwap(void* Source1, void* Source2, uint64 Size)
+    uint8 memory::Swap(void* Source1, void* Source2, uint64 Size)
     {
         uint64 tmp64, i;
         uint8 tmp8;
@@ -67,7 +67,7 @@ namespace neo
         return 0;
     }
 
-    void* memCopy(const void* Source, uint64 Size)
+    void* memory::Copy(const void* Source, uint64 Size)
     {
         void* result;
 
@@ -87,12 +87,12 @@ namespace neo
             exit(1);
         }
 
-        memCopyTo(Source, result, Size);
+        memory::CopyTo(Source, result, Size);
 
         return result;
     }
 
-    uint8 memCopyTo(const void* Source, void* Destination, uint64 Size)
+    uint8 memory::CopyTo(const void* Source, void* Destination, uint64 Size)
     {
         uint64 i;
 
@@ -119,7 +119,7 @@ namespace neo
         return 0;
     }
 
-    void* memLoad(const char* FilePath, uint64 Size)
+    void* memory::Load(const char* FilePath, uint64 Size)
     {
         void* result;
 
@@ -139,7 +139,7 @@ namespace neo
             exit(1);
         }
 
-        if (memLoadTo(FilePath, result, Size) != 0)
+        if (memory::LoadTo(FilePath, result, Size) != 0)
         {
             free(result);
             return NULL;
@@ -148,7 +148,7 @@ namespace neo
         return result;
     }
 
-    uint8 memLoadTo(const char* FilePath, void* Destination, uint64 Size)
+    uint8 memory::LoadTo(const char* FilePath, void* Destination, uint64 Size)
     {
         FILE* file;
 
@@ -177,7 +177,7 @@ namespace neo
         return 0;
     }
 
-    uint8 memSave(const void* Source, uint64 Size, const char* FilePath)
+    uint8 memory::Save(const void* Source, uint64 Size, const char* FilePath)
     {
         FILE* file;
 

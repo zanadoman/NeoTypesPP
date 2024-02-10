@@ -163,13 +163,17 @@ namespace neo
 
     //____________________________________________NeoMemory.hpp____________________________________________//
 
-    bool memCompare(const void* Source1, const void* Source2, uint64 Size);
-    uint8 memSwap(void* Source1, void* Source2, uint64 Size);
-    void* memCopy(const void* Source, uint64 Size);
-    uint8 memCopyTo(const void* Source, void* Destination, uint64 Size);
-    void* memLoad(const char* FilePath, uint64 Size);
-    uint8 memLoadTo(const char* FilePath, void* Destination, uint64 Size);
-    uint8 memSave(const void* Source, uint64 Size, const char* FilePath);
+    class memory
+    {
+        public:
+            static bool Compare(const void* Source1, const void* Source2, uint64 Size);
+            static uint8 Swap(void* Source1, void* Source2, uint64 Size);
+            static void* Copy(const void* Source, uint64 Size);
+            static uint8 CopyTo(const void* Source, void* Destination, uint64 Size);
+            static void* Load(const char* FilePath, uint64 Size);
+            static uint8 LoadTo(const char* FilePath, void* Destination, uint64 Size);
+            static uint8 Save(const void* Source, uint64 Size, const char* FilePath);
+    };
 
     //______________________________________STD_INITIALIZER_LIST.hpp_______________________________________//
 
@@ -219,7 +223,7 @@ namespace neo
                 exit(1);
             }
 
-            memCopyTo(Elements.begin(), this->elements, sizeof(type) * this->length);
+            memory::CopyTo(Elements.begin(), this->elements, sizeof(type) * this->length);
         }
     }
 
@@ -257,7 +261,7 @@ namespace neo
 
             for (uint64 i = 0, j = 0; i < Arrays.size(); i++)
             {
-                memCopyTo(Arrays.begin()[i]->elements, &this->elements[j], sizeof(type) * Arrays.begin()[i]->length);
+                memory::CopyTo(Arrays.begin()[i]->elements, &this->elements[j], sizeof(type) * Arrays.begin()[i]->length);
                 j += Arrays.begin()[i]->length;
             }
         }
@@ -310,7 +314,7 @@ namespace neo
                 exit(1);
             }
 
-            memCopyTo(Elements.begin(), this->elements, sizeof(type) * this->length);
+            memory::CopyTo(Elements.begin(), this->elements, sizeof(type) * this->length);
         }
 
         return *this;
@@ -359,7 +363,7 @@ namespace neo
 
             for (uint64 i = 0, j = 0; i < Arrays.size(); i++)
             {
-                memCopyTo(Arrays.begin()[i]->elements, &this->elements[j], sizeof(type) * Arrays.begin()[i]->length);
+                memory::CopyTo(Arrays.begin()[i]->elements, &this->elements[j], sizeof(type) * Arrays.begin()[i]->length);
                 j += Arrays.begin()[i]->length;
             }
         }
@@ -382,7 +386,7 @@ namespace neo
                 this->elements[i] = this->elements[i - Elements.size()];
             }
 
-            memCopyTo(Elements.begin(), this->elements, sizeof(type) * Elements.size());
+            memory::CopyTo(Elements.begin(), this->elements, sizeof(type) * Elements.size());
         }
 
         return *this;
@@ -424,7 +428,7 @@ namespace neo
 
             for (uint64 i = 0, j = 0; i < Arrays.size(); i++)
             {
-                memCopyTo(Arrays.begin()[i]->elements, &this->elements[j], sizeof(type) * Arrays.begin()[i]->length);
+                memory::CopyTo(Arrays.begin()[i]->elements, &this->elements[j], sizeof(type) * Arrays.begin()[i]->length);
                 j += Arrays.begin()[i]->length;
             }
         }
@@ -442,7 +446,7 @@ namespace neo
                 exit(1);
             }
 
-            memCopyTo(Elements.begin(), &this->elements[this->length - Elements.size()], sizeof(type) * Elements.size());
+            memory::CopyTo(Elements.begin(), &this->elements[this->length - Elements.size()], sizeof(type) * Elements.size());
         }
 
         return *this;
@@ -479,7 +483,7 @@ namespace neo
 
             for (uint64 i = 0, j = lengthPrev; i < Arrays.size(); i++)
             {
-                memCopyTo(Arrays.begin()[i]->elements, &this->elements[j], sizeof(type) * Arrays.begin()[i]->length);
+                memory::CopyTo(Arrays.begin()[i]->elements, &this->elements[j], sizeof(type) * Arrays.begin()[i]->length);
                 j += Arrays.begin()[i]->length;
             }
         }
@@ -499,7 +503,7 @@ namespace neo
             return true;
         }
 
-        return memCompare(this->elements, Array->elements, sizeof(type) * this->length);
+        return memory::Compare(this->elements, Array->elements, sizeof(type) * this->length);
     }
 
     template <typename type> bool array<type>::operator != (array<type>* Array)
@@ -558,7 +562,7 @@ namespace neo
                 this->elements[i] = this->elements[i - Elements.size()];
             }
 
-            memCopyTo(Elements.begin(), &this->elements[Index], sizeof(type) * Elements.size());
+            memory::CopyTo(Elements.begin(), &this->elements[Index], sizeof(type) * Elements.size());
         }
 
         return *this;
@@ -606,7 +610,7 @@ namespace neo
 
             for (uint64 i = 0, j = Index; i < Arrays.size(); i++)
             {
-                memCopyTo(Arrays.begin()[i]->elements, &this->elements[j], sizeof(type) * Arrays.begin()[i]->length);
+                memory::CopyTo(Arrays.begin()[i]->elements, &this->elements[j], sizeof(type) * Arrays.begin()[i]->length);
                 j += Arrays.begin()[i]->length;
             }
         }
