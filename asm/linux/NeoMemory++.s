@@ -13,7 +13,7 @@
 	.globl	_ZN3neo6memory7CompareEPKvS2_y
 	.type	_ZN3neo6memory7CompareEPKvS2_y, @function
 _ZN3neo6memory7CompareEPKvS2_y:
-.LFB103:
+.LFB89:
 	.cfi_startproc
 	subq	$8, %rsp
 	.cfi_def_cfa_offset 16
@@ -89,7 +89,7 @@ _ZN3neo6memory7CompareEPKvS2_y:
 	movl	$1, %edi
 	call	exit@PLT
 	.cfi_endproc
-.LFE103:
+.LFE89:
 	.size	_ZN3neo6memory7CompareEPKvS2_y, .-_ZN3neo6memory7CompareEPKvS2_y
 	.section	.rodata.str1.8
 	.align 8
@@ -104,7 +104,7 @@ _ZN3neo6memory7CompareEPKvS2_y:
 	.globl	_ZN3neo6memory4SwapEPvS1_y
 	.type	_ZN3neo6memory4SwapEPvS1_y, @function
 _ZN3neo6memory4SwapEPvS1_y:
-.LFB104:
+.LFB90:
 	.cfi_startproc
 	testq	%rdx, %rdx
 	pushq	%rbx
@@ -347,7 +347,7 @@ _ZN3neo6memory4SwapEPvS1_y:
 	movl	$1, %edi
 	call	exit@PLT
 	.cfi_endproc
-.LFE104:
+.LFE90:
 	.size	_ZN3neo6memory4SwapEPvS1_y, .-_ZN3neo6memory4SwapEPvS1_y
 	.section	.rodata.str1.8
 	.align 8
@@ -362,7 +362,7 @@ _ZN3neo6memory4SwapEPvS1_y:
 	.globl	_ZN3neo6memory6CopyToEPKvPvy
 	.type	_ZN3neo6memory6CopyToEPKvPvy, @function
 _ZN3neo6memory6CopyToEPKvPvy:
-.LFB106:
+.LFB92:
 	.cfi_startproc
 	testq	%rdx, %rdx
 	pushq	%rbx
@@ -558,7 +558,7 @@ _ZN3neo6memory6CopyToEPKvPvy:
 	movl	$1, %edi
 	call	exit@PLT
 	.cfi_endproc
-.LFE106:
+.LFE92:
 	.size	_ZN3neo6memory6CopyToEPKvPvy, .-_ZN3neo6memory6CopyToEPKvPvy
 	.section	.rodata.str1.8
 	.align 8
@@ -573,7 +573,7 @@ _ZN3neo6memory6CopyToEPKvPvy:
 	.globl	_ZN3neo6memory4CopyEPKvy
 	.type	_ZN3neo6memory4CopyEPKvy, @function
 _ZN3neo6memory4CopyEPKvy:
-.LFB105:
+.LFB91:
 	.cfi_startproc
 	pushq	%r12
 	.cfi_def_cfa_offset 16
@@ -642,7 +642,7 @@ _ZN3neo6memory4CopyEPKvy:
 	movl	$1, %edi
 	call	exit@PLT
 	.cfi_endproc
-.LFE105:
+.LFE91:
 	.size	_ZN3neo6memory4CopyEPKvy, .-_ZN3neo6memory4CopyEPKvy
 	.section	.rodata.str1.8
 	.align 8
@@ -660,7 +660,7 @@ _ZN3neo6memory4CopyEPKvy:
 	.globl	_ZN3neo6memory6LoadToEPKcPvy
 	.type	_ZN3neo6memory6LoadToEPKcPvy, @function
 _ZN3neo6memory6LoadToEPKcPvy:
-.LFB108:
+.LFB94:
 	.cfi_startproc
 	pushq	%r12
 	.cfi_def_cfa_offset 16
@@ -733,7 +733,7 @@ _ZN3neo6memory6LoadToEPKcPvy:
 	movl	$1, %eax
 	jmp	.L141
 	.cfi_endproc
-.LFE108:
+.LFE94:
 	.size	_ZN3neo6memory6LoadToEPKcPvy, .-_ZN3neo6memory6LoadToEPKcPvy
 	.section	.rodata.str1.8
 	.align 8
@@ -748,7 +748,7 @@ _ZN3neo6memory6LoadToEPKcPvy:
 	.globl	_ZN3neo6memory4LoadEPKcy
 	.type	_ZN3neo6memory4LoadEPKcy, @function
 _ZN3neo6memory4LoadEPKcy:
-.LFB107:
+.LFB93:
 	.cfi_startproc
 	pushq	%r13
 	.cfi_def_cfa_offset 16
@@ -823,7 +823,7 @@ _ZN3neo6memory4LoadEPKcy:
 	movl	$1, %edi
 	call	exit@PLT
 	.cfi_endproc
-.LFE107:
+.LFE93:
 	.size	_ZN3neo6memory4LoadEPKcy, .-_ZN3neo6memory4LoadEPKcy
 	.section	.rodata.str1.8
 	.align 8
@@ -841,7 +841,7 @@ _ZN3neo6memory4LoadEPKcy:
 	.globl	_ZN3neo6memory4SaveEPKvyPKc
 	.type	_ZN3neo6memory4SaveEPKvyPKc, @function
 _ZN3neo6memory4SaveEPKvyPKc:
-.LFB109:
+.LFB95:
 	.cfi_startproc
 	pushq	%r12
 	.cfi_def_cfa_offset 16
@@ -915,7 +915,7 @@ _ZN3neo6memory4SaveEPKvyPKc:
 	movl	$1, %edi
 	call	exit@PLT
 	.cfi_endproc
-.LFE109:
+.LFE95:
 	.size	_ZN3neo6memory4SaveEPKvyPKc, .-_ZN3neo6memory4SaveEPKvyPKc
 	.ident	"GCC: (GNU) 13.2.1 20230801"
 	.section	.note.GNU-stack,"",@progbits

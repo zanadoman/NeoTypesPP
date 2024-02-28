@@ -8,7 +8,7 @@
 	.globl	main
 	.type	main, @function
 main:
-.LFB103:
+.LFB89:
 	.cfi_startproc
 	subq	$8, %rsp
 	.cfi_def_cfa_offset 16
@@ -19,7 +19,7 @@ main:
 	.cfi_def_cfa_offset 8
 	ret
 	.cfi_endproc
-.LFE103:
+.LFE89:
 	.size	main, .-main
 	.ident	"GCC: (GNU) 13.2.1 20230801"
 	.section	.note.GNU-stack,"",@progbits

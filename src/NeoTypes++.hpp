@@ -5,7 +5,9 @@
 #include <type_traits>
 #include <initializer_list>
 
+#ifdef _WIN64
     #include <new>
+#endif
 
 namespace neo
 {
